@@ -1,0 +1,38 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://asso404miashs.fr/sitemap.xml
+
+# Crawl-delay pour éviter la surcharge
+Crawl-delay: 1
+
+# Disallow admin ou pages privées (à adapter selon vos besoins)
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /private/
+
+# Allow des pages importantes
+Allow: /
+Allow: /about
+Allow: /trombinoscope
+Allow: /events
+Allow: /actualites
+Allow: /activities
+Allow: /contact
+Allow: /join
+
+# Pour les bots spécifiques
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Eviter l'indexation des fichiers de développement
+User-agent: *
+Disallow: /*.json$
+Disallow: /*.xml$
+Disallow: /browserconfig.xml
+Disallow: /manifest.json

@@ -1,0 +1,115 @@
+[
+  {
+    "id": "coding-sessions",
+    "name": "Sessions de Code",
+    "description": "Ateliers de programmation hebdomadaires pour tous les niveaux. Découverte de nouveaux langages, frameworks et bonnes pratiques de développement.",
+    "longDescription": "Nos sessions de code sont l'occasion parfaite d'apprendre ensemble et de progresser dans différents langages de programmation. Chaque semaine, nous explorons un nouveau sujet : des bases de Python aux frameworks modernes comme React ou Vue.js, en passant par les concepts avancés comme les design patterns ou l'architecture logicielle.\n\nFormat typique :\n- Introduction théorique (30 min)\n- Exercices pratiques en binômes (90 min)\n- Code review et discussion (30 min)\n- Projet fil rouge sur plusieurs sessions\n\nNiveaux acceptés : débutant à avancé\nFréquence : tous les mardis 18h-20h30",
+    "icon": "Code",
+    "color": "text-blue-600",
+    "category": "technical",
+    "isActive": true,
+    "schedule": "Mardis 18h-20h30",
+    "location": "Salle informatique B12",
+    "participants": 25,
+    "difficulty": "Tous niveaux",
+    "technologies": ["Python", "JavaScript", "React", "Node.js", "Git"],
+    "nextSession": "2024-03-05T18:00:00Z"
+  },
+  {
+    "id": "conferences",
+    "name": "Conférences Tech",
+    "description": "Rencontres mensuelles avec des professionnels du secteur technologique. Découvrez les métiers, les innovations et les tendances du domaine.",
+    "longDescription": "Chaque mois, nous invitons des professionnels reconnus pour partager leur expérience et leurs connaissances. Ces conférences couvrent tous les aspects du monde tech : développement, data science, cybersécurité, IA, entrepreneuriat, et bien plus.\n\nFormat des conférences :\n- Présentation du speaker et de son parcours (10 min)\n- Conférence principale (45 min)\n- Session questions-réponses (30 min)\n- Networking autour d'un cocktail (45 min)\n\nSpeakers récents :\n- Marie Dubois, Lead Data Scientist chez Netflix\n- Pierre Martin, CTO de BlaBlaCar\n- Sophie Chen, Fondatrice de SecureAI\n\nAccès gratuit pour tous les étudiants !",
+    "icon": "Presentation",
+    "color": "text-purple-600",
+    "category": "professional",
+    "isActive": true,
+    "schedule": "Premier jeudi du mois 19h-21h",
+    "location": "Amphithéâtre Turing",
+    "participants": 120,
+    "difficulty": "Tous niveaux",
+    "nextSession": "2024-03-07T19:00:00Z",
+    "speakers": ["Marie Dubois", "Pierre Martin", "Sophie Chen"]
+  },
+  {
+    "id": "hackathons",
+    "name": "Hackathons",
+    "description": "Compétitions de développement créatif sur 24-48h. Seul ou en équipe, venez créer des projets innovants sur des thématiques variées.",
+    "longDescription": "Nos hackathons sont des événements phares de l'association ! Ces marathons de développement permettent de créer des projets concrets en un temps limité, de rencontrer d'autres passionnés et de gagner des prix attractifs.\n\nDéroulement typique :\n- Pitch des thématiques et formation des équipes\n- 24-48h de développement intensif\n- Mentoring par des professionnels\n- Présentation des projets devant un jury\n- Remise des prix et networking\n\nPrix habituels :\n- 1er prix : 500€ + stage en entreprise\n- 2e prix : 300€ + formation en ligne\n- 3e prix : 150€ + goodies\n- Prix spéciaux : innovation, design, impact social\n\nThématiques passées : IA responsable, smart city, fintech, healthtech\n\nMatériel fourni, repas inclus !",
+    "icon": "Zap",
+    "color": "text-yellow-600",
+    "category": "technical",
+    "isActive": true,
+    "schedule": "Trimestriel",
+    "location": "FabLab Université",
+    "participants": 50,
+    "difficulty": "Intermédiaire",
+    "duration": "24-48h",
+    "prizes": ["500€", "300€", "150€"],
+    "nextEvent": "2024-02-25T09:00:00Z"
+  },
+  {
+    "id": "study-groups",
+    "name": "Groupes d'Étude",
+    "description": "Séances d'entraide et de révisions collectives. Partagez vos connaissances et progressez ensemble dans vos matières.",
+    "longDescription": "L'entraide est au cœur de notre association ! Nos groupes d'étude permettent aux membres de s'entraider sur les matières du cursus MIASHS, de partager leurs méthodes de travail et de réviser ensemble pour les examens.\n\nMatières couvertes :\n- Mathématiques (algèbre, analyse, probabilités)\n- Informatique (algorithmique, bases de données, web)\n- Sciences humaines (sociologie, psychologie, économie)\n- Statistiques et data analysis\n- Outils spécialisés (R, SPSS, LaTeX)\n\nFormat des sessions :\n- Révision des concepts clés\n- Résolution d'exercices en groupe\n- Partage de ressources et méthodes\n- Préparation aux examens\n- Projets collaboratifs\n\nAnimé par nos membres les plus expérimentés dans chaque matière.",
+    "icon": "BookOpen",
+    "color": "text-green-600",
+    "category": "academic",
+    "isActive": true,
+    "schedule": "Sur demande + période d'examens",
+    "location": "Salles d'étude universitaires",
+    "participants": 35,
+    "difficulty": "Tous niveaux",
+    "subjects": ["Mathématiques", "Informatique", "Sciences humaines", "Statistiques"],
+    "tutors": ["Alice Dubois", "Emma Bernard", "Sarah Garcia"]
+  },
+  {
+    "id": "social-events",
+    "name": "Événements Sociaux",
+    "description": "Sorties, soirées et activités pour créer du lien entre les membres. L'occasion de se détendre et de tisser des amitiés durables.",
+    "longDescription": "Les liens sociaux sont essentiels pour créer une vraie communauté ! Nos événements sociaux permettent aux membres de se rencontrer dans un cadre détendu, loin des préoccupations académiques.\n\nTypes d'événements organisés :\n\n**Soirées détente :**\n- Soirées jeux (société, vidéo, quiz)\n- Soirées cinéma et débats\n- Karaoké et open mic\n- Apéritifs sur les quais de Seine\n\n**Sorties culturelles :**\n- Visites de musées (Cité des Sciences, Palais de la Découverte)\n- Expositions technologiques\n- Spectacles et festivals\n- Escape games thématiques\n\n**Activités sportives :**\n- Tournois de ping-pong et babyfoot\n- Sorties vélo dans Paris\n- Laser game entre équipes\n- Cours de danse collectifs\n\n**Événements saisonniers :**\n- Barbecue de rentrée\n- Galette des rois\n- Pique-nique de printemps\n- Soirée de fin d'année\n\nTarifs préférentiels négociés pour tous nos membres !",
+    "icon": "Users",
+    "color": "text-pink-600",
+    "category": "social",
+    "isActive": true,
+    "schedule": "Bi-mensuel",
+    "location": "Variable",
+    "participants": 45,
+    "difficulty": "Tous niveaux",
+    "upcomingEvents": ["Soirée jeux 22/03", "Visite Cité des Sciences 15/04", "Barbecue de printemps 20/05"]
+  },
+  {
+    "id": "workshops",
+    "name": "Ateliers Techniques",
+    "description": "Formations pratiques sur des outils et technologies spécifiques. Approfondissez vos compétences techniques avec nos experts.",
+    "longDescription": "Nos ateliers techniques sont conçus pour vous faire monter en compétences sur des outils et technologies spécifiques, très demandés dans le monde professionnel.\n\n**Ateliers programmés pour ce semestre :**\n\n**Développement web moderne :**\n- React avancé et hooks personnalisés\n- API REST avec Node.js et Express\n- Déploiement avec Docker et Kubernetes\n- Tests automatisés avec Jest et Cypress\n\n**Data Science et IA :**\n- Machine Learning avec scikit-learn\n- Deep Learning avec TensorFlow\n- Visualisation avec D3.js et Plotly\n- Big Data avec Apache Spark\n\n**DevOps et Cloud :**\n- CI/CD avec GitHub Actions\n- Infrastructure as Code avec Terraform\n- Monitoring avec Prometheus et Grafana\n- Sécurité cloud et bonnes pratiques\n\n**Design et UX :**\n- Figma pour les développeurs\n- Design system et composants réutilisables\n- Tests utilisateurs et A/B testing\n- Accessibilité web (WCAG)\n\nChaque atelier inclut :\n- Support de cours détaillé\n- Exercices pratiques\n- Projet final\n- Certificat de participation\n- Accès aux enregistrements\n\nAnimés par nos membres experts et des intervenants externes.",
+    "icon": "Wrench",
+    "color": "text-orange-600",
+    "category": "technical",
+    "isActive": true,
+    "schedule": "Samedis après-midi",
+    "location": "Labs informatiques",
+    "participants": 20,
+    "difficulty": "Intermédiaire à avancé",
+    "duration": "3-4h par session",
+    "certification": true,
+    "upcomingWorkshops": [
+      {
+        "title": "React Hooks avancés",
+        "date": "2024-03-09T14:00:00Z",
+        "instructor": "Hugo Leroy"
+      },
+      {
+        "title": "Machine Learning avec Python",
+        "date": "2024-03-16T14:00:00Z",
+        "instructor": "Sarah Garcia"
+      },
+      {
+        "title": "Docker pour développeurs",
+        "date": "2024-03-23T14:00:00Z",
+        "instructor": "Thomas Martin"
+      }
+    ]
+  }
+]

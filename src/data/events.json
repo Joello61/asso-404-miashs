@@ -1,0 +1,207 @@
+[
+  {
+    "id": "event-001",
+    "title": "Hackathon Asso 404 : Innovation Durable",
+    "description": "48 heures pour développer des solutions technologiques durables ! Notre premier hackathon réunit étudiants et professionnels autour du thème de l'innovation responsable. Ateliers, mentoring et prix à la clé !",
+    "startDate": "2024-02-25T09:00:00Z",
+    "endDate": "2024-02-26T18:00:00Z",
+    "location": {
+      "name": "Université Paris Cité - Bâtiment Sophie Germain",
+      "address": "8 Place Aurélie Nemours, 75013 Paris",
+      "url": "https://maps.google.com/..."
+    },
+    "image": "/images/events/hackathon-innovation-durable.jpg",
+    "organizer": "Thomas Martin",
+    "maxParticipants": 50,
+    "currentParticipants": 38,
+    "registrationRequired": true,
+    "registrationDeadline": "2024-02-20T23:59:59Z",
+    "price": 0,
+    "tags": ["Hackathon", "Innovation", "Développement durable", "Compétition"],
+    "status": "upcoming",
+    "slug": "hackathon-asso-404-innovation-durable"
+  },
+  {
+    "id": "event-002",
+    "title": "Atelier Machine Learning avec Sarah Garcia",
+    "description": "Initiez-vous au Machine Learning lors de cet atelier pratique ! Au programme : concepts théoriques, manipulation de données avec Python, création de votre premier modèle et mise en pratique sur des cas concrets.",
+    "startDate": "2024-03-02T09:00:00Z",
+    "endDate": "2024-03-02T17:00:00Z",
+    "location": {
+      "name": "Salle informatique B12 - Université Paris Cité",
+      "address": "45 Rue des Saints-Pères, 75006 Paris"
+    },
+    "image": "/images/events/atelier-machine-learning.jpg",
+    "organizer": "Sarah Garcia",
+    "maxParticipants": 25,
+    "currentParticipants": 22,
+    "registrationRequired": true,
+    "registrationDeadline": "2024-02-28T23:59:59Z",
+    "price": 10,
+    "tags": ["Atelier", "Machine Learning", "IA", "Python", "Formation"],
+    "status": "upcoming",
+    "slug": "atelier-machine-learning-sarah-garcia"
+  },
+  {
+    "id": "event-003",
+    "title": "Réunion de lancement - Projet StudyBuddy",
+    "description": "Première réunion pour le lancement de StudyBuddy, notre projet open source collaboratif ! Présentation du concept, des technologies et recrutement des contributeurs. Ouvert à tous les niveaux.",
+    "startDate": "2024-03-05T18:00:00Z",
+    "endDate": "2024-03-05T20:00:00Z",
+    "location": {
+      "name": "Salle C15 - Université Paris Cité",
+      "address": "45 Rue des Saints-Pères, 75006 Paris"
+    },
+    "image": "/images/events/reunion-studybuddy.jpg",
+    "organizer": "Maxime Dupont",
+    "maxParticipants": 40,
+    "currentParticipants": 15,
+    "registrationRequired": false,
+    "price": 0,
+    "tags": ["Réunion", "Open Source", "Projet", "Collaboration"],
+    "status": "upcoming",
+    "slug": "reunion-lancement-projet-studybuddy"
+  },
+  {
+    "id": "event-004",
+    "title": "Conférence TechCorp : L'IA au service de l'humanité",
+    "description": "Dans le cadre de notre partenariat avec TechCorp, découvrez comment l'intelligence artificielle peut résoudre les grands défis de notre époque. Conférence suivie d'un cocktail networking avec les équipes TechCorp.",
+    "startDate": "2024-03-15T14:00:00Z",
+    "endDate": "2024-03-15T18:00:00Z",
+    "location": {
+      "name": "Amphithéâtre Turing - Université Paris Cité",
+      "address": "45 Rue des Saints-Pères, 75006 Paris"
+    },
+    "image": "/images/events/conference-techcorp-ia.jpg",
+    "organizer": "Alice Dubois",
+    "maxParticipants": 200,
+    "currentParticipants": 145,
+    "registrationRequired": true,
+    "registrationDeadline": "2024-03-12T23:59:59Z",
+    "price": 0,
+    "tags": ["Conférence", "IA", "TechCorp", "Networking", "Partenariat"],
+    "status": "upcoming",
+    "slug": "conference-techcorp-ia-service-humanite"
+  },
+  {
+    "id": "event-005",
+    "title": "Soirée Jeux et Networking",
+    "description": "Détendez-vous et rencontrez les autres membres dans une ambiance conviviale ! Jeux de société, jeux vidéo, pizza et boissons. L'occasion parfaite pour créer du lien et échanger en dehors du contexte académique.",
+    "startDate": "2024-03-22T19:00:00Z",
+    "endDate": "2024-03-22T23:00:00Z",
+    "location": {
+      "name": "Foyer des étudiants - Université Paris Cité",
+      "address": "45 Rue des Saints-Pères, 75006 Paris"
+    },
+    "image": "/images/events/soiree-jeux-networking.jpg",
+    "organizer": "Hugo Leroy",
+    "maxParticipants": 60,
+    "currentParticipants": 28,
+    "registrationRequired": true,
+    "registrationDeadline": "2024-03-20T23:59:59Z",
+    "price": 5,
+    "tags": ["Social", "Networking", "Jeux", "Convivialité"],
+    "status": "upcoming",
+    "slug": "soiree-jeux-networking"
+  },
+  {
+    "id": "event-006",
+    "title": "Workshop Cybersécurité : Ethical Hacking",
+    "description": "Découvrez les bases de l'ethical hacking avec Maxime Dupont ! Au programme : reconnaissance, vulnérabilités web, tests de pénétration et bonnes pratiques de sécurité. Session pratique sur environnement contrôlé.",
+    "startDate": "2024-04-05T14:00:00Z",
+    "endDate": "2024-04-05T18:00:00Z",
+    "location": {
+      "name": "Lab Cybersécurité - Université Paris Cité",
+      "address": "8 Place Aurélie Nemours, 75013 Paris"
+    },
+    "image": "/images/events/workshop-cybersecurite.jpg",
+    "organizer": "Maxime Dupont",
+    "maxParticipants": 20,
+    "currentParticipants": 18,
+    "registrationRequired": true,
+    "registrationDeadline": "2024-04-01T23:59:59Z",
+    "price": 15,
+    "tags": ["Workshop", "Cybersécurité", "Ethical Hacking", "Sécurité"],
+    "status": "upcoming",
+    "slug": "workshop-cybersecurite-ethical-hacking"
+  },
+  {
+    "id": "event-007",
+    "title": "Game Jam 72h : Créez votre jeu vidéo !",
+    "description": "Participez à notre première Game Jam ! 72 heures pour concevoir et développer un jeu vidéo sur le thème 'Exploration'. Solo ou en équipe, tous niveaux acceptés. Matériel fourni, mentors disponibles.",
+    "startDate": "2024-04-12T18:00:00Z",
+    "endDate": "2024-04-15T18:00:00Z",
+    "location": {
+      "name": "FabLab - Université Paris Cité",
+      "address": "45 Rue des Saints-Pères, 75006 Paris"
+    },
+    "image": "/images/events/game-jam-72h.jpg",
+    "organizer": "Lucas Blanc",
+    "maxParticipants": 40,
+    "currentParticipants": 12,
+    "registrationRequired": true,
+    "registrationDeadline": "2024-04-08T23:59:59Z",
+    "price": 20,
+    "tags": ["Game Jam", "Jeux vidéo", "Développement", "Créativité"],
+    "status": "upcoming",
+    "slug": "game-jam-72h-creez-votre-jeu-video"
+  },
+  {
+    "id": "event-008",
+    "title": "Visite d'entreprise chez TechCorp",
+    "description": "Visitez les bureaux de notre partenaire TechCorp ! Découverte des métiers, des projets en cours, rencontre avec les équipes et session de recrutement. Transport organisé depuis l'université.",
+    "startDate": "2024-04-25T09:00:00Z",
+    "endDate": "2024-04-25T17:00:00Z",
+    "location": {
+      "name": "TechCorp Headquarters",
+      "address": "42 Avenue des Champs-Élysées, 75008 Paris",
+      "url": "https://techcorp.com/contact"
+    },
+    "image": "/images/events/visite-techcorp.jpg",
+    "organizer": "Emma Bernard",
+    "maxParticipants": 30,
+    "currentParticipants": 27,
+    "registrationRequired": true,
+    "registrationDeadline": "2024-04-20T23:59:59Z",
+    "price": 0,
+    "tags": ["Visite", "Entreprise", "TechCorp", "Recrutement", "Métiers"],
+    "status": "upcoming",
+    "slug": "visite-entreprise-techcorp"
+  },
+  {
+    "id": "event-009",
+    "title": "Assemblée Générale 2024",
+    "description": "Assemblée générale annuelle de l'association. Bilan des activités, présentation du budget, élection du nouveau bureau et présentation des projets pour l'année prochaine. Suivi d'un pot convivial.",
+    "startDate": "2024-05-15T18:00:00Z",
+    "endDate": "2024-05-15T21:00:00Z",
+    "location": {
+      "name": "Amphithéâtre Lovelace - Université Paris Cité",
+      "address": "45 Rue des Saints-Pères, 75006 Paris"
+    },
+    "image": "/images/events/assemblee-generale-2024.jpg",
+    "organizer": "Alice Dubois",
+    "registrationRequired": false,
+    "price": 0,
+    "tags": ["Assemblée Générale", "Bilan", "Élections", "Association"],
+    "status": "upcoming",
+    "slug": "assemblee-generale-2024"
+  },
+  {
+    "id": "event-010",
+    "title": "Forum des Entreprises 2024 - Participation",
+    "description": "Représentation de l'Asso 404 MIASHS au Forum des Entreprises annuel. Présentation de nos projets, networking avec les professionnels et promotion de notre association auprès des futurs membres.",
+    "startDate": "2024-02-20T09:00:00Z",
+    "endDate": "2024-02-21T18:00:00Z",
+    "location": {
+      "name": "Grand Palais Éphémère",
+      "address": "Place Joffre, 75007 Paris"
+    },
+    "image": "/images/events/forum-entreprises-2024.jpg",
+    "organizer": "Hugo Leroy",
+    "registrationRequired": false,
+    "price": 0,
+    "tags": ["Forum", "Entreprises", "Networking", "Promotion"],
+    "status": "completed",
+    "slug": "forum-entreprises-2024-participation"
+  }
+]
