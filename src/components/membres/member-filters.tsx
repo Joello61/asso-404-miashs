@@ -21,18 +21,18 @@ export function MemberFiltersComponent({
   onFiltersChange,
   resultCount,
   totalCount,
-  className
+  className,
 }: MemberFiltersProps) {
   // Extraction des compétences uniques
   const availableSkills = React.useMemo(() => {
-    const skills = members.flatMap(member => member.skills || []);
+    const skills = members.flatMap((member) => member.skills || []);
     return Array.from(new Set(skills)).sort();
   }, [members]);
 
   // Comptage par promo
   const promoStats = React.useMemo(() => {
     const stats = { L3: 0, M1: 0, M2: 0 };
-    members.forEach(member => {
+    members.forEach((member) => {
       stats[member.promo]++;
     });
     return stats;
@@ -47,7 +47,7 @@ export function MemberFiltersComponent({
   const togglePromo = (promo: PromoType) => {
     const currentPromos = filters.promo || [];
     const newPromos = currentPromos.includes(promo)
-      ? currentPromos.filter(p => p !== promo)
+      ? currentPromos.filter((p) => p !== promo)
       : [...currentPromos, promo];
     updateFilters({ promo: newPromos });
   };
@@ -58,7 +58,7 @@ export function MemberFiltersComponent({
       promo: [],
       search: '',
       hasLinkedIn: undefined,
-      hasGitHub: undefined
+      hasGitHub: undefined,
     });
   };
 
@@ -71,7 +71,12 @@ export function MemberFiltersComponent({
   );
 
   return (
-    <div className={cn('bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6', className)}>
+    <div
+      className={cn(
+        'bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6',
+        className
+      )}
+    >
       {/* En-tête */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center space-x-2">
@@ -126,7 +131,7 @@ export function MemberFiltersComponent({
             {(['L3', 'M1', 'M2'] as PromoType[]).map((promo) => {
               const isSelected = filters.promo?.includes(promo);
               const count = promoStats[promo];
-              
+
               return (
                 <button
                   key={promo}
@@ -139,36 +144,50 @@ export function MemberFiltersComponent({
                   )}
                 >
                   <div className="flex items-center space-x-3">
-                    <div className={cn(
-                      'w-4 h-4 rounded border-2 flex items-center justify-center transition-colors',
-                      isSelected
-                        ? 'border-primary-500 bg-primary-500'
-                        : 'border-slate-300 dark:border-slate-600'
-                    )}>
+                    <div
+                      className={cn(
+                        'w-4 h-4 rounded border-2 flex items-center justify-center transition-colors',
+                        isSelected
+                          ? 'border-primary-500 bg-primary-500'
+                          : 'border-slate-300 dark:border-slate-600'
+                      )}
+                    >
                       {isSelected && (
-                        <svg className="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        <svg
+                          className="w-2.5 h-2.5 text-white"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          />
                         </svg>
                       )}
                     </div>
                     <div className="flex items-center space-x-2">
                       <GraduationCap className="w-4 h-4 text-primary-600 dark:text-primary-400" />
-                      <span className={cn(
-                        'font-medium',
-                        isSelected
-                          ? 'text-primary-700 dark:text-primary-300'
-                          : 'text-slate-700 dark:text-slate-300'
-                      )}>
+                      <span
+                        className={cn(
+                          'font-medium',
+                          isSelected
+                            ? 'text-primary-700 dark:text-primary-300'
+                            : 'text-slate-700 dark:text-slate-300'
+                        )}
+                      >
                         {promo}
                       </span>
                     </div>
                   </div>
-                  <span className={cn(
-                    'text-sm px-2 py-1 rounded-full',
-                    isSelected
-                      ? 'bg-primary-100 text-primary-700 dark:bg-primary-800 dark:text-primary-300'
-                      : 'bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-400'
-                  )}>
+                  <span
+                    className={cn(
+                      'text-sm px-2 py-1 rounded-full',
+                      isSelected
+                        ? 'bg-primary-100 text-primary-700 dark:bg-primary-800 dark:text-primary-300'
+                        : 'bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-400'
+                    )}
+                  >
                     {count}
                   </span>
                 </button>
@@ -185,9 +204,11 @@ export function MemberFiltersComponent({
           <div className="space-y-2">
             {/* LinkedIn */}
             <button
-              onClick={() => updateFilters({ 
-                hasLinkedIn: filters.hasLinkedIn === true ? undefined : true 
-              })}
+              onClick={() =>
+                updateFilters({
+                  hasLinkedIn: filters.hasLinkedIn === true ? undefined : true,
+                })
+              }
               className={cn(
                 'w-full flex items-center justify-between px-4 py-3 rounded-lg border transition-all duration-200',
                 filters.hasLinkedIn === true
@@ -196,45 +217,61 @@ export function MemberFiltersComponent({
               )}
             >
               <div className="flex items-center space-x-3">
-                <div className={cn(
-                  'w-4 h-4 rounded border-2 flex items-center justify-center transition-colors',
-                  filters.hasLinkedIn === true
-                    ? 'border-blue-500 bg-blue-500'
-                    : 'border-slate-300 dark:border-slate-600'
-                )}>
+                <div
+                  className={cn(
+                    'w-4 h-4 rounded border-2 flex items-center justify-center transition-colors',
+                    filters.hasLinkedIn === true
+                      ? 'border-blue-500 bg-blue-500'
+                      : 'border-slate-300 dark:border-slate-600'
+                  )}
+                >
                   {filters.hasLinkedIn === true && (
-                    <svg className="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    <svg
+                      className="w-2.5 h-2.5 text-white"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      />
                     </svg>
                   )}
                 </div>
                 <div className="flex items-center space-x-2">
                   <SiLinkedin className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-                  <span className={cn(
-                    'font-medium',
-                    filters.hasLinkedIn === true
-                      ? 'text-blue-700 dark:text-blue-300'
-                      : 'text-slate-700 dark:text-slate-300'
-                  )}>
+                  <span
+                    className={cn(
+                      'font-medium',
+                      filters.hasLinkedIn === true
+                        ? 'text-blue-700 dark:text-blue-300'
+                        : 'text-slate-700 dark:text-slate-300'
+                    )}
+                  >
                     Avec LinkedIn
                   </span>
                 </div>
               </div>
-              <span className={cn(
-                'text-sm px-2 py-1 rounded-full',
-                filters.hasLinkedIn === true
-                  ? 'bg-blue-100 text-blue-700 dark:bg-blue-800 dark:text-blue-300'
-                  : 'bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-400'
-              )}>
-                {members.filter(m => m.linkedin).length}
+              <span
+                className={cn(
+                  'text-sm px-2 py-1 rounded-full',
+                  filters.hasLinkedIn === true
+                    ? 'bg-blue-100 text-blue-700 dark:bg-blue-800 dark:text-blue-300'
+                    : 'bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-400'
+                )}
+              >
+                {members.filter((m) => m.linkedin).length}
               </span>
             </button>
 
             {/* GitHub */}
             <button
-              onClick={() => updateFilters({ 
-                hasGitHub: filters.hasGitHub === true ? undefined : true 
-              })}
+              onClick={() =>
+                updateFilters({
+                  hasGitHub: filters.hasGitHub === true ? undefined : true,
+                })
+              }
               className={cn(
                 'w-full flex items-center justify-between px-4 py-3 rounded-lg border transition-all duration-200',
                 filters.hasGitHub === true
@@ -243,37 +280,51 @@ export function MemberFiltersComponent({
               )}
             >
               <div className="flex items-center space-x-3">
-                <div className={cn(
-                  'w-4 h-4 rounded border-2 flex items-center justify-center transition-colors',
-                  filters.hasGitHub === true
-                    ? 'border-slate-800 bg-slate-800 dark:border-slate-600 dark:bg-slate-600'
-                    : 'border-slate-300 dark:border-slate-600'
-                )}>
+                <div
+                  className={cn(
+                    'w-4 h-4 rounded border-2 flex items-center justify-center transition-colors',
+                    filters.hasGitHub === true
+                      ? 'border-slate-800 bg-slate-800 dark:border-slate-600 dark:bg-slate-600'
+                      : 'border-slate-300 dark:border-slate-600'
+                  )}
+                >
                   {filters.hasGitHub === true && (
-                    <svg className="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    <svg
+                      className="w-2.5 h-2.5 text-white"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      />
                     </svg>
                   )}
                 </div>
                 <div className="flex items-center space-x-2">
                   <SiGithub className="w-4 h-4 text-slate-800 dark:text-slate-200" />
-                  <span className={cn(
-                    'font-medium',
-                    filters.hasGitHub === true
-                      ? 'text-slate-800 dark:text-slate-200'
-                      : 'text-slate-700 dark:text-slate-300'
-                  )}>
+                  <span
+                    className={cn(
+                      'font-medium',
+                      filters.hasGitHub === true
+                        ? 'text-slate-800 dark:text-slate-200'
+                        : 'text-slate-700 dark:text-slate-300'
+                    )}
+                  >
                     Avec GitHub
                   </span>
                 </div>
               </div>
-              <span className={cn(
-                'text-sm px-2 py-1 rounded-full',
-                filters.hasGitHub === true
-                  ? 'bg-slate-200 text-slate-800 dark:bg-slate-700 dark:text-slate-200'
-                  : 'bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-400'
-              )}>
-                {members.filter(m => m.github).length}
+              <span
+                className={cn(
+                  'text-sm px-2 py-1 rounded-full',
+                  filters.hasGitHub === true
+                    ? 'bg-slate-200 text-slate-800 dark:bg-slate-700 dark:text-slate-200'
+                    : 'bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-400'
+                )}
+              >
+                {members.filter((m) => m.github).length}
               </span>
             </button>
           </div>
@@ -287,9 +338,13 @@ export function MemberFiltersComponent({
             </label>
             <div className="flex flex-wrap gap-2">
               {availableSkills.slice(0, 10).map((skill) => {
-                const membersWithSkill = members.filter(m => m.skills?.includes(skill)).length;
-                const isSearched = filters.search?.toLowerCase().includes(skill.toLowerCase());
-                
+                const membersWithSkill = members.filter((m) =>
+                  m.skills?.includes(skill)
+                ).length;
+                const isSearched = filters.search
+                  ?.toLowerCase()
+                  .includes(skill.toLowerCase());
+
                 return (
                   <button
                     key={skill}
@@ -303,12 +358,14 @@ export function MemberFiltersComponent({
                   >
                     <Code className="w-3 h-3" />
                     <span>{skill}</span>
-                    <span className={cn(
-                      'text-xs px-1.5 py-0.5 rounded',
-                      isSearched
-                        ? 'bg-primary-100 text-primary-600 dark:bg-primary-800 dark:text-primary-400'
-                        : 'bg-slate-100 text-slate-500 dark:bg-slate-700 dark:text-slate-400'
-                    )}>
+                    <span
+                      className={cn(
+                        'text-xs px-1.5 py-0.5 rounded',
+                        isSearched
+                          ? 'bg-primary-100 text-primary-600 dark:bg-primary-800 dark:text-primary-400'
+                          : 'bg-slate-100 text-slate-500 dark:bg-slate-700 dark:text-slate-400'
+                      )}
+                    >
                       {membersWithSkill}
                     </span>
                   </button>

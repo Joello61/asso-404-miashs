@@ -13,11 +13,11 @@ interface ThemeToggleProps {
   className?: string;
 }
 
-export function ThemeToggle({ 
-  variant = 'button', 
-  size = 'md', 
+export function ThemeToggle({
+  variant = 'button',
+  size = 'md',
   showLabel = false,
-  className 
+  className,
 }: ThemeToggleProps) {
   const { theme, setTheme, resolvedTheme } = useTheme();
   const isClient = useIsClient();
@@ -25,7 +25,11 @@ export function ThemeToggle({
   // Éviter le flash pendant l'hydratation
   if (!isClient) {
     return (
-      <Button variant="ghost" size={size} className={cn('w-10 h-10', className)}>
+      <Button
+        variant="ghost"
+        size={size}
+        className={cn('w-10 h-10', className)}
+      >
         <Sun className="h-4 w-4" />
       </Button>
     );
@@ -43,7 +47,9 @@ export function ThemeToggle({
         size={size}
         onClick={toggleTheme}
         className={cn('relative', className)}
-        aria-label={`Passer en mode ${resolvedTheme === 'dark' ? 'clair' : 'sombre'}`}
+        aria-label={`Passer en mode ${
+          resolvedTheme === 'dark' ? 'clair' : 'sombre'
+        }`}
       >
         <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
         <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
@@ -77,7 +83,8 @@ export function ThemeToggle({
             onClick={() => setTheme('light')}
             className={cn(
               'w-full px-4 py-2 text-left text-sm hover:bg-muted transition-colors flex items-center',
-              theme === 'light' && 'bg-primary-50 text-primary-600 dark:bg-primary-900 dark:text-primary-400'
+              theme === 'light' &&
+                'bg-primary-50 text-primary-600 dark:bg-primary-900 dark:text-primary-400'
             )}
           >
             <Sun className="h-4 w-4 mr-3" />
@@ -87,7 +94,8 @@ export function ThemeToggle({
             onClick={() => setTheme('dark')}
             className={cn(
               'w-full px-4 py-2 text-left text-sm hover:bg-muted transition-colors flex items-center',
-              theme === 'dark' && 'bg-primary-50 text-primary-600 dark:bg-primary-900 dark:text-primary-400'
+              theme === 'dark' &&
+                'bg-primary-50 text-primary-600 dark:bg-primary-900 dark:text-primary-400'
             )}
           >
             <Moon className="h-4 w-4 mr-3" />
@@ -97,7 +105,8 @@ export function ThemeToggle({
             onClick={() => setTheme('system')}
             className={cn(
               'w-full px-4 py-2 text-left text-sm hover:bg-muted transition-colors flex items-center',
-              theme === 'system' && 'bg-primary-50 text-primary-600 dark:bg-primary-900 dark:text-primary-400'
+              theme === 'system' &&
+                'bg-primary-50 text-primary-600 dark:bg-primary-900 dark:text-primary-400'
             )}
           >
             <Monitor className="h-4 w-4 mr-3" />
@@ -156,11 +165,7 @@ export function ThemeToggle({
     >
       <div className="relative flex items-center">
         {getThemeIcon()}
-        {showLabel && (
-          <span className="ml-2">
-            {getThemeLabel()}
-          </span>
-        )}
+        {showLabel && <span className="ml-2">{getThemeLabel()}</span>}
       </div>
     </Button>
   );

@@ -35,7 +35,9 @@ function validateNewsData(data: any): News {
 
   // Validation du statut
   if (!isValidNewsStatus(data.status)) {
-    console.warn(`Statut actualité non reconnu: ${data.status}, utilisation de "published" par défaut`);
+    console.warn(
+      `Statut actualité non reconnu: ${data.status}, utilisation de "published" par défaut`
+    );
     data.status = 'published';
   }
 
@@ -52,14 +54,14 @@ function validateNewsData(data: any): News {
     excerpt: data.excerpt || '',
     author: {
       name: author.name || 'Auteur inconnu',
-      avatar: author.avatar || undefined
+      avatar: author.avatar || undefined,
     },
     publishedAt: data.publishedAt || new Date().toISOString(),
     updatedAt: data.updatedAt || undefined,
     image: data.image || undefined,
     tags,
     status: data.status as News['status'],
-    slug: data.slug || ''
+    slug: data.slug || '',
   };
 }
 
@@ -71,10 +73,12 @@ export function NewsList({
   showSearch = true,
   showViewToggle = true,
   itemsPerPage = 9,
-  className
+  className,
 }: NewsListProps) {
   // États locaux
-  const [currentView, setCurrentView] = useState<'grid' | 'list' | 'compact'>(variant);
+  const [currentView, setCurrentView] = useState<'grid' | 'list' | 'compact'>(
+    variant
+  );
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedTag, setSelectedTag] = useState<FilterOption>('all');
   const [selectedAuthor, setSelectedAuthor] = useState<FilterOption>('all');
@@ -83,12 +87,12 @@ export function NewsList({
 
   // Extraction des tags et auteurs uniques
   const availableTags = useMemo(() => {
-    const tags = news.flatMap(item => item.tags);
+    const tags = news.flatMap((item) => item.tags);
     return Array.from(new Set(tags)).sort();
   }, [news]);
 
   const availableAuthors = useMemo(() => {
-    const authors = news.map(item => item.author.name);
+    const authors = news.map((item) => item.author.name);
     return Array.from(new Set(authors)).sort();
   }, [news]);
 
@@ -99,30 +103,37 @@ export function NewsList({
     // Filtrage par recherche
     if (searchTerm) {
       const term = searchTerm.toLowerCase();
-      filtered = filtered.filter(item =>
-        item.title.toLowerCase().includes(term) ||
-        item.excerpt.toLowerCase().includes(term) ||
-        item.content.toLowerCase().includes(term)
+      filtered = filtered.filter(
+        (item) =>
+          item.title.toLowerCase().includes(term) ||
+          item.excerpt.toLowerCase().includes(term) ||
+          item.content.toLowerCase().includes(term)
       );
     }
 
     // Filtrage par tag
     if (selectedTag !== 'all') {
-      filtered = filtered.filter(item => item.tags.includes(selectedTag));
+      filtered = filtered.filter((item) => item.tags.includes(selectedTag));
     }
 
     // Filtrage par auteur
     if (selectedAuthor !== 'all') {
-      filtered = filtered.filter(item => item.author.name === selectedAuthor);
+      filtered = filtered.filter((item) => item.author.name === selectedAuthor);
     }
 
     // Tri
     filtered.sort((a, b) => {
       switch (sortBy) {
         case 'date-desc':
-          return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
+          return (
+            new Date(b.publishedAt).getTime() -
+            new Date(a.publishedAt).getTime()
+          );
         case 'date-asc':
-          return new Date(a.publishedAt).getTime() - new Date(b.publishedAt).getTime();
+          return (
+            new Date(a.publishedAt).getTime() -
+            new Date(b.publishedAt).getTime()
+          );
         case 'title-asc':
           return a.title.localeCompare(b.title, 'fr');
         case 'title-desc':
@@ -148,12 +159,12 @@ export function NewsList({
   }, [searchTerm, selectedTag, selectedAuthor, sortBy]);
 
   // Composant de filtre
-  const FilterSelect = ({ 
-    value, 
-    onChange, 
-    options, 
-    placeholder, 
-    icon: Icon 
+  const FilterSelect = ({
+    value,
+    onChange,
+    options,
+    placeholder,
+    icon: Icon,
   }: {
     value: string;
     onChange: (value: string) => void;
@@ -182,15 +193,18 @@ export function NewsList({
   const renderNews = () => {
     if (loading) {
       return (
-        <div className={cn(
-          currentView === 'grid' && 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6',
-          currentView === 'list' && 'space-y-6',
-          currentView === 'compact' && 'space-y-2'
-        )}>
+        <div
+          className={cn(
+            currentView === 'grid' &&
+              'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6',
+            currentView === 'list' && 'space-y-6',
+            currentView === 'compact' && 'space-y-2'
+          )}
+        >
           {Array.from({ length: itemsPerPage }, (_, i) => (
-            <NewsCardSkeleton 
-              key={i} 
-              variant={currentView === 'compact' ? 'compact' : 'default'} 
+            <NewsCardSkeleton
+              key={i}
+              variant={currentView === 'compact' ? 'compact' : 'default'}
             />
           ))}
         </div>
@@ -232,7 +246,9 @@ export function NewsList({
               <NewsCard
                 key={item.id}
                 news={item}
-                variant={index === 0 && currentPage === 1 ? 'featured' : 'default'}
+                variant={
+                  index === 0 && currentPage === 1 ? 'featured' : 'default'
+                }
               />
             ))}
           </div>
@@ -297,7 +313,7 @@ export function NewsList({
                   placeholder="Tous les tags"
                   icon={Tag}
                 />
-                
+
                 <FilterSelect
                   value={selectedAuthor}
                   onChange={setSelectedAuthor}
@@ -309,12 +325,7 @@ export function NewsList({
                 <FilterSelect
                   value={sortBy}
                   onChange={(value) => setSortBy(value as SortOption)}
-                  options={[
-                    'date-desc',
-                    'date-asc',
-                    'title-asc',
-                    'title-desc'
-                  ]}
+                  options={['date-desc', 'date-asc', 'title-asc', 'title-desc']}
                   placeholder="Trier par"
                   icon={Calendar}
                 />
@@ -364,7 +375,9 @@ export function NewsList({
           {/* Résultats */}
           <div className="mt-4 flex items-center justify-between text-sm text-slate-600 dark:text-slate-400">
             <span>
-              {filteredAndSortedNews.length} actualité{filteredAndSortedNews.length > 1 ? 's' : ''} trouvée{filteredAndSortedNews.length > 1 ? 's' : ''}
+              {filteredAndSortedNews.length} actualité
+              {filteredAndSortedNews.length > 1 ? 's' : ''} trouvée
+              {filteredAndSortedNews.length > 1 ? 's' : ''}
             </span>
             {totalPages > 1 && (
               <span>
@@ -382,18 +395,19 @@ export function NewsList({
       {totalPages > 1 && (
         <div className="flex items-center justify-center space-x-2">
           <button
-            onClick={() => setCurrentPage(page => Math.max(1, page - 1))}
+            onClick={() => setCurrentPage((page) => Math.max(1, page - 1))}
             disabled={currentPage === 1}
             className="px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Précédent
           </button>
-          
+
           {Array.from({ length: totalPages }, (_, i) => i + 1)
-            .filter(page => 
-              page === 1 || 
-              page === totalPages || 
-              Math.abs(page - currentPage) <= 1
+            .filter(
+              (page) =>
+                page === 1 ||
+                page === totalPages ||
+                Math.abs(page - currentPage) <= 1
             )
             .map((page, index, array) => (
               <React.Fragment key={page}>
@@ -413,9 +427,11 @@ export function NewsList({
                 </button>
               </React.Fragment>
             ))}
-          
+
           <button
-            onClick={() => setCurrentPage(page => Math.min(totalPages, page + 1))}
+            onClick={() =>
+              setCurrentPage((page) => Math.min(totalPages, page + 1))
+            }
             disabled={currentPage === totalPages}
             className="px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed"
           >
@@ -437,10 +453,10 @@ export function useNews() {
       try {
         // Import direct du JSON avec validation
         const { default: newsData } = await import('@/data/actualites.json');
-        
+
         // Validation et conversion des données
         const validatedNews: News[] = newsData.map(validateNewsData);
-        
+
         setNews(validatedNews);
       } catch (error) {
         console.error('Erreur lors du chargement des actualités:', error);

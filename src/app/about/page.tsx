@@ -1,16 +1,16 @@
 import React from 'react';
 import Image from 'next/image';
-import { 
-  Users, 
-  Target, 
-  Heart, 
-  Award, 
-  Code, 
+import {
+  Users,
+  Target,
+  Heart,
+  Award,
+  Code,
   Lightbulb,
   Calendar,
   BookOpen,
   Coffee,
-  Rocket
+  Rocket,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -19,69 +19,77 @@ export default function AboutPage() {
     {
       icon: Users,
       title: 'Communauté',
-      description: 'Créer un environnement inclusif où chaque membre peut s\'épanouir et partager ses connaissances.',
+      description:
+        "Créer un environnement inclusif où chaque membre peut s'épanouir et partager ses connaissances.",
       color: 'text-blue-600 dark:text-blue-400',
-      bg: 'bg-blue-100 dark:bg-blue-900/30'
+      bg: 'bg-blue-100 dark:bg-blue-900/30',
     },
     {
       icon: Target,
       title: 'Excellence',
-      description: 'Encourager l\'excellence académique et professionnelle à travers l\'entraide et l\'apprentissage continu.',
+      description:
+        "Encourager l'excellence académique et professionnelle à travers l'entraide et l'apprentissage continu.",
       color: 'text-green-600 dark:text-green-400',
-      bg: 'bg-green-100 dark:bg-green-900/30'
+      bg: 'bg-green-100 dark:bg-green-900/30',
     },
     {
       icon: Lightbulb,
       title: 'Innovation',
-      description: 'Promouvoir la créativité et l\'innovation dans tous nos projets et initiatives.',
+      description:
+        "Promouvoir la créativité et l'innovation dans tous nos projets et initiatives.",
       color: 'text-yellow-600 dark:text-yellow-400',
-      bg: 'bg-yellow-100 dark:bg-yellow-900/30'
+      bg: 'bg-yellow-100 dark:bg-yellow-900/30',
     },
     {
       icon: Heart,
       title: 'Solidarité',
-      description: 'Cultiver l\'esprit d\'entraide et de soutien mutuel entre tous les membres.',
+      description:
+        "Cultiver l'esprit d'entraide et de soutien mutuel entre tous les membres.",
       color: 'text-red-600 dark:text-red-400',
-      bg: 'bg-red-100 dark:bg-red-900/30'
-    }
+      bg: 'bg-red-100 dark:bg-red-900/30',
+    },
   ];
 
   const stats = [
     { label: 'Membres actifs', value: '150+', icon: Users },
     { label: 'Événements organisés', value: '25+', icon: Calendar },
     { label: 'Projets réalisés', value: '12', icon: Code },
-    { label: 'Partenaires', value: '8', icon: Award }
+    { label: 'Partenaires', value: '8', icon: Award },
   ];
 
   const team = [
     {
       name: 'Alice Dubois',
       role: 'Présidente',
-      description: 'Passionnée par l\'IA et le leadership, Alice guide notre association vers l\'excellence.',
+      description:
+        "Passionnée par l'IA et le leadership, Alice guide notre association vers l'excellence.",
       image: '/images/membres/alice-dubois.jpg',
-      promo: 'M2'
+      promo: 'M2',
     },
     {
       name: 'Thomas Martin',
       role: 'Vice-président',
-      description: 'Expert DevOps et organisateur né, Thomas coordonne nos initiatives techniques.',
+      description:
+        'Expert DevOps et organisateur né, Thomas coordonne nos initiatives techniques.',
       image: '/images/membres/thomas-martin.jpg',
-      promo: 'M2'
+      promo: 'M2',
     },
     {
       name: 'Emma Bernard',
       role: 'Trésorière',
-      description: 'Spécialiste en data science, Emma assure la gestion financière avec rigueur.',
+      description:
+        'Spécialiste en data science, Emma assure la gestion financière avec rigueur.',
       image: '/images/membres/emma-bernard.jpg',
-      promo: 'M1'
+      promo: 'M1',
     },
     {
       name: 'Hugo Leroy',
       role: 'Secrétaire',
-      description: 'Designer UX/UI créatif, Hugo veille à la communication et à l\'image de l\'association.',
+      description:
+        "Designer UX/UI créatif, Hugo veille à la communication et à l'image de l'association.",
       image: '/images/membres/hugo-leroy.jpg',
-      promo: 'M1'
-    }
+      promo: 'M1',
+    },
   ];
 
   return (
@@ -90,31 +98,32 @@ export default function AboutPage() {
       <section className="relative py-20 lg:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary-50 to-blue-50 dark:from-slate-900 dark:to-slate-800" />
         <div className="absolute inset-0 bg-[url('/images/hero-pattern.svg')] opacity-10" />
-        
+
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center space-x-2 bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-200 px-4 py-2 rounded-full text-sm font-medium mb-6">
               <Users className="w-4 h-4" />
               <span>À propos de nous</span>
             </div>
-            
+
             <h1 className="text-4xl lg:text-6xl font-bold text-slate-900 dark:text-slate-100 mb-6">
               L&apos;Association{' '}
               <span className="bg-gradient-to-r from-primary-600 to-blue-500 bg-clip-text text-transparent">
                 404 MIASHS
               </span>
             </h1>
-            
+
             <p className="text-xl text-slate-600 dark:text-slate-400 mb-8 max-w-3xl mx-auto leading-relaxed">
-              Nous sommes une communauté dynamique d&apos;étudiants passionnés par les mathématiques, 
-              l&apos;informatique et les sciences humaines. Notre mission : créer des ponts entre 
-              les disciplines et préparer l&apos;avenir numérique.
+              Nous sommes une communauté dynamique d&apos;étudiants passionnés
+              par les mathématiques, l&apos;informatique et les sciences
+              humaines. Notre mission : créer des ponts entre les disciplines et
+              préparer l&apos;avenir numérique.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
               <div className="flex items-center space-x-2 text-slate-600 dark:text-slate-400">
                 <Calendar className="w-5 h-5" />
-                <span>Créée en 2023</span>
+                <span>Créée en 2024</span>
               </div>
               <div className="flex items-center space-x-2 text-slate-600 dark:text-slate-400">
                 <Users className="w-5 h-5" />
@@ -122,7 +131,7 @@ export default function AboutPage() {
               </div>
               <div className="flex items-center space-x-2 text-slate-600 dark:text-slate-400">
                 <BookOpen className="w-5 h-5" />
-                <span>Université Paris Cité</span>
+                <span>Université de Toulouse Jean Jaurès</span>
               </div>
             </div>
           </div>
@@ -140,28 +149,32 @@ export default function AboutPage() {
                 </h2>
                 <div className="space-y-6">
                   <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-                    L&apos;Association 404 MIASHS a été créée avec une vision claire : 
-                    rassembler les étudiants de MIASHS dans un environnement 
-                    stimulant qui favorise l&apos;apprentissage, l&apos;innovation et l&apos;entraide.
+                    L&apos;Association 404 MIASHS a été créée avec une vision
+                    claire : rassembler les étudiants de MIASHS dans un
+                    environnement stimulant qui favorise l&apos;apprentissage,
+                    l&apos;innovation et l&apos;entraide.
                   </p>
                   <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-                    Nous organisons des événements, des ateliers et des projets 
-                    collaboratifs qui permettent à nos membres de développer leurs 
-                    compétences techniques et humaines tout en créant des liens durables.
+                    Nous organisons des événements, des ateliers et des projets
+                    collaboratifs qui permettent à nos membres de développer
+                    leurs compétences techniques et humaines tout en créant des
+                    liens durables.
                   </p>
                   <div className="flex items-start space-x-3">
                     <div className="flex-shrink-0 w-6 h-6 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mt-1">
                       <Rocket className="w-3 h-3 text-primary-600 dark:text-primary-400" />
                     </div>
                     <p className="text-slate-600 dark:text-slate-400">
-                      <strong className="text-slate-900 dark:text-slate-100">Notre objectif :</strong> 
-                      {' '}Préparer nos membres aux défis du monde professionnel en 
+                      <strong className="text-slate-900 dark:text-slate-100">
+                        Notre objectif :
+                      </strong>{' '}
+                      Préparer nos membres aux défis du monde professionnel en
                       leur offrant une expérience riche et diversifiée.
                     </p>
                   </div>
                 </div>
               </div>
-              
+
               <div className="relative">
                 <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl">
                   <Image
@@ -190,11 +203,11 @@ export default function AboutPage() {
                 Nos Valeurs
               </h2>
               <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-                Les principes qui guident notre action et définissent l&apos;esprit 
-                de notre communauté.
+                Les principes qui guident notre action et définissent
+                l&apos;esprit de notre communauté.
               </p>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {values.map((value, index) => {
                 const Icon = value.icon;
@@ -203,7 +216,12 @@ export default function AboutPage() {
                     key={index}
                     className="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all duration-300"
                   >
-                    <div className={cn('w-12 h-12 rounded-xl flex items-center justify-center mb-6', value.bg)}>
+                    <div
+                      className={cn(
+                        'w-12 h-12 rounded-xl flex items-center justify-center mb-6',
+                        value.bg
+                      )}
+                    >
                       <Icon className={cn('w-6 h-6', value.color)} />
                     </div>
                     <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-3">
@@ -232,7 +250,7 @@ export default function AboutPage() {
                 Découvrez l&apos;impact de notre communauté depuis sa création.
               </p>
             </div>
-            
+
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
               {stats.map((stat, index) => {
                 const Icon = stat.icon;
@@ -264,10 +282,11 @@ export default function AboutPage() {
                 Notre Bureau
               </h2>
               <p className="text-lg text-slate-600 dark:text-slate-400">
-                L&apos;équipe dirigeante qui porte la vision de l&apos;association.
+                L&apos;équipe dirigeante qui porte la vision de
+                l&apos;association.
               </p>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {team.map((member, index) => (
                 <div
@@ -290,11 +309,15 @@ export default function AboutPage() {
                     <span className="text-sm font-medium text-primary-600 dark:text-primary-400">
                       {member.role}
                     </span>
-                    <span className={cn(
-                      'text-xs px-2 py-1 rounded-full font-medium',
-                      member.promo === 'M2' && 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300',
-                      member.promo === 'M1' && 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300'
-                    )}>
+                    <span
+                      className={cn(
+                        'text-xs px-2 py-1 rounded-full font-medium',
+                        member.promo === 'M2' &&
+                          'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300',
+                        member.promo === 'M1' &&
+                          'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300'
+                      )}
+                    >
                       {member.promo}
                     </span>
                   </div>
@@ -316,8 +339,9 @@ export default function AboutPage() {
               Rejoignez l&apos;Aventure
             </h2>
             <p className="text-lg text-slate-600 dark:text-slate-400 mb-8 max-w-2xl mx-auto">
-              Vous êtes étudiant en MIASHS et vous souhaitez faire partie d&apos;une 
-              communauté dynamique ? N&apos;hésitez plus, rejoignez-nous !
+              Vous êtes étudiant en MIASHS et vous souhaitez faire partie
+              d&apos;une communauté dynamique ? N&apos;hésitez plus,
+              rejoignez-nous !
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
               <a

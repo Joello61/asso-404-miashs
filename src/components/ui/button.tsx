@@ -11,29 +11,42 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = 'primary', size = 'md', loading = false, asChild = false, disabled, children, ...props }, ref) => {
-    const baseClasses = 'inline-flex items-center justify-center rounded-xl font-medium transition-all duration-200 focus-ring disabled:pointer-events-none disabled:opacity-50';
-    
+  (
+    {
+      className,
+      variant = 'primary',
+      size = 'md',
+      loading = false,
+      asChild = false,
+      disabled,
+      children,
+      ...props
+    },
+    ref
+  ) => {
+    const baseClasses =
+      'inline-flex items-center justify-center rounded-xl font-medium transition-all duration-200 focus-ring disabled:pointer-events-none disabled:opacity-50';
+
     const variants = {
-      primary: 'bg-primary-600 text-white hover:bg-primary-700 active:bg-primary-800 shadow-sm hover:shadow-medium',
-      secondary: 'bg-neutral-100 text-neutral-900 hover:bg-neutral-200 dark:bg-neutral-800 dark:text-neutral-100 dark:hover:bg-neutral-700',
-      ghost: 'hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-700 dark:text-neutral-300',
-      destructive: 'bg-error-600 text-white hover:bg-error-700 active:bg-error-800',
-      outline: 'border border-neutral-300 dark:border-neutral-700 bg-transparent hover:bg-neutral-50 dark:hover:bg-neutral-900'
+      primary:
+        'bg-primary-600 text-white hover:bg-primary-700 active:bg-primary-800 shadow-sm hover:shadow-medium',
+      secondary:
+        'bg-neutral-100 text-neutral-900 hover:bg-neutral-200 dark:bg-neutral-800 dark:text-neutral-100 dark:hover:bg-neutral-700',
+      ghost:
+        'hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-700 dark:text-neutral-300',
+      destructive:
+        'bg-error-600 text-white hover:bg-error-700 active:bg-error-800',
+      outline:
+        'border border-neutral-300 dark:border-neutral-700 bg-transparent hover:bg-neutral-50 dark:hover:bg-neutral-900',
     };
 
     const sizes = {
       sm: 'px-3 py-1.5 text-sm h-8',
       md: 'px-4 py-2 text-sm h-10',
-      lg: 'px-6 py-3 text-base h-12'
+      lg: 'px-6 py-3 text-base h-12',
     };
 
-    const classes = cn(
-      baseClasses,
-      variants[variant],
-      sizes[size],
-      className
-    );
+    const classes = cn(baseClasses, variants[variant], sizes[size], className);
 
     const Comp = asChild ? Slot : 'button';
 
@@ -71,12 +84,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     }
 
     return (
-      <Comp
-        className={classes}
-        ref={ref}
-        disabled={disabled}
-        {...props}
-      >
+      <Comp className={classes} ref={ref} disabled={disabled} {...props}>
         {children}
       </Comp>
     );
@@ -86,4 +94,4 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 Button.displayName = 'Button';
 
 export { Button };
-export type { ButtonProps }
+export type { ButtonProps };

@@ -37,7 +37,8 @@ export const metadata: Metadata = {
     default: 'Asso 404 MIASHS - Association Étudiante',
     template: '%s | Asso 404 MIASHS',
   },
-  description: 'Association étudiante de Mathématiques et Informatique Appliquées aux Sciences Humaines et Sociales. Rejoignez notre communauté de passionnés de tech !',
+  description:
+    'Association étudiante de Mathématiques et Informatique Appliquées aux Sciences Humaines et Sociales. Rejoignez notre communauté de passionnés de tech !',
   keywords: [
     'association étudiante',
     'MIASHS',
@@ -51,11 +52,9 @@ export const metadata: Metadata = {
     'data science',
     'événements tech',
     'formation',
-    'networking'
+    'networking',
   ],
-  authors: [
-    { name: 'Asso 404 MIASHS', url: 'https://asso404miashs.fr' }
-  ],
+  authors: [{ name: 'Asso 404 MIASHS', url: 'https://asso404miashs.fr' }],
   creator: 'Asso 404 MIASHS',
   publisher: 'Asso 404 MIASHS',
   formatDetection: {
@@ -68,7 +67,8 @@ export const metadata: Metadata = {
     locale: 'fr_FR',
     url: 'https://asso404miashs.fr',
     title: 'Asso 404 MIASHS - Association Étudiante',
-    description: 'Rejoignez la communauté étudiante MIASHS ! Événements tech, formations, projets collaboratifs et networking.',
+    description:
+      'Rejoignez la communauté étudiante MIASHS ! Événements tech, formations, projets collaboratifs et networking.',
     siteName: 'Asso 404 MIASHS',
     images: [
       {
@@ -90,7 +90,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Asso 404 MIASHS - Association Étudiante',
-    description: 'Rejoignez la communauté étudiante MIASHS ! Événements tech, formations et networking.',
+    description:
+      'Rejoignez la communauté étudiante MIASHS ! Événements tech, formations et networking.',
     images: ['/images/og-image.jpg'],
     creator: '@asso404miashs',
     site: '@asso404miashs',
@@ -117,13 +118,29 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
-      { url: '/images/logo/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/images/logo/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-      { url: '/images/logo/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+      {
+        url: '/images/logo/favicon-16x16.png',
+        sizes: '16x16',
+        type: 'image/png',
+      },
+      {
+        url: '/images/logo/favicon-32x32.png',
+        sizes: '32x32',
+        type: 'image/png',
+      },
+      {
+        url: '/images/logo/favicon-96x96.png',
+        sizes: '96x96',
+        type: 'image/png',
+      },
     ],
     shortcut: '/favicon.ico',
     apple: [
-      { url: '/images/logo/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+      {
+        url: '/images/logo/apple-touch-icon.png',
+        sizes: '180x180',
+        type: 'image/png',
+      },
     ],
     other: [
       {
@@ -146,7 +163,8 @@ export const metadata: Metadata = {
   referrer: 'origin-when-cross-origin',
   applicationName: 'Asso 404 MIASHS',
   generator: 'Next.js',
-  abstract: 'Association étudiante dédiée aux MIASHS avec événements, formations et projets tech.',
+  abstract:
+    'Association étudiante dédiée aux MIASHS avec événements, formations et projets tech.',
   archives: ['https://asso404miashs.fr/actualites'],
   assets: ['https://asso404miashs.fr/images'],
   bookmarks: ['https://asso404miashs.fr/trombinoscope'],
@@ -172,15 +190,24 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <head>
         {/* Preconnect pour optimiser les performances */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+
         {/* DNS Prefetch pour les domaines externes */}
         <link rel="dns-prefetch" href="//www.google-analytics.com" />
         <link rel="dns-prefetch" href="//fonts.googleapis.com" />
-        
+
         {/* Preload des ressources critiques */}
-        <link rel="preload" href="/images/logo/logo.svg" as="image" type="image/svg+xml" />
-        
+        <link
+          rel="preload"
+          href="/images/logo/logo.svg"
+          as="image"
+          type="image/svg+xml"
+        />
+
         {/* Scripts de performance (à configurer selon vos besoins) */}
         {process.env.NODE_ENV === 'production' && (
           <>
@@ -209,7 +236,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           </>
         )}
       </head>
-      <body 
+      <body
         className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}
         suppressHydrationWarning
       >
@@ -223,15 +250,13 @@ export default function RootLayout({ children }: RootLayoutProps) {
           {/* Structure principale de l'application */}
           <div className="relative flex min-h-screen flex-col">
             <Header />
-            
+
             {/* Contenu principal avec padding pour le header fixe */}
-            <main className="flex-1 pt-16">
-              {children}
-            </main>
-            
+            <main className="flex-1 pt-16">{children}</main>
+
             <Footer />
           </div>
-          
+
           {/* Scripts additionnels */}
           {process.env.NODE_ENV === 'development' && (
             <div className="fixed bottom-4 right-4 z-50 no-print">

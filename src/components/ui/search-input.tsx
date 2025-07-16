@@ -6,14 +6,25 @@ import { Input } from './input';
 import { Button } from './button';
 import { cn } from '@/lib/utils';
 
-interface SearchInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
+interface SearchInputProps
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
   onClear?: () => void;
   showClearButton?: boolean;
   loading?: boolean;
 }
 
 const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
-  ({ className, value, onClear, showClearButton = true, loading = false, ...props }, ref) => {
+  (
+    {
+      className,
+      value,
+      onClear,
+      showClearButton = true,
+      loading = false,
+      ...props
+    },
+    ref
+  ) => {
     const hasValue = Boolean(value && String(value).length > 0);
 
     return (

@@ -15,12 +15,13 @@ export default function EventsPage() {
             Événements
           </h1>
           <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-            Découvrez tous nos événements : hackathons, conférences, ateliers, et bien plus encore !
+            Découvrez tous nos événements : hackathons, conférences, ateliers,
+            et bien plus encore !
           </p>
         </div>
 
         {/* Liste des événements */}
-        <EventList 
+        <EventList
           events={events}
           loading={loading}
           variant="grid"

@@ -11,7 +11,7 @@ const LoadingSpinner = React.forwardRef<HTMLDivElement, LoadingSpinnerProps>(
     const sizeClasses = {
       sm: 'w-4 h-4',
       md: 'w-6 h-6',
-      lg: 'w-8 h-8'
+      lg: 'w-8 h-8',
     };
 
     return (
@@ -26,11 +26,7 @@ const LoadingSpinner = React.forwardRef<HTMLDivElement, LoadingSpinnerProps>(
             sizeClasses[size]
           )}
         />
-        {text && (
-          <p className="mt-2 text-sm text-muted-foreground">
-            {text}
-          </p>
-        )}
+        {text && <p className="mt-2 text-sm text-muted-foreground">{text}</p>}
       </div>
     );
   }

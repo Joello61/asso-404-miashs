@@ -4,15 +4,19 @@ export { default as eventsData } from './events.json';
 export { default as activitiesData } from './activities.json';
 
 // Fonctions utilitaires pour manipuler les données
-import type { Member, News, Event, Activity } from '@/lib/types';
+import type { Member, News, Event, Activity, PromoType } from '@/lib/types';
 
 /**
  * Obtenir tous les membres
  */
 export async function getAllMembers(): Promise<Member[]> {
-  // En mode production, ceci pourrait être un appel API
   const { default: membres } = await import('./membres.json');
-  return membres;
+
+  // Conversion avec validation du type promo
+  return membres.map((membre) => ({
+    ...membre,
+    promo: membre.promo as PromoType, // Assertion de type
+  }));
 }
 
 /**
@@ -20,7 +24,7 @@ export async function getAllMembers(): Promise<Member[]> {
  */
 export async function getMemberById(id: string): Promise<Member | null> {
   const membres = await getAllMembers();
-  return membres.find(member => member.id === id) || null;
+  return membres.find((member) => member.id === id) || null;
 }
 
 /**
@@ -28,7 +32,7 @@ export async function getMemberById(id: string): Promise<Member | null> {
  */
 export async function getMembersByPromo(promo: string): Promise<Member[]> {
   const membres = await getAllMembers();
-  return membres.filter(member => member.promo === promo);
+  return membres.filter((member) => member.promo === promo);
 }
 
 /**
@@ -36,8 +40,17 @@ export async function getMembersByPromo(promo: string): Promise<Member[]> {
  */
 export async function getAllNews(): Promise<News[]> {
   const { default: actualites } = await import('./actualites.json');
-  return actualites.filter(news => news.status === 'published')
-    .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
+
+  return actualites
+    .map((news) => ({
+      ...news,
+      status: news.status as 'published' | 'draft' | 'archived',
+    }))
+    .filter((news) => news.status === 'published')
+    .sort(
+      (a, b) =>
+        new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+    );
 }
 
 /**
@@ -45,7 +58,7 @@ export async function getAllNews(): Promise<News[]> {
  */
 export async function getNewsBySlug(slug: string): Promise<News | null> {
   const actualites = await getAllNews();
-  return actualites.find(news => news.slug === slug) || null;
+  return actualites.find((news) => news.slug === slug) || null;
 }
 
 /**
@@ -61,7 +74,20 @@ export async function getRecentNews(limit: number = 3): Promise<News[]> {
  */
 export async function getAllEvents(): Promise<Event[]> {
   const { default: events } = await import('./events.json');
-  return events.sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
+
+  return events
+    .map((event) => ({
+      ...event,
+      status: event.status as
+        | 'upcoming'
+        | 'completed'
+        | 'ongoing'
+        | 'cancelled',
+    }))
+    .sort(
+      (a, b) =>
+        new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
+    );
 }
 
 /**
@@ -69,7 +95,7 @@ export async function getAllEvents(): Promise<Event[]> {
  */
 export async function getEventBySlug(slug: string): Promise<Event | null> {
   const events = await getAllEvents();
-  return events.find(event => event.slug === slug) || null;
+  return events.find((event) => event.slug === slug) || null;
 }
 
 /**
@@ -78,8 +104,8 @@ export async function getEventBySlug(slug: string): Promise<Event | null> {
 export async function getUpcomingEvents(limit?: number): Promise<Event[]> {
   const events = await getAllEvents();
   const now = new Date();
-  const upcomingEvents = events.filter(event => 
-    new Date(event.startDate) > now && event.status === 'upcoming'
+  const upcomingEvents = events.filter(
+    (event) => new Date(event.startDate) > now && event.status === 'upcoming'
   );
   return limit ? upcomingEvents.slice(0, limit) : upcomingEvents;
 }
@@ -90,9 +116,16 @@ export async function getUpcomingEvents(limit?: number): Promise<Event[]> {
 export async function getPastEvents(limit?: number): Promise<Event[]> {
   const events = await getAllEvents();
   const now = new Date();
-  const pastEvents = events.filter(event => 
-    new Date(event.endDate || event.startDate) < now || event.status === 'completed'
-  ).sort((a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime());
+  const pastEvents = events
+    .filter(
+      (event) =>
+        new Date(event.endDate || event.startDate) < now ||
+        event.status === 'completed'
+    )
+    .sort(
+      (a, b) =>
+        new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
+    );
   return limit ? pastEvents.slice(0, limit) : pastEvents;
 }
 
@@ -101,7 +134,15 @@ export async function getPastEvents(limit?: number): Promise<Event[]> {
  */
 export async function getAllActivities(): Promise<Activity[]> {
   const { default: activities } = await import('./activities.json');
-  return activities;
+
+  return activities.map((activity) => ({
+    ...activity,
+    category: activity.category as
+      | 'technical'
+      | 'professional'
+      | 'academic'
+      | 'social',
+  }));
 }
 
 /**
@@ -109,7 +150,7 @@ export async function getAllActivities(): Promise<Activity[]> {
  */
 export async function getActiveActivities(): Promise<Activity[]> {
   const activities = await getAllActivities();
-  return activities.filter(activity => activity.isActive);
+  return activities.filter((activity) => activity.isActive);
 }
 
 /**
@@ -117,7 +158,7 @@ export async function getActiveActivities(): Promise<Activity[]> {
  */
 export async function getActivityById(id: string): Promise<Activity | null> {
   const activities = await getAllActivities();
-  return activities.find(activity => activity.id === id) || null;
+  return activities.find((activity) => activity.id === id) || null;
 }
 
 /**
@@ -128,23 +169,23 @@ export async function getStats() {
     getAllMembers(),
     getAllNews(),
     getAllEvents(),
-    getActiveActivities()
+    getActiveActivities(),
   ]);
 
   const upcomingEvents = await getUpcomingEvents();
-  
+
   return {
     totalMembers: membres.length,
     membersByPromo: {
-      L3: membres.filter(m => m.promo === 'L3').length,
-      M1: membres.filter(m => m.promo === 'M1').length,
-      M2: membres.filter(m => m.promo === 'M2').length,
+      L3: membres.filter((m) => m.promo === 'L3').length,
+      M1: membres.filter((m) => m.promo === 'M1').length,
+      M2: membres.filter((m) => m.promo === 'M2').length,
     },
     totalNews: actualites.length,
     totalEvents: events.length,
     upcomingEvents: upcomingEvents.length,
     activeActivities: activities.length,
-    membersWithLinkedIn: membres.filter(m => m.linkedin).length,
-    membersWithGitHub: membres.filter(m => m.github).length,
+    membersWithLinkedIn: membres.filter((m) => m.linkedin).length,
+    membersWithGitHub: membres.filter((m) => m.github).length,
   };
 }

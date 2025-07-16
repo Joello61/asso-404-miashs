@@ -25,17 +25,9 @@ export function NewsCard({
   showExcerpt = true,
   showTags = true,
   showAuthor = true,
-  className
+  className,
 }: NewsCardProps) {
-  const {
-    title,
-    excerpt,
-    author,
-    publishedAt,
-    image,
-    tags,
-    slug
-  } = news;
+  const { title, excerpt, author, publishedAt, image, tags, slug } = news;
 
   // Configuration selon la variante
   const config = {
@@ -43,35 +35,43 @@ export function NewsCard({
       imageHeight: 'h-48',
       titleSize: 'text-xl',
       excerptLines: 3,
-      padding: 'p-6'
+      padding: 'p-6',
     },
     featured: {
       imageHeight: 'h-64',
       titleSize: 'text-2xl',
       excerptLines: 4,
-      padding: 'p-8'
+      padding: 'p-8',
     },
     compact: {
       imageHeight: 'h-32',
       titleSize: 'text-lg',
       excerptLines: 2,
-      padding: 'p-4'
-    }
+      padding: 'p-4',
+    },
   };
 
   const currentConfig = config[variant];
 
   return (
-    <article className={cn(
-      'group bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden transition-all duration-300',
-      'hover:shadow-lg hover:border-primary-200 dark:hover:border-primary-800 hover:-translate-y-1',
-      variant === 'featured' && 'ring-2 ring-primary-100 dark:ring-primary-900',
-      className
-    )}>
+    <article
+      className={cn(
+        'group bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden transition-all duration-300',
+        'hover:shadow-lg hover:border-primary-200 dark:hover:border-primary-800 hover:-translate-y-1',
+        variant === 'featured' &&
+          'ring-2 ring-primary-100 dark:ring-primary-900',
+        className
+      )}
+    >
       <Link href={`/actualites/${slug}`} className="block">
         {/* Image */}
         {showImage && image && (
-          <div className={cn('relative overflow-hidden', currentConfig.imageHeight)}>
+          <div
+            className={cn(
+              'relative overflow-hidden',
+              currentConfig.imageHeight
+            )}
+          >
             <Image
               src={image}
               alt={title}
@@ -79,10 +79,10 @@ export function NewsCard({
               className="object-cover transition-transform duration-300 group-hover:scale-105"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
-            
+
             {/* Overlay gradient */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            
+
             {/* Badge statut (si brouillon) */}
             {news.status === 'draft' && (
               <div className="absolute top-3 left-3">
@@ -91,7 +91,7 @@ export function NewsCard({
                 </span>
               </div>
             )}
-            
+
             {/* Tags overlay */}
             {showTags && tags.length > 0 && variant === 'featured' && (
               <div className="absolute bottom-3 left-3">
@@ -126,19 +126,23 @@ export function NewsCard({
           )}
 
           {/* Titre */}
-          <h3 className={cn(
-            'font-bold text-slate-900 dark:text-slate-100 mb-3 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors line-clamp-2',
-            currentConfig.titleSize
-          )}>
+          <h3
+            className={cn(
+              'font-bold text-slate-900 dark:text-slate-100 mb-3 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors line-clamp-2',
+              currentConfig.titleSize
+            )}
+          >
             {title}
           </h3>
 
           {/* Excerpt */}
           {showExcerpt && excerpt && (
-            <p className={cn(
-              'text-slate-600 dark:text-slate-400 mb-4 leading-relaxed',
-              `line-clamp-${currentConfig.excerptLines}`
-            )}>
+            <p
+              className={cn(
+                'text-slate-600 dark:text-slate-400 mb-4 leading-relaxed',
+                `line-clamp-${currentConfig.excerptLines}`
+              )}
+            >
               {truncateText(excerpt, variant === 'compact' ? 80 : 120)}
             </p>
           )}
@@ -167,7 +171,10 @@ export function NewsCard({
               {/* Date */}
               <div className="flex items-center space-x-1">
                 <Calendar className="w-4 h-4" />
-                <time dateTime={publishedAt} title={formatDate(new Date(publishedAt))}>
+                <time
+                  dateTime={publishedAt}
+                  title={formatDate(new Date(publishedAt))}
+                >
                   {formatRelativeDate(new Date(publishedAt))}
                 </time>
               </div>
@@ -186,11 +193,15 @@ export function NewsCard({
 }
 
 // Composant skeleton pour le loading
-export function NewsCardSkeleton({ variant = 'default' }: { variant?: 'default' | 'featured' | 'compact' }) {
+export function NewsCardSkeleton({
+  variant = 'default',
+}: {
+  variant?: 'default' | 'featured' | 'compact';
+}) {
   const config = {
     default: { height: 'h-48', padding: 'p-6' },
     featured: { height: 'h-64', padding: 'p-8' },
-    compact: { height: 'h-32', padding: 'p-4' }
+    compact: { height: 'h-32', padding: 'p-4' },
   };
 
   const currentConfig = config[variant];
@@ -198,8 +209,13 @@ export function NewsCardSkeleton({ variant = 'default' }: { variant?: 'default' 
   return (
     <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden">
       {/* Image skeleton */}
-      <div className={cn('bg-slate-200 dark:bg-slate-700 animate-pulse', currentConfig.height)} />
-      
+      <div
+        className={cn(
+          'bg-slate-200 dark:bg-slate-700 animate-pulse',
+          currentConfig.height
+        )}
+      />
+
       {/* Contenu skeleton */}
       <div className={currentConfig.padding}>
         {/* Tags skeleton */}
@@ -207,20 +223,20 @@ export function NewsCardSkeleton({ variant = 'default' }: { variant?: 'default' 
           <div className="h-6 w-16 bg-slate-200 dark:bg-slate-700 rounded-md animate-pulse" />
           <div className="h-6 w-20 bg-slate-200 dark:bg-slate-700 rounded-md animate-pulse" />
         </div>
-        
+
         {/* Titre skeleton */}
         <div className="space-y-2 mb-3">
           <div className="h-6 bg-slate-200 dark:bg-slate-700 rounded animate-pulse" />
           <div className="h-6 w-3/4 bg-slate-200 dark:bg-slate-700 rounded animate-pulse" />
         </div>
-        
+
         {/* Excerpt skeleton */}
         <div className="space-y-2 mb-4">
           <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded animate-pulse" />
           <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded animate-pulse" />
           <div className="h-4 w-2/3 bg-slate-200 dark:bg-slate-700 rounded animate-pulse" />
         </div>
-        
+
         {/* Métadonnées skeleton */}
         <div className="flex justify-between">
           <div className="flex items-center space-x-4">
@@ -238,7 +254,13 @@ export function NewsCardSkeleton({ variant = 'default' }: { variant?: 'default' 
 }
 
 // Variante compacte pour sidebar ou listes
-export function NewsCardCompact({ news, className }: { news: News; className?: string }) {
+export function NewsCardCompact({
+  news,
+  className,
+}: {
+  news: News;
+  className?: string;
+}) {
   return (
     <Link
       href={`/actualites/${news.slug}`}
@@ -259,13 +281,13 @@ export function NewsCardCompact({ news, className }: { news: News; className?: s
           />
         </div>
       )}
-      
+
       {/* Contenu */}
       <div className="flex-1 min-w-0">
         <h4 className="font-medium text-slate-900 dark:text-slate-100 line-clamp-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors mb-1">
           {news.title}
         </h4>
-        
+
         <div className="flex items-center text-xs text-slate-500 dark:text-slate-400 space-x-2">
           <span>{formatRelativeDate(new Date(news.publishedAt))}</span>
           {news.tags.length > 0 && (

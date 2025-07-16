@@ -16,7 +16,7 @@ export default function Template({ children }: TemplateProps) {
         exit={{ opacity: 0, y: -10 }}
         transition={{
           duration: 0.3,
-          ease: 'easeInOut'
+          ease: 'easeInOut',
         }}
         className="min-h-full"
       >
@@ -28,9 +28,5 @@ export default function Template({ children }: TemplateProps) {
 
 // Version sans animations (si vous ne voulez pas utiliser Framer Motion)
 export function SimpleTemplate({ children }: TemplateProps) {
-  return (
-    <div className="animate-fade-in">
-      {children}
-    </div>
-  );
+  return <div className="animate-fade-in">{children}</div>;
 }

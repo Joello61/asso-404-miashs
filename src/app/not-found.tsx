@@ -2,7 +2,14 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Home, Search, Users, Calendar, BookOpen, ArrowLeft } from 'lucide-react';
+import {
+  Home,
+  Search,
+  Users,
+  Calendar,
+  BookOpen,
+  ArrowLeft,
+} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
@@ -59,8 +66,9 @@ export default function NotFound() {
               Page introuvable
             </h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Oups ! Il semblerait que cette page se soit perdue dans les méandres du code. 
-              Peut-être qu&apos;elle fait une pause café avec nos développeurs ? ☕
+              Oups ! Il semblerait que cette page se soit perdue dans les
+              méandres du code. Peut-être qu&apos;elle fait une pause café avec
+              nos développeurs ? ☕
             </p>
             <p className="text-sm text-muted-foreground">
               Erreur 404 : La page demandée n&apos;existe pas ou a été déplacée.
@@ -75,8 +83,13 @@ export default function NotFound() {
                 Retour à l&apos;accueil
               </Link>
             </Button>
-            
-            <Button asChild variant="outline" size="lg" className="min-w-[200px]">
+
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="min-w-[200px]"
+            >
               <Link href="/trombinoscope">
                 <Users className="w-4 h-4 mr-2" />
                 Voir nos membres
@@ -89,23 +102,28 @@ export default function NotFound() {
             <h2 className="text-xl font-semibold text-foreground mb-8">
               Ou explorez ces sections populaires
             </h2>
-            
+
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {quickLinks.map((link) => {
                 const IconComponent = link.icon;
                 return (
-                  <Card key={link.href} className="group hover:shadow-medium transition-all duration-300">
+                  <Card
+                    key={link.href}
+                    className="group hover:shadow-medium transition-all duration-300"
+                  >
                     <CardContent className="p-6">
                       <Link href={link.href} className="block space-y-4">
                         <div className="flex items-center justify-center">
-                          <div className={cn(
-                            'w-12 h-12 rounded-xl bg-muted flex items-center justify-center group-hover:scale-110 transition-transform duration-300',
-                            link.color
-                          )}>
+                          <div
+                            className={cn(
+                              'w-12 h-12 rounded-xl bg-muted flex items-center justify-center group-hover:scale-110 transition-transform duration-300',
+                              link.color
+                            )}
+                          >
                             <IconComponent className="w-6 h-6" />
                           </div>
                         </div>
-                        
+
                         <div className="text-center space-y-2">
                           <h3 className="font-semibold text-foreground group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                             {link.title}
@@ -129,19 +147,16 @@ export default function NotFound() {
                 Besoin d&apos;aide ?
               </h3>
               <p className="text-muted-foreground">
-                Si vous pensez qu&apos;il s&apos;agit d&apos;une erreur ou si vous ne trouvez pas ce que vous cherchez, 
-                n&apos;hésitez pas à nous contacter.
+                Si vous pensez qu&apos;il s&apos;agit d&apos;une erreur ou si
+                vous ne trouvez pas ce que vous cherchez, n&apos;hésitez pas à
+                nous contacter.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Button asChild variant="ghost">
-                  <Link href="/contact">
-                    Nous contacter
-                  </Link>
+                  <Link href="/contact">Nous contacter</Link>
                 </Button>
                 <Button asChild variant="ghost">
-                  <Link href="/about">
-                    En savoir plus sur nous
-                  </Link>
+                  <Link href="/about">En savoir plus sur nous</Link>
                 </Button>
               </div>
             </div>
@@ -149,8 +164,8 @@ export default function NotFound() {
 
           {/* Retour navigation */}
           <div className="pt-8">
-            <Button 
-              variant="ghost" 
+            <Button
+              variant="ghost"
               onClick={() => window.history.back()}
               className="text-muted-foreground hover:text-foreground"
             >
@@ -165,10 +180,10 @@ export default function NotFound() {
 }
 
 // Version simplifiée pour les erreurs internes
-export function SimpleNotFound({ 
-  title = "Page introuvable", 
+export function SimpleNotFound({
+  title = 'Page introuvable',
   message = "La page que vous recherchez n'existe pas.",
-  showBackButton = true 
+  showBackButton = true,
 }: {
   title?: string;
   message?: string;
@@ -180,7 +195,7 @@ export function SimpleNotFound({
         <div className="text-6xl font-bold text-muted-foreground">404</div>
         <h1 className="text-2xl font-bold text-foreground">{title}</h1>
         <p className="text-muted-foreground">{message}</p>
-        
+
         <div className="flex items-center justify-center gap-4">
           <Button asChild>
             <Link href="/">
@@ -188,12 +203,9 @@ export function SimpleNotFound({
               Accueil
             </Link>
           </Button>
-          
+
           {showBackButton && (
-            <Button 
-              variant="outline" 
-              onClick={() => window.history.back()}
-            >
+            <Button variant="outline" onClick={() => window.history.back()}>
               <ArrowLeft className="w-4 h-4 mr-2" />
               Retour
             </Button>

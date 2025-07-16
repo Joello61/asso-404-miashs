@@ -3,10 +3,7 @@ import { useState, useMemo } from 'react';
 /**
  * Hook pour gérer la pagination
  */
-export function usePagination<T>(
-  items: T[],
-  itemsPerPage: number = 12
-) {
+export function usePagination<T>(items: T[], itemsPerPage: number = 12) {
   const [currentPage, setCurrentPage] = useState(1);
 
   // Calculs de pagination
@@ -43,7 +40,7 @@ export function usePagination<T>(
   // Reset à la première page quand les items changent
   useMemo(() => {
     setCurrentPage(1);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items.length]);
 
   return {
@@ -58,6 +55,6 @@ export function usePagination<T>(
     nextPage,
     previousPage,
     isFirstPage: currentPage === 1,
-    isLastPage: currentPage === totalPages
+    isLastPage: currentPage === totalPages,
   };
 }

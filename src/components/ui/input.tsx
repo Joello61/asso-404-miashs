@@ -10,7 +10,20 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type = 'text', label, error, helper, leftIcon, rightIcon, id, ...props }, ref) => {
+  (
+    {
+      className,
+      type = 'text',
+      label,
+      error,
+      helper,
+      leftIcon,
+      rightIcon,
+      id,
+      ...props
+    },
+    ref
+  ) => {
     const inputId = id || `input-${Math.random().toString(36).substr(2, 9)}`;
 
     return (
@@ -20,7 +33,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             {label}
           </label>
         )}
-        
+
         <div className="relative">
           {leftIcon && (
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -29,7 +42,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               </div>
             </div>
           )}
-          
+
           <input
             type={type}
             className={cn(
@@ -43,7 +56,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             id={inputId}
             {...props}
           />
-          
+
           {rightIcon && (
             <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
               <div className="text-neutral-400 dark:text-neutral-500">
@@ -52,14 +65,10 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             </div>
           )}
         </div>
-        
-        {error && (
-          <p className="form-error">{error}</p>
-        )}
-        
-        {helper && !error && (
-          <p className="form-helper">{helper}</p>
-        )}
+
+        {error && <p className="form-error">{error}</p>}
+
+        {helper && !error && <p className="form-helper">{helper}</p>}
       </div>
     );
   }

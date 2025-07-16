@@ -22,12 +22,13 @@ export default function TrombinoscopePage() {
             Trombinoscope
           </h1>
           <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-            Découvrez les membres de l&apos;Asso 404 MIASHS ! Étudiants passionnés de tech, data science, développement et bien plus encore.
+            Découvrez les membres de l&apos;Asso 404 MIASHS ! Étudiants
+            passionnés de tech, data science, développement et bien plus encore.
           </p>
         </div>
 
         {/* Grille des membres */}
-        <MemberGrid 
+        <MemberGrid
           members={members}
           loading={loading}
           variant="grid"

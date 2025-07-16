@@ -15,7 +15,7 @@ export default function Error({ error, reset }: ErrorProps) {
   useEffect(() => {
     // Log l'erreur pour le monitoring
     console.error('Application Error:', error);
-    
+
     // Ici vous pouvez intégrer un service de monitoring comme Sentry
     // if (typeof window !== 'undefined' && window.Sentry) {
     //   window.Sentry.captureException(error);
@@ -41,7 +41,8 @@ export default function Error({ error, reset }: ErrorProps) {
               Oups ! Une erreur s&apos;est produite
             </h1>
             <p className="text-lg text-muted-foreground">
-              Quelque chose s&apos;est mal passé. Nos développeurs ont été notifiés et travaillent sur le problème.
+              Quelque chose s&apos;est mal passé. Nos développeurs ont été
+              notifiés et travaillent sur le problème.
             </p>
           </div>
 
@@ -51,7 +52,7 @@ export default function Error({ error, reset }: ErrorProps) {
               <RefreshCw className="w-4 h-4 mr-2" />
               Réessayer
             </Button>
-            
+
             <Button asChild variant="outline" size="lg">
               <Link href="/">
                 <Home className="w-4 h-4 mr-2" />
@@ -71,24 +72,30 @@ export default function Error({ error, reset }: ErrorProps) {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <h4 className="font-semibold text-sm text-muted-foreground mb-2">Message:</h4>
+                  <h4 className="font-semibold text-sm text-muted-foreground mb-2">
+                    Message:
+                  </h4>
                   <p className="text-sm font-mono bg-muted p-3 rounded border text-error-600 dark:text-error-400">
                     {error.message}
                   </p>
                 </div>
-                
+
                 {error.digest && (
                   <div>
-                    <h4 className="font-semibold text-sm text-muted-foreground mb-2">Digest:</h4>
+                    <h4 className="font-semibold text-sm text-muted-foreground mb-2">
+                      Digest:
+                    </h4>
                     <p className="text-sm font-mono bg-muted p-3 rounded border">
                       {error.digest}
                     </p>
                   </div>
                 )}
-                
+
                 {error.stack && (
                   <div>
-                    <h4 className="font-semibold text-sm text-muted-foreground mb-2">Stack Trace:</h4>
+                    <h4 className="font-semibold text-sm text-muted-foreground mb-2">
+                      Stack Trace:
+                    </h4>
                     <pre className="text-xs font-mono bg-muted p-3 rounded border overflow-auto max-h-40">
                       {error.stack}
                     </pre>
@@ -106,16 +113,22 @@ export default function Error({ error, reset }: ErrorProps) {
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-muted-foreground">
                 <div className="space-y-2">
-                  <h4 className="font-medium text-foreground">Pour les utilisateurs :</h4>
+                  <h4 className="font-medium text-foreground">
+                    Pour les utilisateurs :
+                  </h4>
                   <ul className="space-y-1 text-left">
-                    <li>• Actualisez la page en cliquant sur &quot;Réessayer&quot;</li>
+                    <li>
+                      • Actualisez la page en cliquant sur &quot;Réessayer&quot;
+                    </li>
                     <li>• Vérifiez votre connexion internet</li>
                     <li>• Essayez de nouveau dans quelques minutes</li>
                     <li>• Contactez-nous si le problème persiste</li>
                   </ul>
                 </div>
                 <div className="space-y-2">
-                  <h4 className="font-medium text-foreground">Pour signaler le bug :</h4>
+                  <h4 className="font-medium text-foreground">
+                    Pour signaler le bug :
+                  </h4>
                   <ul className="space-y-1 text-left">
                     <li>• Notez l&apos;heure de l&apos;erreur</li>
                     <li>• Décrivez les actions effectuées</li>
@@ -124,12 +137,10 @@ export default function Error({ error, reset }: ErrorProps) {
                   </ul>
                 </div>
               </div>
-              
+
               <div className="flex items-center justify-center pt-4">
                 <Button asChild variant="ghost" size="sm">
-                  <Link href="/contact">
-                    Signaler ce problème
-                  </Link>
+                  <Link href="/contact">Signaler ce problème</Link>
                 </Button>
               </div>
             </div>
@@ -145,27 +156,6 @@ export function useErrorHandler() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleError = (error: Error, errorInfo?: any) => {
     console.error('Error caught by error handler:', error, errorInfo);
-    
-    // Intégration avec service de monitoring
-    if (typeof window !== 'undefined') {
-      // Exemple avec Sentry (optionnel)
-      // if (window.Sentry) {
-      //   window.Sentry.captureException(error, {
-      //     extra: errorInfo,
-      //     tags: {
-      //       component: 'ErrorBoundary'
-      //     }
-      //   });
-      // }
-      
-      // Analytics personnalisées
-      // if (window.gtag) {
-      //   window.gtag('event', 'exception', {
-      //     description: error.toString(),
-      //     fatal: false,
-      //   });
-      // }
-    }
   };
 
   return { handleError };

@@ -1,18 +1,19 @@
 'use client';
 
 import React, { useState } from 'react';
-import { 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Clock, 
-  Send, 
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Clock,
+  Send,
   MessageCircle,
   Users,
   ExternalLink,
   CheckCircle,
-  AlertCircle
+  AlertCircle,
 } from 'lucide-react';
+import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import type { ContactForm } from '@/lib/types';
 import { SiInstagram, SiLinkedin, SiGithub } from 'react-icons/si';
@@ -23,11 +24,13 @@ export default function ContactPage() {
     email: '',
     subject: '',
     message: '',
-    promo: undefined
+    promo: undefined,
   });
-  
+
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitStatus, setSubmitStatus] = useState<
+    'idle' | 'success' | 'error'
+  >('idle');
 
   const contactInfo = [
     {
@@ -35,28 +38,28 @@ export default function ContactPage() {
       title: 'Email',
       content: 'contact@asso404miashs.fr',
       link: 'mailto:contact@asso404miashs.fr',
-      description: 'Pour toute question générale'
+      description: 'Pour toute question générale',
     },
     {
       icon: Phone,
       title: 'Téléphone',
       content: '+33 1 23 45 67 89',
       link: 'tel:+33123456789',
-      description: 'Du lundi au vendredi, 10h-18h'
+      description: 'Du lundi au vendredi, 10h-18h',
     },
     {
       icon: MapPin,
       title: 'Adresse',
       content: 'Université Paris Cité\n45 Rue des Saints-Pères\n75006 Paris',
       link: 'https://maps.google.com/?q=45+Rue+des+Saints-Pères+75006+Paris',
-      description: 'Bureau de l\'association'
+      description: "Bureau de l'association",
     },
     {
       icon: Clock,
       title: 'Permanences',
       content: 'Mardi & Jeudi\n14h - 17h',
-      description: 'Rencontrez l\'équipe en personne'
-    }
+      description: "Rencontrez l'équipe en personne",
+    },
   ];
 
   const socialLinks = [
@@ -64,20 +67,20 @@ export default function ContactPage() {
       name: 'Instagram',
       icon: SiInstagram,
       url: 'https://instagram.com/asso404miashs',
-      color: 'text-pink-600 dark:text-pink-400'
+      color: 'text-pink-600 dark:text-pink-400',
     },
     {
       name: 'LinkedIn',
       icon: SiLinkedin,
       url: 'https://linkedin.com/company/asso-404-miashs',
-      color: 'text-blue-600 dark:text-blue-400'
+      color: 'text-blue-600 dark:text-blue-400',
     },
     {
       name: 'GitHub',
       icon: SiGithub,
       url: 'https://github.com/asso-404-miashs',
-      color: 'text-slate-900 dark:text-slate-100'
-    }
+      color: 'text-slate-900 dark:text-slate-100',
+    },
   ];
 
   const teamContacts = [
@@ -86,59 +89,63 @@ export default function ContactPage() {
       role: 'Présidente',
       email: 'president@asso404miashs.fr',
       avatar: '/images/membres/alice-dubois.jpg',
-      description: 'Questions générales et partenariats'
+      description: 'Questions générales et partenariats',
     },
     {
       name: 'Thomas Martin',
       role: 'Vice-président',
       email: 'vicepresident@asso404miashs.fr',
       avatar: '/images/membres/thomas-martin.jpg',
-      description: 'Projets techniques et événements'
+      description: 'Projets techniques et événements',
     },
     {
       name: 'Emma Bernard',
       role: 'Trésorière',
       email: 'tresorier@asso404miashs.fr',
       avatar: '/images/membres/emma-bernard.jpg',
-      description: 'Questions financières'
+      description: 'Questions financières',
     },
     {
       name: 'Hugo Leroy',
       role: 'Secrétaire',
       email: 'secretaire@asso404miashs.fr',
       avatar: '/images/membres/hugo-leroy.jpg',
-      description: 'Communication et adhésions'
-    }
+      description: 'Communication et adhésions',
+    },
   ];
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     try {
       // Simulation d'envoi de formulaire
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
       // Ici vous intégreriez votre API d'envoi d'email
       console.log('Formulaire envoyé:', formData);
-      
+
       setSubmitStatus('success');
       setFormData({
         name: '',
         email: '',
         subject: '',
         message: '',
-        promo: undefined
+        promo: undefined,
       });
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       setSubmitStatus('error');
     } finally {
@@ -152,24 +159,25 @@ export default function ContactPage() {
       <section className="relative py-20 lg:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary-50 to-blue-50 dark:from-slate-900 dark:to-slate-800" />
         <div className="absolute inset-0 bg-[url('/images/hero-pattern.svg')] opacity-10" />
-        
+
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center space-x-2 bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-200 px-4 py-2 rounded-full text-sm font-medium mb-6">
               <MessageCircle className="w-4 h-4" />
               <span>Contactez-nous</span>
             </div>
-            
+
             <h1 className="text-4xl lg:text-6xl font-bold text-slate-900 dark:text-slate-100 mb-6">
               Restons en{' '}
               <span className="bg-gradient-to-r from-primary-600 to-blue-500 bg-clip-text text-transparent">
                 Contact
               </span>
             </h1>
-            
+
             <p className="text-xl text-slate-600 dark:text-slate-400 mb-8 max-w-3xl mx-auto leading-relaxed">
-              Une question, une suggestion, ou simplement envie d&apos;échanger ? 
-              Notre équipe est là pour vous accompagner. N&apos;hésitez pas à nous contacter !
+              Une question, une suggestion, ou simplement envie d&apos;échanger
+              ? Notre équipe est là pour vous accompagner. N&apos;hésitez pas à
+              nous contacter !
             </p>
           </div>
         </div>
@@ -202,8 +210,14 @@ export default function ContactPage() {
                     {info.link && (
                       <a
                         href={info.link}
-                        target={info.link.startsWith('http') ? '_blank' : undefined}
-                        rel={info.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+                        target={
+                          info.link.startsWith('http') ? '_blank' : undefined
+                        }
+                        rel={
+                          info.link.startsWith('http')
+                            ? 'noopener noreferrer'
+                            : undefined
+                        }
                         className="inline-flex items-center text-sm font-medium text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors"
                       >
                         <span>Contacter</span>
@@ -214,7 +228,7 @@ export default function ContactPage() {
                 );
               })}
             </div>
-            
+
             {/* Social Links */}
             <div className="text-center mb-16">
               <h3 className="text-lg font-medium text-slate-900 dark:text-slate-100 mb-6">
@@ -255,7 +269,7 @@ export default function ContactPage() {
                   <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-6">
                     Envoyez-nous un message
                   </h2>
-                  
+
                   {submitStatus === 'success' && (
                     <div className="mb-6 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl flex items-start space-x-3">
                       <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" />
@@ -269,7 +283,7 @@ export default function ContactPage() {
                       </div>
                     </div>
                   )}
-                  
+
                   {submitStatus === 'error' && (
                     <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl flex items-start space-x-3">
                       <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0 mt-0.5" />
@@ -283,11 +297,14 @@ export default function ContactPage() {
                       </div>
                     </div>
                   )}
-                  
+
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
-                        <label htmlFor="name" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                        <label
+                          htmlFor="name"
+                          className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2"
+                        >
                           Nom complet *
                         </label>
                         <input
@@ -302,7 +319,10 @@ export default function ContactPage() {
                         />
                       </div>
                       <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                        <label
+                          htmlFor="email"
+                          className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2"
+                        >
                           Email *
                         </label>
                         <input
@@ -317,10 +337,13 @@ export default function ContactPage() {
                         />
                       </div>
                     </div>
-                    
+
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
-                        <label htmlFor="subject" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                        <label
+                          htmlFor="subject"
+                          className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2"
+                        >
                           Sujet *
                         </label>
                         <input
@@ -335,7 +358,10 @@ export default function ContactPage() {
                         />
                       </div>
                       <div>
-                        <label htmlFor="promo" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                        <label
+                          htmlFor="promo"
+                          className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2"
+                        >
                           Promotion (optionnel)
                         </label>
                         <select
@@ -352,9 +378,12 @@ export default function ContactPage() {
                         </select>
                       </div>
                     </div>
-                    
+
                     <div>
-                      <label htmlFor="message" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                      <label
+                        htmlFor="message"
+                        className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2"
+                      >
                         Message *
                       </label>
                       <textarea
@@ -368,7 +397,7 @@ export default function ContactPage() {
                         placeholder="Décrivez votre demande en détail..."
                       />
                     </div>
-                    
+
                     <button
                       type="submit"
                       disabled={isSubmitting}
@@ -389,7 +418,7 @@ export default function ContactPage() {
                   </form>
                 </div>
               </div>
-              
+
               {/* Team Contacts */}
               <div>
                 <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-6">
@@ -403,10 +432,12 @@ export default function ContactPage() {
                     >
                       <div className="flex items-start space-x-4">
                         <div className="relative w-12 h-12 flex-shrink-0">
-                          <img
+                          <Image
                             src={member.avatar}
                             alt={member.name}
-                            className="w-full h-full object-cover rounded-full border-2 border-white dark:border-slate-800 shadow-sm"
+                            width={100} // tu dois définir width et height, ou utiliser fill
+                            height={100}
+                            className="object-cover rounded-full border-2 border-white dark:border-slate-800 shadow-sm"
                           />
                         </div>
                         <div className="flex-1 min-w-0">
@@ -446,64 +477,74 @@ export default function ContactPage() {
                 Questions Fréquentes
               </h2>
               <p className="text-lg text-slate-600 dark:text-slate-400">
-                Trouvez rapidement les réponses aux questions les plus courantes.
+                Trouvez rapidement les réponses aux questions les plus
+                courantes.
               </p>
             </div>
-            
+
             <div className="space-y-6">
               <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
                 <h3 className="text-lg font-medium text-slate-900 dark:text-slate-100 mb-2">
                   Comment devenir membre de l&apos;association ?
                 </h3>
                 <p className="text-slate-600 dark:text-slate-400">
-                  Vous pouvez adhérer en remplissant le formulaire d&apos;inscription en ligne sur notre page 
-                  <a href="/join" className="text-primary-600 dark:text-primary-400 hover:underline ml-1">
+                  Vous pouvez adhérer en remplissant le formulaire
+                  d&apos;inscription en ligne sur notre page
+                  <a
+                    href="/join"
+                    className="text-primary-600 dark:text-primary-400 hover:underline ml-1"
+                  >
                     &quot;Nous rejoindre&quot;
                   </a>
-                  . L&apos;adhésion est gratuite pour tous les étudiants de MIASHS.
+                  . L&apos;adhésion est gratuite pour tous les étudiants de
+                  MIASHS.
                 </p>
               </div>
-              
+
               <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
                 <h3 className="text-lg font-medium text-slate-900 dark:text-slate-100 mb-2">
                   Puis-je participer aux événements sans être membre ?
                 </h3>
                 <p className="text-slate-600 dark:text-slate-400">
-                  Certains événements ouverts au public sont accessibles à tous. Cependant, 
-                  la plupart de nos activités sont réservées aux membres pour garantir une 
-                  meilleure qualité d&apos;échange et de suivi.
+                  Certains événements ouverts au public sont accessibles à tous.
+                  Cependant, la plupart de nos activités sont réservées aux
+                  membres pour garantir une meilleure qualité d&apos;échange et
+                  de suivi.
                 </p>
               </div>
-              
+
               <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
                 <h3 className="text-lg font-medium text-slate-900 dark:text-slate-100 mb-2">
                   Comment proposer un événement ou un atelier ?
                 </h3>
                 <p className="text-slate-600 dark:text-slate-400">
-                  Nous encourageons les initiatives de nos membres ! Contactez notre bureau 
-                  avec votre proposition détaillée. Nous étudierons ensemble la faisabilité 
-                  et vous accompagnerons dans l&apos;organisation.
+                  Nous encourageons les initiatives de nos membres ! Contactez
+                  notre bureau avec votre proposition détaillée. Nous étudierons
+                  ensemble la faisabilité et vous accompagnerons dans
+                  l&apos;organisation.
                 </p>
               </div>
-              
+
               <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
                 <h3 className="text-lg font-medium text-slate-900 dark:text-slate-100 mb-2">
                   Y a-t-il des frais de participation aux activités ?
                 </h3>
                 <p className="text-slate-600 dark:text-slate-400">
-                  La plupart de nos activités sont gratuites pour les membres. Seuls certains 
-                  événements spéciaux (avec matériel fourni, restauration, etc.) peuvent 
-                  occasionner une participation symbolique.
+                  La plupart de nos activités sont gratuites pour les membres.
+                  Seuls certains événements spéciaux (avec matériel fourni,
+                  restauration, etc.) peuvent occasionner une participation
+                  symbolique.
                 </p>
               </div>
-              
+
               <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
                 <h3 className="text-lg font-medium text-slate-900 dark:text-slate-100 mb-2">
                   Comment rester informé des actualités de l&apos;association ?
                 </h3>
                 <p className="text-slate-600 dark:text-slate-400">
-                  Suivez-nous sur nos réseaux sociaux, consultez régulièrement notre site web, 
-                  et rejoignez notre Discord pour recevoir toutes les notifications en temps réel !
+                  Suivez-nous sur nos réseaux sociaux, consultez régulièrement
+                  notre site web, et rejoignez notre Discord pour recevoir
+                  toutes les notifications en temps réel !
                 </p>
               </div>
             </div>
@@ -519,8 +560,8 @@ export default function ContactPage() {
               Une autre question ?
             </h2>
             <p className="text-lg text-slate-600 dark:text-slate-400 mb-8 max-w-2xl mx-auto">
-              N&apos;hésitez pas à nous contacter ! Notre équipe est là pour vous aider 
-              et répondre à toutes vos interrogations.
+              N&apos;hésitez pas à nous contacter ! Notre équipe est là pour
+              vous aider et répondre à toutes vos interrogations.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
               <a

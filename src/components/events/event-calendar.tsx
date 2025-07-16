@@ -13,22 +13,26 @@ interface EventCalendarProps {
   className?: string;
 }
 
-export function EventCalendar({ 
-  events, 
-  onEventClick, 
-  onDateClick, 
-  className 
+export function EventCalendar({
+  events,
+  onEventClick,
+  onDateClick,
+  className,
 }: EventCalendarProps) {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [viewMode, setViewMode] = useState<'calendar' | 'list'>('calendar');
 
   // Navigation
   const goToPreviousMonth = () => {
-    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1));
+    setCurrentDate(
+      new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1)
+    );
   };
 
   const goToNextMonth = () => {
-    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1));
+    setCurrentDate(
+      new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1)
+    );
   };
 
   const goToToday = () => {
@@ -40,7 +44,7 @@ export function EventCalendar({
   const month = currentDate.getMonth();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const today = new Date();
-  
+
   const firstDayOfMonth = new Date(year, month, 1);
   const lastDayOfMonth = new Date(year, month + 1, 0);
   const firstDayOfWeek = firstDayOfMonth.getDay();
@@ -48,7 +52,7 @@ export function EventCalendar({
 
   // Événements du mois
   const eventsInMonth = useMemo(() => {
-    return events.filter(event => {
+    return events.filter((event) => {
       const eventDate = new Date(event.startDate);
       return eventDate.getFullYear() === year && eventDate.getMonth() === month;
     });
@@ -57,7 +61,7 @@ export function EventCalendar({
   // Événements groupés par jour
   const eventsByDay = useMemo(() => {
     const groups: Record<number, Event[]> = {};
-    eventsInMonth.forEach(event => {
+    eventsInMonth.forEach((event) => {
       const day = new Date(event.startDate).getDate();
       if (!groups[day]) groups[day] = [];
       groups[day].push(event);
@@ -68,7 +72,7 @@ export function EventCalendar({
   // Génération des jours du calendrier
   const calendarDays = useMemo(() => {
     const days = [];
-    
+
     // Jours du mois précédent
     const daysFromPrevMonth = firstDayOfWeek === 0 ? 6 : firstDayOfWeek - 1;
     for (let i = daysFromPrevMonth; i > 0; i--) {
@@ -77,24 +81,24 @@ export function EventCalendar({
         date,
         isCurrentMonth: false,
         isToday: false,
-        events: []
+        events: [],
       });
     }
-    
+
     // Jours du mois actuel
     for (let day = 1; day <= daysInMonth; day++) {
       const date = new Date(year, month, day);
       const isToday = date.toDateString() === today.toDateString();
       const dayEvents = eventsByDay[day] || [];
-      
+
       days.push({
         date,
         isCurrentMonth: true,
         isToday,
-        events: dayEvents
+        events: dayEvents,
       });
     }
-    
+
     // Jours du mois suivant pour compléter la grille
     const remainingDays = 42 - days.length; // 6 semaines * 7 jours
     for (let day = 1; day <= remainingDays; day++) {
@@ -103,17 +107,18 @@ export function EventCalendar({
         date,
         isCurrentMonth: false,
         isToday: false,
-        events: []
+        events: [],
       });
     }
-    
+
     return days;
   }, [year, month, daysInMonth, firstDayOfWeek, today, eventsByDay]);
 
   // Vue liste des événements du mois
   const renderEventsList = () => {
-    const sortedEvents = [...eventsInMonth].sort((a, b) => 
-      new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
+    const sortedEvents = [...eventsInMonth].sort(
+      (a, b) =>
+        new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
     );
 
     if (sortedEvents.length === 0) {
@@ -144,17 +149,22 @@ export function EventCalendar({
   };
 
   return (
-    <div className={cn('bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700', className)}>
+    <div
+      className={cn(
+        'bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700',
+        className
+      )}
+    >
       {/* En-tête */}
       <div className="p-6 border-b border-slate-200 dark:border-slate-700">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">
-            {currentDate.toLocaleDateString('fr-FR', { 
-              month: 'long', 
-              year: 'numeric' 
+            {currentDate.toLocaleDateString('fr-FR', {
+              month: 'long',
+              year: 'numeric',
             })}
           </h2>
-          
+
           <div className="flex items-center space-x-2">
             {/* Toggle vue */}
             <div className="flex items-center space-x-1 bg-slate-100 dark:bg-slate-700 rounded-lg p-1">
@@ -211,7 +221,8 @@ export function EventCalendar({
 
         {/* Compteur d'événements */}
         <div className="mt-4 text-sm text-slate-600 dark:text-slate-400">
-          {eventsInMonth.length} événement{eventsInMonth.length > 1 ? 's' : ''} ce mois-ci
+          {eventsInMonth.length} événement{eventsInMonth.length > 1 ? 's' : ''}{' '}
+          ce mois-ci
         </div>
       </div>
 
@@ -222,7 +233,10 @@ export function EventCalendar({
             {/* En-têtes des jours */}
             <div className="grid grid-cols-7 gap-1 mb-2">
               {['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'].map((day) => (
-                <div key={day} className="p-2 text-center text-sm font-medium text-slate-600 dark:text-slate-400">
+                <div
+                  key={day}
+                  className="p-2 text-center text-sm font-medium text-slate-600 dark:text-slate-400"
+                >
                   {day}
                 </div>
               ))}
@@ -238,17 +252,20 @@ export function EventCalendar({
                     day.isCurrentMonth
                       ? 'bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700'
                       : 'bg-slate-50 dark:bg-slate-900/50 text-slate-400',
-                    day.isToday && 'ring-2 ring-primary-500 bg-primary-50 dark:bg-primary-900/20'
+                    day.isToday &&
+                      'ring-2 ring-primary-500 bg-primary-50 dark:bg-primary-900/20'
                   )}
                   onClick={() => onDateClick?.(day.date)}
                 >
-                  <div className={cn(
-                    'text-sm font-medium mb-1',
-                    day.isToday && 'text-primary-600 dark:text-primary-400'
-                  )}>
+                  <div
+                    className={cn(
+                      'text-sm font-medium mb-1',
+                      day.isToday && 'text-primary-600 dark:text-primary-400'
+                    )}
+                  >
                     {day.date.getDate()}
                   </div>
-                  
+
                   {/* Événements du jour */}
                   <div className="space-y-1">
                     {day.events.slice(0, 2).map((event) => (
@@ -272,7 +289,8 @@ export function EventCalendar({
                     ))}
                     {day.events.length > 2 && (
                       <div className="text-xs text-slate-500 dark:text-slate-400 px-2">
-                        +{day.events.length - 2} autre{day.events.length - 2 > 1 ? 's' : ''}
+                        +{day.events.length - 2} autre
+                        {day.events.length - 2 > 1 ? 's' : ''}
                       </div>
                     )}
                   </div>
@@ -289,11 +307,11 @@ export function EventCalendar({
 }
 
 // Mini calendrier pour sidebar
-export function MiniEventCalendar({ 
-  events, 
-  selectedDate, 
-  onDateSelect, 
-  className 
+export function MiniEventCalendar({
+  events,
+  selectedDate,
+  onDateSelect,
+  className,
 }: {
   events: Event[];
   selectedDate?: Date;
@@ -301,12 +319,12 @@ export function MiniEventCalendar({
   className?: string;
 }) {
   const [currentDate, setCurrentDate] = useState(selectedDate || new Date());
-  
+
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const today = new Date();
-  
+
   const firstDayOfMonth = new Date(year, month, 1);
   const lastDayOfMonth = new Date(year, month + 1, 0);
   const firstDayOfWeek = firstDayOfMonth.getDay();
@@ -315,7 +333,7 @@ export function MiniEventCalendar({
   // Événements du mois
   const eventDays = useMemo(() => {
     const days = new Set<number>();
-    events.forEach(event => {
+    events.forEach((event) => {
       const eventDate = new Date(event.startDate);
       if (eventDate.getFullYear() === year && eventDate.getMonth() === month) {
         days.add(eventDate.getDate());
@@ -327,7 +345,7 @@ export function MiniEventCalendar({
   // Génération des jours
   const calendarDays = useMemo(() => {
     const days = [];
-    
+
     // Jours du mois précédent
     const daysFromPrevMonth = firstDayOfWeek === 0 ? 6 : firstDayOfWeek - 1;
     for (let i = daysFromPrevMonth; i > 0; i--) {
@@ -336,24 +354,24 @@ export function MiniEventCalendar({
         date,
         isCurrentMonth: false,
         isToday: false,
-        hasEvents: false
+        hasEvents: false,
       });
     }
-    
+
     // Jours du mois actuel
     for (let day = 1; day <= daysInMonth; day++) {
       const date = new Date(year, month, day);
       const isToday = date.toDateString() === today.toDateString();
       const hasEvents = eventDays.has(day);
-      
+
       days.push({
         date,
         isCurrentMonth: true,
         isToday,
-        hasEvents
+        hasEvents,
       });
     }
-    
+
     // Jours du mois suivant
     const remainingDays = 42 - days.length;
     for (let day = 1; day <= remainingDays; day++) {
@@ -362,19 +380,27 @@ export function MiniEventCalendar({
         date,
         isCurrentMonth: false,
         isToday: false,
-        hasEvents: false
+        hasEvents: false,
       });
     }
-    
+
     return days;
   }, [year, month, daysInMonth, firstDayOfWeek, today, eventDays]);
 
   return (
-    <div className={cn('bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-4', className)}>
+    <div
+      className={cn(
+        'bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-4',
+        className
+      )}
+    >
       {/* En-tête */}
       <div className="flex items-center justify-between mb-4">
         <h3 className="font-semibold text-slate-900 dark:text-slate-100">
-          {currentDate.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' })}
+          {currentDate.toLocaleDateString('fr-FR', {
+            month: 'long',
+            year: 'numeric',
+          })}
         </h3>
         <div className="flex items-center space-x-1">
           <button
@@ -395,7 +421,10 @@ export function MiniEventCalendar({
       {/* Jours de la semaine */}
       <div className="grid grid-cols-7 gap-1 mb-2">
         {['L', 'M', 'M', 'J', 'V', 'S', 'D'].map((day, index) => (
-          <div key={index} className="text-center text-xs font-medium text-slate-500 dark:text-slate-400 p-1">
+          <div
+            key={index}
+            className="text-center text-xs font-medium text-slate-500 dark:text-slate-400 p-1"
+          >
             {day}
           </div>
         ))}
@@ -416,8 +445,11 @@ export function MiniEventCalendar({
               day.isCurrentMonth
                 ? 'text-slate-900 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-700'
                 : 'text-slate-400 dark:text-slate-600',
-              day.isToday && 'bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-400',
-              selectedDate && day.date.toDateString() === selectedDate.toDateString() && 'ring-2 ring-primary-500'
+              day.isToday &&
+                'bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-400',
+              selectedDate &&
+                day.date.toDateString() === selectedDate.toDateString() &&
+                'ring-2 ring-primary-500'
             )}
           >
             {day.date.getDate()}

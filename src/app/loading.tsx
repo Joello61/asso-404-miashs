@@ -16,13 +16,13 @@ export default function Loading() {
                 <Skeleton className="h-3 w-12" />
               </div>
             </div>
-            
+
             <div className="hidden lg:flex items-center space-x-4">
               {Array.from({ length: 6 }, (_, i) => (
                 <Skeleton key={i} className="h-8 w-16" />
               ))}
             </div>
-            
+
             <div className="flex items-center space-x-2">
               <Skeleton className="w-10 h-10 rounded-lg" />
               <Skeleton className="hidden lg:block w-20 h-8 rounded-lg" />

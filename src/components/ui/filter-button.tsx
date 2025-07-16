@@ -6,7 +6,8 @@ import { Button } from './button';
 import { Badge } from './badge';
 import { cn } from '@/lib/utils';
 
-interface FilterButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface FilterButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   active?: boolean;
   count?: number;
   onClear?: () => void;
@@ -14,17 +15,24 @@ interface FilterButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement
 }
 
 const FilterButton = React.forwardRef<HTMLButtonElement, FilterButtonProps>(
-  ({ className, active = false, count, onClear, showClearButton = true, children, ...props }, ref) => {
+  (
+    {
+      className,
+      active = false,
+      count,
+      onClear,
+      showClearButton = true,
+      children,
+      ...props
+    },
+    ref
+  ) => {
     return (
       <div className="relative inline-flex items-center">
         <Button
           ref={ref}
           variant={active ? 'primary' : 'outline'}
-          className={cn(
-            'relative',
-            active && 'pr-8',
-            className
-          )}
+          className={cn('relative', active && 'pr-8', className)}
           {...props}
         >
           <Filter className="h-4 w-4 mr-2" />
@@ -35,7 +43,7 @@ const FilterButton = React.forwardRef<HTMLButtonElement, FilterButtonProps>(
             </Badge>
           )}
         </Button>
-        
+
         {active && showClearButton && onClear && (
           <Button
             variant="ghost"

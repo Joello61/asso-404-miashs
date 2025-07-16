@@ -17,7 +17,10 @@ export function useLocalStorage<T>(
       const item = window.localStorage.getItem(key);
       return item ? JSON.parse(item) : initialValue;
     } catch (error) {
-      console.error(`Erreur lors de la lecture du localStorage pour la clé "${key}":`, error);
+      console.error(
+        `Erreur lors de la lecture du localStorage pour la clé "${key}":`,
+        error
+      );
       return initialValue;
     }
   });
@@ -25,14 +28,18 @@ export function useLocalStorage<T>(
   // Fonction pour définir la valeur
   const setValue = (value: T | ((val: T) => T)) => {
     try {
-      const valueToStore = value instanceof Function ? value(storedValue) : value;
+      const valueToStore =
+        value instanceof Function ? value(storedValue) : value;
       setStoredValue(valueToStore);
-      
+
       if (typeof window !== 'undefined') {
         window.localStorage.setItem(key, JSON.stringify(valueToStore));
       }
     } catch (error) {
-      console.error(`Erreur lors de l'écriture dans le localStorage pour la clé "${key}":`, error);
+      console.error(
+        `Erreur lors de l'écriture dans le localStorage pour la clé "${key}":`,
+        error
+      );
     }
   };
 
@@ -44,7 +51,10 @@ export function useLocalStorage<T>(
         window.localStorage.removeItem(key);
       }
     } catch (error) {
-      console.error(`Erreur lors de la suppression du localStorage pour la clé "${key}":`, error);
+      console.error(
+        `Erreur lors de la suppression du localStorage pour la clé "${key}":`,
+        error
+      );
     }
   };
 
@@ -55,27 +65,30 @@ export function useLocalStorage<T>(
  * Hook spécialisé pour les préférences utilisateur
  */
 export function useUserPreferences() {
-  const [preferences, setPreferences, clearPreferences] = useLocalStorage('user-preferences', {
-    theme: 'system' as 'light' | 'dark' | 'system',
-    memberGridView: 'grid' as 'grid' | 'list',
-    membersPerPage: 12,
-    showMemberDetails: true,
-    notifications: {
-      events: true,
-      news: true,
-      general: true
+  const [preferences, setPreferences, clearPreferences] = useLocalStorage(
+    'user-preferences',
+    {
+      theme: 'system' as 'light' | 'dark' | 'system',
+      memberGridView: 'grid' as 'grid' | 'list',
+      membersPerPage: 12,
+      showMemberDetails: true,
+      notifications: {
+        events: true,
+        news: true,
+        general: true,
+      },
     }
-  });
+  );
 
   return {
     preferences,
     setPreferences,
     clearPreferences,
     updateTheme: (theme: 'light' | 'dark' | 'system') =>
-      setPreferences(prev => ({ ...prev, theme })),
+      setPreferences((prev) => ({ ...prev, theme })),
     updateGridView: (view: 'grid' | 'list') =>
-      setPreferences(prev => ({ ...prev, memberGridView: view })),
+      setPreferences((prev) => ({ ...prev, memberGridView: view })),
     updateMembersPerPage: (count: number) =>
-      setPreferences(prev => ({ ...prev, membersPerPage: count })),
+      setPreferences((prev) => ({ ...prev, membersPerPage: count })),
   };
 }

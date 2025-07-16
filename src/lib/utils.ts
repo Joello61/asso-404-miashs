@@ -1,6 +1,6 @@
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
-import type { Member, MemberFilters, PromoType } from "./types";
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+import type { Member, MemberFilters, PromoType } from './types';
 
 /**
  * Combine les classes CSS avec Tailwind merge
@@ -32,8 +32,8 @@ export function formatRelativeDate(date: Date | string): string {
   const now = new Date();
   const diffInSeconds = Math.floor((now.getTime() - dateObj.getTime()) / 1000);
 
-  if (diffInSeconds < 60) return 'À l\'instant';
-  
+  if (diffInSeconds < 60) return "À l'instant";
+
   const diffInMinutes = Math.floor(diffInSeconds / 60);
   if (diffInMinutes < 60) {
     return `Il y a ${diffInMinutes} minute${diffInMinutes > 1 ? 's' : ''}`;
@@ -163,17 +163,19 @@ export function sortMembers(members: Member[]): Member[] {
 /**
  * Groupe les membres par promo
  */
-export function groupMembersByPromo(members: Member[]): Record<PromoType, Member[]> {
+export function groupMembersByPromo(
+  members: Member[]
+): Record<PromoType, Member[]> {
   const groups: Record<PromoType, Member[]> = {
     L3: [],
     M1: [],
-    M2: []
+    M2: [],
   };
-  
-  members.forEach(member => {
+
+  members.forEach((member) => {
     groups[member.promo].push(member);
   });
-  
+
   return groups;
 }
 
@@ -183,8 +185,8 @@ export function groupMembersByPromo(members: Member[]): Record<PromoType, Member
 export function getMemberStats(members: Member[]) {
   const total = members.length;
   const byPromo = groupMembersByPromo(members);
-  const withLinkedIn = members.filter(m => m.linkedin).length;
-  const withGitHub = members.filter(m => m.github).length;
+  const withLinkedIn = members.filter((m) => m.linkedin).length;
+  const withGitHub = members.filter((m) => m.github).length;
 
   return {
     total,

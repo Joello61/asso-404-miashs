@@ -1,7 +1,15 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import { Search, Grid, List, Users, BarChart3, TrendingUp, Award } from 'lucide-react';
+import {
+  Search,
+  Grid,
+  List,
+  Users,
+  BarChart3,
+  TrendingUp,
+  Award,
+} from 'lucide-react';
 import { MemberCard, MemberCardSkeleton } from './member-card';
 import { MemberFiltersComponent } from './member-filters';
 import { cn } from '@/lib/utils';
@@ -38,7 +46,9 @@ function validateMemberData(data: any): Member {
 
   // Validation de la promo
   if (!isValidPromo(data.promo)) {
-    console.warn(`Promo non reconnue: ${data.promo}, utilisation de L3 par défaut`);
+    console.warn(
+      `Promo non reconnue: ${data.promo}, utilisation de L3 par défaut`
+    );
     data.promo = 'L3';
   }
 
@@ -68,10 +78,12 @@ export function MemberGrid({
   showViewToggle = true,
   itemsPerPage = 12,
   onMemberClick,
-  className
+  className,
 }: MemberGridProps) {
-  const [currentView, setCurrentView] = useState<'grid' | 'list' | 'compact'>(variant);
-  
+  const [currentView, setCurrentView] = useState<'grid' | 'list' | 'compact'>(
+    variant
+  );
+
   // Gestion des filtres
   const {
     filters,
@@ -82,7 +94,7 @@ export function MemberGrid({
     clearFilters,
     hasActiveFilters,
     resultCount,
-    totalCount
+    totalCount,
   } = useMemberFilters(members);
 
   // Gestion de la pagination
@@ -94,7 +106,7 @@ export function MemberGrid({
     nextPage,
     previousPage,
     hasNextPage,
-    hasPreviousPage
+    hasPreviousPage,
   } = usePagination(filteredMembers, itemsPerPage);
 
   // Statistiques
@@ -111,7 +123,10 @@ export function MemberGrid({
   const handleFiltersChange = (newFilters: any) => {
     if (newFilters.search !== undefined) updateSearch(newFilters.search);
     if (newFilters.promo !== undefined) updatePromo(newFilters.promo);
-    if (newFilters.hasLinkedIn !== undefined || newFilters.hasGitHub !== undefined) {
+    if (
+      newFilters.hasLinkedIn !== undefined ||
+      newFilters.hasGitHub !== undefined
+    ) {
       updateSocialFilters(newFilters.hasLinkedIn, newFilters.hasGitHub);
     }
   };
@@ -123,7 +138,7 @@ export function MemberGrid({
       value: stats.total,
       icon: Users,
       color: 'text-blue-600 dark:text-blue-400',
-      bg: 'bg-blue-100 dark:bg-blue-900/30'
+      bg: 'bg-blue-100 dark:bg-blue-900/30',
     },
     {
       label: 'LinkedIn',
@@ -131,7 +146,7 @@ export function MemberGrid({
       percentage: stats.socialLinks.linkedin.percentage,
       icon: TrendingUp,
       color: 'text-green-600 dark:text-green-400',
-      bg: 'bg-green-100 dark:bg-green-900/30'
+      bg: 'bg-green-100 dark:bg-green-900/30',
     },
     {
       label: 'GitHub',
@@ -139,15 +154,15 @@ export function MemberGrid({
       percentage: stats.socialLinks.github.percentage,
       icon: BarChart3,
       color: 'text-purple-600 dark:text-purple-400',
-      bg: 'bg-purple-100 dark:bg-purple-900/30'
+      bg: 'bg-purple-100 dark:bg-purple-900/30',
     },
     {
       label: 'Actifs',
-      value: members.filter(m => m.skills && m.skills.length > 0).length,
+      value: members.filter((m) => m.skills && m.skills.length > 0).length,
       icon: Award,
       color: 'text-orange-600 dark:text-orange-400',
-      bg: 'bg-orange-100 dark:bg-orange-900/30'
-    }
+      bg: 'bg-orange-100 dark:bg-orange-900/30',
+    },
   ];
 
   // Fonction pour mapper le variant du grid vers le variant de la card
@@ -168,17 +183,17 @@ export function MemberGrid({
   const renderMembers = () => {
     if (loading) {
       return (
-        <div className={cn(
-          'grid gap-6',
-          currentView === 'grid' && 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4',
-          currentView === 'list' && 'grid-cols-1',
-          currentView === 'compact' && 'grid-cols-1 lg:grid-cols-2'
-        )}>
+        <div
+          className={cn(
+            'grid gap-6',
+            currentView === 'grid' &&
+              'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4',
+            currentView === 'list' && 'grid-cols-1',
+            currentView === 'compact' && 'grid-cols-1 lg:grid-cols-2'
+          )}
+        >
           {Array.from({ length: itemsPerPage }, (_, i) => (
-            <MemberCardSkeleton 
-              key={i} 
-              variant={getCardVariant(currentView)} 
-            />
+            <MemberCardSkeleton key={i} variant={getCardVariant(currentView)} />
           ))}
         </div>
       );
@@ -194,10 +209,9 @@ export function MemberGrid({
             Aucun membre trouvé
           </h3>
           <p className="text-slate-600 dark:text-slate-400 mb-4">
-            {hasActiveFilters 
+            {hasActiveFilters
               ? 'Essayez de modifier vos filtres ou votre recherche.'
-              : 'Il n\'y a pas encore de membres dans cette association.'
-            }
+              : "Il n'y a pas encore de membres dans cette association."}
           </p>
           {hasActiveFilters && (
             <button
@@ -222,15 +236,21 @@ export function MemberGrid({
               <div key={promo}>
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 flex items-center">
-                    <span className={cn(
-                      'inline-flex items-center px-3 py-1 rounded-full text-sm font-medium mr-3',
-                      promo === 'L3' && 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
-                      promo === 'M1' && 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300',
-                      promo === 'M2' && 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300'
-                    )}>
+                    <span
+                      className={cn(
+                        'inline-flex items-center px-3 py-1 rounded-full text-sm font-medium mr-3',
+                        promo === 'L3' &&
+                          'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
+                        promo === 'M1' &&
+                          'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300',
+                        promo === 'M2' &&
+                          'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300'
+                      )}
+                    >
                       {promo}
                     </span>
-                    {promoMembers.length} membre{promoMembers.length > 1 ? 's' : ''}
+                    {promoMembers.length} membre
+                    {promoMembers.length > 1 ? 's' : ''}
                   </h3>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -251,11 +271,13 @@ export function MemberGrid({
 
     // Vue liste ou compact
     return (
-      <div className={cn(
-        'grid gap-6',
-        currentView === 'list' && 'grid-cols-1',
-        currentView === 'compact' && 'grid-cols-1 lg:grid-cols-2'
-      )}>
+      <div
+        className={cn(
+          'grid gap-6',
+          currentView === 'list' && 'grid-cols-1',
+          currentView === 'compact' && 'grid-cols-1 lg:grid-cols-2'
+        )}
+      >
         {paginatedMembers.map((member) => (
           <MemberCard
             key={member.id}
@@ -281,7 +303,12 @@ export function MemberGrid({
                 className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6"
               >
                 <div className="flex items-center">
-                  <div className={cn('w-12 h-12 rounded-lg flex items-center justify-center', stat.bg)}>
+                  <div
+                    className={cn(
+                      'w-12 h-12 rounded-lg flex items-center justify-center',
+                      stat.bg
+                    )}
+                  >
                     <Icon className={cn('w-6 h-6', stat.color)} />
                   </div>
                   <div className="ml-4">
@@ -341,8 +368,9 @@ export function MemberGrid({
               <div className="text-sm text-slate-600 dark:text-slate-400">
                 <span className="font-medium text-slate-900 dark:text-slate-100">
                   {resultCount}
-                </span>
-                {' '}membre{resultCount > 1 ? 's' : ''} trouvé{resultCount > 1 ? 's' : ''}
+                </span>{' '}
+                membre{resultCount > 1 ? 's' : ''} trouvé
+                {resultCount > 1 ? 's' : ''}
                 {hasActiveFilters && (
                   <span className="ml-2 text-primary-600 dark:text-primary-400">
                     (filtré{resultCount > 1 ? 's' : ''})
@@ -414,12 +442,13 @@ export function MemberGrid({
               >
                 Précédent
               </button>
-              
+
               {Array.from({ length: totalPages }, (_, i) => i + 1)
-                .filter(page => 
-                  page === 1 || 
-                  page === totalPages || 
-                  Math.abs(page - currentPage) <= 1
+                .filter(
+                  (page) =>
+                    page === 1 ||
+                    page === totalPages ||
+                    Math.abs(page - currentPage) <= 1
                 )
                 .map((page, index, array) => (
                   <React.Fragment key={page}>
@@ -439,7 +468,7 @@ export function MemberGrid({
                     </button>
                   </React.Fragment>
                 ))}
-              
+
               <button
                 onClick={nextPage}
                 disabled={!hasNextPage}
@@ -465,10 +494,10 @@ export function useMembers() {
       try {
         // Import direct du JSON avec assertion de type
         const { default: membersData } = await import('@/data/membres.json');
-        
+
         // Validation et conversion des données
         const validatedMembers: Member[] = membersData.map(validateMemberData);
-        
+
         setMembers(validatedMembers);
       } catch (error) {
         console.error('Erreur lors du chargement des membres:', error);

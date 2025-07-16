@@ -5,43 +5,43 @@ export const NAVIGATION: NavigationItem[] = [
   {
     name: 'Accueil',
     href: '/',
-    description: 'Page d\'accueil de l\'association'
+    description: "Page d'accueil de l'association",
   },
   {
     name: 'À propos',
     href: '/about',
-    description: 'Découvrez notre association'
+    description: 'Découvrez notre association',
   },
   {
     name: 'Trombinoscope',
     href: '/trombinoscope',
-    description: 'Rencontrez nos membres'
+    description: 'Rencontrez nos membres',
   },
   {
     name: 'Activités',
     href: '/activities',
-    description: 'Nos différentes activités'
+    description: 'Nos différentes activités',
   },
   {
     name: 'Événements',
     href: '/events',
-    description: 'Nos événements à venir'
+    description: 'Nos événements à venir',
   },
   {
     name: 'Actualités',
     href: '/actualites',
-    description: 'Dernières nouvelles'
+    description: 'Dernières nouvelles',
   },
   {
     name: 'Nous rejoindre',
     href: '/join',
-    description: 'Rejoignez notre communauté'
+    description: 'Rejoignez notre communauté',
   },
   {
     name: 'Contact',
     href: '/contact',
-    description: 'Contactez-nous'
-  }
+    description: 'Contactez-nous',
+  },
 ];
 
 // Liens sociaux
@@ -50,26 +50,26 @@ export const SOCIAL_LINKS: SocialLink[] = [
     name: 'LinkedIn',
     href: 'https://linkedin.com/company/asso-404-miashs',
     icon: 'Linkedin',
-    color: 'hover:text-blue-600'
+    color: 'hover:text-blue-600',
   },
   {
     name: 'GitHub',
     href: 'https://github.com/asso-404-miashs',
     icon: 'Github',
-    color: 'hover:text-gray-900 dark:hover:text-gray-100'
+    color: 'hover:text-gray-900 dark:hover:text-gray-100',
   },
   {
     name: 'Discord',
     href: 'https://discord.gg/asso404miashs',
     icon: 'MessageCircle',
-    color: 'hover:text-indigo-600'
+    color: 'hover:text-indigo-600',
   },
   {
     name: 'Email',
     href: 'mailto:contact@asso404miashs.fr',
     icon: 'Mail',
-    color: 'hover:text-red-600'
-  }
+    color: 'hover:text-red-600',
+  },
 ];
 
 // Activités de l'association
@@ -81,7 +81,7 @@ export const ACTIVITIES: Activity[] = [
     icon: 'Code',
     color: 'text-blue-600',
     category: 'technical',
-    isActive: true
+    isActive: true,
   },
   {
     id: 'conferences',
@@ -90,7 +90,7 @@ export const ACTIVITIES: Activity[] = [
     icon: 'Presentation',
     color: 'text-purple-600',
     category: 'professional',
-    isActive: true
+    isActive: true,
   },
   {
     id: 'hackathons',
@@ -99,16 +99,16 @@ export const ACTIVITIES: Activity[] = [
     icon: 'Zap',
     color: 'text-yellow-600',
     category: 'technical',
-    isActive: true
+    isActive: true,
   },
   {
     id: 'study-groups',
-    name: 'Groupes d\'Étude',
+    name: "Groupes d'Étude",
     description: 'Entraide et révisions collectives',
     icon: 'BookOpen',
     color: 'text-green-600',
     category: 'academic',
-    isActive: true
+    isActive: true,
   },
   {
     id: 'social-events',
@@ -117,7 +117,7 @@ export const ACTIVITIES: Activity[] = [
     icon: 'Users',
     color: 'text-pink-600',
     category: 'social',
-    isActive: true
+    isActive: true,
   },
   {
     id: 'workshops',
@@ -126,8 +126,8 @@ export const ACTIVITIES: Activity[] = [
     icon: 'Wrench',
     color: 'text-orange-600',
     category: 'technical',
-    isActive: true
-  }
+    isActive: true,
+  },
 ];
 
 // Informations de contact
@@ -135,12 +135,12 @@ export const CONTACT_INFO = {
   email: 'contact@asso404miashs.fr',
   phone: '+33 1 23 45 67 89',
   address: {
-    street: 'Université Paris Cité',
-    city: 'Paris',
-    zipCode: '75013',
-    country: 'France'
+    street: 'Université de Toulouse Jean Jaurès',
+    city: 'Toulouse',
+    zipCode: '31000',
+    country: 'France',
   },
-  socialMedia: SOCIAL_LINKS
+  socialMedia: SOCIAL_LINKS,
 };
 
 // Configuration par défaut
@@ -151,7 +151,7 @@ export const DEFAULT_CONFIG = {
   maxImageSize: 5 * 1024 * 1024, // 5MB
   supportedImageTypes: ['image/jpeg', 'image/png', 'image/webp'],
   debounceDelay: 300,
-  animationDuration: 300
+  animationDuration: 300,
 };
 
 // Tags fréquents
@@ -163,7 +163,7 @@ export const COMMON_TAGS = {
     'Partenariat',
     'Réussite',
     'Innovation',
-    'Communauté'
+    'Communauté',
   ],
   events: [
     'Formation',
@@ -172,7 +172,7 @@ export const COMMON_TAGS = {
     'Compétition',
     'Networking',
     'Social',
-    'Académique'
+    'Académique',
   ],
   skills: [
     'JavaScript',
@@ -187,8 +187,8 @@ export const COMMON_TAGS = {
     'Web Design',
     'UX/UI',
     'DevOps',
-    'Cybersécurité'
-  ]
+    'Cybersécurité',
+  ],
 };
 
 // Messages d'erreur
@@ -200,7 +200,7 @@ export const ERROR_MESSAGES = {
   fileSize: 'Fichier trop volumineux (max 5MB)',
   fileType: 'Type de fichier non supporté',
   network: 'Erreur de connexion, veuillez réessayer',
-  unknown: 'Une erreur inattendue s\'est produite'
+  unknown: "Une erreur inattendue s'est produite",
 };
 
 // Messages de succès
@@ -208,6 +208,6 @@ export const SUCCESS_MESSAGES = {
   formSubmitted: 'Formulaire envoyé avec succès !',
   dataSaved: 'Données sauvegardées',
   fileUploaded: 'Fichier téléchargé avec succès',
-  memberAdded: 'Membre ajouté à l\'association',
-  contactSent: 'Message envoyé, nous vous répondrons bientôt'
+  memberAdded: "Membre ajouté à l'association",
+  contactSent: 'Message envoyé, nous vous répondrons bientôt',
 };

@@ -11,17 +11,20 @@ export function useMemberFilters(members: Member[]) {
     promo: [],
     search: '',
     hasLinkedIn: undefined,
-    hasGitHub: undefined
+    hasGitHub: undefined,
   });
 
   // Debounce de la recherche pour éviter trop d'appels
   const debouncedSearch = useDebounce(filters.search || '', 300);
 
   // Filtres avec search debounced
-  const debouncedFilters = useMemo(() => ({
-    ...filters,
-    search: debouncedSearch
-  }), [filters, debouncedSearch]);
+  const debouncedFilters = useMemo(
+    () => ({
+      ...filters,
+      search: debouncedSearch,
+    }),
+    [filters, debouncedSearch]
+  );
 
   // Membres filtrés et triés
   const filteredMembers = useMemo(() => {
@@ -31,24 +34,24 @@ export function useMemberFilters(members: Member[]) {
 
   // Fonctions de mise à jour des filtres
   const updateSearch = (search: string) => {
-    setFilters(prev => ({ ...prev, search }));
+    setFilters((prev) => ({ ...prev, search }));
   };
 
   const updatePromo = (promo: PromoType[]) => {
-    setFilters(prev => ({ ...prev, promo }));
+    setFilters((prev) => ({ ...prev, promo }));
   };
 
   const togglePromo = (promo: PromoType) => {
-    setFilters(prev => ({
+    setFilters((prev) => ({
       ...prev,
       promo: prev.promo?.includes(promo)
-        ? prev.promo.filter(p => p !== promo)
-        : [...(prev.promo || []), promo]
+        ? prev.promo.filter((p) => p !== promo)
+        : [...(prev.promo || []), promo],
     }));
   };
 
   const updateSocialFilters = (hasLinkedIn?: boolean, hasGitHub?: boolean) => {
-    setFilters(prev => ({ ...prev, hasLinkedIn, hasGitHub }));
+    setFilters((prev) => ({ ...prev, hasLinkedIn, hasGitHub }));
   };
 
   const clearFilters = () => {
@@ -56,7 +59,7 @@ export function useMemberFilters(members: Member[]) {
       promo: [],
       search: '',
       hasLinkedIn: undefined,
-      hasGitHub: undefined
+      hasGitHub: undefined,
     });
   };
 
@@ -79,6 +82,6 @@ export function useMemberFilters(members: Member[]) {
     clearFilters,
     hasActiveFilters,
     resultCount: filteredMembers.length,
-    totalCount: members.length
+    totalCount: members.length,
   };
 }

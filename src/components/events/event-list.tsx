@@ -1,7 +1,17 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import { Search, Filter, Calendar, Tag, MapPin, Grid, List, Users, Clock } from 'lucide-react';
+import {
+  Search,
+  Filter,
+  Calendar,
+  Tag,
+  MapPin,
+  Grid,
+  List,
+  Users,
+  Clock,
+} from 'lucide-react';
 import { EventCard, EventCardSkeleton } from './event-card';
 import { EventCalendar } from './event-calendar';
 import { cn } from '@/lib/utils';
@@ -19,7 +29,12 @@ interface EventListProps {
   className?: string;
 }
 
-type SortOption = 'date-asc' | 'date-desc' | 'title-asc' | 'title-desc' | 'participants-desc';
+type SortOption =
+  | 'date-asc'
+  | 'date-desc'
+  | 'title-asc'
+  | 'title-desc'
+  | 'participants-desc';
 type StatusFilter = 'all' | 'upcoming' | 'ongoing' | 'completed' | 'cancelled';
 type FilterOption = 'all' | string;
 
@@ -38,7 +53,9 @@ function validateEventData(data: any): Event {
 
   // Validation du statut
   if (!isValidEventStatus(data.status)) {
-    console.warn(`Statut événement non reconnu: ${data.status}, utilisation de "upcoming" par défaut`);
+    console.warn(
+      `Statut événement non reconnu: ${data.status}, utilisation de "upcoming" par défaut`
+    );
     data.status = 'upcoming';
   }
 
@@ -61,7 +78,7 @@ function validateEventData(data: any): Event {
     price: data.price || undefined,
     tags,
     status: data.status as Event['status'],
-    slug: data.slug || ''
+    slug: data.slug || '',
   };
 }
 
@@ -73,10 +90,12 @@ export function EventList({
   showSearch = true,
   showViewToggle = true,
   itemsPerPage = 9,
-  className
+  className,
 }: EventListProps) {
   // États locaux
-  const [currentView, setCurrentView] = useState<'grid' | 'list' | 'calendar'>(variant);
+  const [currentView, setCurrentView] = useState<'grid' | 'list' | 'calendar'>(
+    variant
+  );
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<StatusFilter>('all');
   const [selectedTag, setSelectedTag] = useState<FilterOption>('all');
@@ -86,14 +105,14 @@ export function EventList({
 
   // Extraction des tags et lieux uniques
   const availableTags = useMemo(() => {
-    const tags = events.flatMap(event => event.tags);
+    const tags = events.flatMap((event) => event.tags);
     return Array.from(new Set(tags)).sort();
   }, [events]);
 
   const availableLocations = useMemo(() => {
     const locations = events
-      .filter(event => event.location?.name)
-      .map(event => event.location!.name);
+      .filter((event) => event.location?.name)
+      .map((event) => event.location!.name);
     return Array.from(new Set(locations)).sort();
   }, [events]);
 
@@ -104,36 +123,43 @@ export function EventList({
     // Filtrage par recherche
     if (searchTerm) {
       const term = searchTerm.toLowerCase();
-      filtered = filtered.filter(event =>
-        event.title.toLowerCase().includes(term) ||
-        event.description.toLowerCase().includes(term) ||
-        event.organizer.toLowerCase().includes(term) ||
-        (event.location?.name.toLowerCase().includes(term))
+      filtered = filtered.filter(
+        (event) =>
+          event.title.toLowerCase().includes(term) ||
+          event.description.toLowerCase().includes(term) ||
+          event.organizer.toLowerCase().includes(term) ||
+          event.location?.name.toLowerCase().includes(term)
       );
     }
 
     // Filtrage par statut
     if (statusFilter !== 'all') {
-      filtered = filtered.filter(event => event.status === statusFilter);
+      filtered = filtered.filter((event) => event.status === statusFilter);
     }
 
     // Filtrage par tag
     if (selectedTag !== 'all') {
-      filtered = filtered.filter(event => event.tags.includes(selectedTag));
+      filtered = filtered.filter((event) => event.tags.includes(selectedTag));
     }
 
     // Filtrage par lieu
     if (selectedLocation !== 'all') {
-      filtered = filtered.filter(event => event.location?.name === selectedLocation);
+      filtered = filtered.filter(
+        (event) => event.location?.name === selectedLocation
+      );
     }
 
     // Tri
     filtered.sort((a, b) => {
       switch (sortBy) {
         case 'date-asc':
-          return new Date(a.startDate).getTime() - new Date(b.startDate).getTime();
+          return (
+            new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
+          );
         case 'date-desc':
-          return new Date(b.startDate).getTime() - new Date(a.startDate).getTime();
+          return (
+            new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
+          );
         case 'title-asc':
           return a.title.localeCompare(b.title, 'fr');
         case 'title-desc':
@@ -150,12 +176,13 @@ export function EventList({
 
   // Pagination
   const totalPages = Math.ceil(filteredAndSortedEvents.length / itemsPerPage);
-  const paginatedEvents = currentView === 'calendar' 
-    ? filteredAndSortedEvents 
-    : filteredAndSortedEvents.slice(
-        (currentPage - 1) * itemsPerPage,
-        currentPage * itemsPerPage
-      );
+  const paginatedEvents =
+    currentView === 'calendar'
+      ? filteredAndSortedEvents
+      : filteredAndSortedEvents.slice(
+          (currentPage - 1) * itemsPerPage,
+          currentPage * itemsPerPage
+        );
 
   // Reset de la pagination lors du changement de filtres
   React.useEffect(() => {
@@ -164,20 +191,23 @@ export function EventList({
 
   // Statistiques rapides
   const stats = useMemo(() => {
-    const upcoming = events.filter(e => e.status === 'upcoming').length;
-    const ongoing = events.filter(e => e.status === 'ongoing').length;
-    const totalParticipants = events.reduce((sum, e) => sum + (e.currentParticipants || 0), 0);
-    
+    const upcoming = events.filter((e) => e.status === 'upcoming').length;
+    const ongoing = events.filter((e) => e.status === 'ongoing').length;
+    const totalParticipants = events.reduce(
+      (sum, e) => sum + (e.currentParticipants || 0),
+      0
+    );
+
     return { upcoming, ongoing, totalParticipants };
   }, [events]);
 
   // Composant de filtre
-  const FilterSelect = ({ 
-    value, 
-    onChange, 
-    options, 
-    placeholder, 
-    icon: Icon 
+  const FilterSelect = ({
+    value,
+    onChange,
+    options,
+    placeholder,
+    icon: Icon,
   }: {
     value: string;
     onChange: (value: string) => void;
@@ -206,11 +236,14 @@ export function EventList({
   const renderEvents = () => {
     if (loading) {
       return (
-        <div className={cn(
-          currentView === 'grid' && 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6',
-          currentView === 'list' && 'space-y-6',
-          currentView === 'calendar' && 'w-full'
-        )}>
+        <div
+          className={cn(
+            currentView === 'grid' &&
+              'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6',
+            currentView === 'list' && 'space-y-6',
+            currentView === 'calendar' && 'w-full'
+          )}
+        >
           {currentView === 'calendar' ? (
             <div className="h-96 bg-slate-100 dark:bg-slate-800 rounded-xl animate-pulse" />
           ) : (
@@ -224,7 +257,7 @@ export function EventList({
 
     if (currentView === 'calendar') {
       return (
-        <EventCalendar 
+        <EventCalendar
           events={paginatedEvents}
           onEventClick={(event) => {
             // Navigation vers la page de détail
@@ -263,15 +296,22 @@ export function EventList({
 
     // Rendu selon la vue
     return (
-      <div className={cn(
-        currentView === 'grid' && 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6',
-        currentView === 'list' && 'space-y-6'
-      )}>
+      <div
+        className={cn(
+          currentView === 'grid' &&
+            'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6',
+          currentView === 'list' && 'space-y-6'
+        )}
+      >
         {paginatedEvents.map((event, index) => (
           <EventCard
             key={event.id}
             event={event}
-            variant={currentView === 'grid' && index === 0 && currentPage === 1 ? 'featured' : 'default'}
+            variant={
+              currentView === 'grid' && index === 0 && currentPage === 1
+                ? 'featured'
+                : 'default'
+            }
           />
         ))}
       </div>
@@ -360,7 +400,7 @@ export function EventList({
                   placeholder="Tous les statuts"
                   icon={Filter}
                 />
-                
+
                 <FilterSelect
                   value={selectedTag}
                   onChange={setSelectedTag}
@@ -385,7 +425,7 @@ export function EventList({
                     'date-desc',
                     'title-asc',
                     'title-desc',
-                    'participants-desc'
+                    'participants-desc',
                   ]}
                   placeholder="Trier par"
                   icon={Calendar}
@@ -436,7 +476,9 @@ export function EventList({
           {/* Résultats */}
           <div className="mt-4 flex items-center justify-between text-sm text-slate-600 dark:text-slate-400">
             <span>
-              {filteredAndSortedEvents.length} événement{filteredAndSortedEvents.length > 1 ? 's' : ''} trouvé{filteredAndSortedEvents.length > 1 ? 's' : ''}
+              {filteredAndSortedEvents.length} événement
+              {filteredAndSortedEvents.length > 1 ? 's' : ''} trouvé
+              {filteredAndSortedEvents.length > 1 ? 's' : ''}
             </span>
             {currentView !== 'calendar' && totalPages > 1 && (
               <span>
@@ -454,18 +496,19 @@ export function EventList({
       {currentView !== 'calendar' && totalPages > 1 && (
         <div className="flex items-center justify-center space-x-2">
           <button
-            onClick={() => setCurrentPage(page => Math.max(1, page - 1))}
+            onClick={() => setCurrentPage((page) => Math.max(1, page - 1))}
             disabled={currentPage === 1}
             className="px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Précédent
           </button>
-          
+
           {Array.from({ length: totalPages }, (_, i) => i + 1)
-            .filter(page => 
-              page === 1 || 
-              page === totalPages || 
-              Math.abs(page - currentPage) <= 1
+            .filter(
+              (page) =>
+                page === 1 ||
+                page === totalPages ||
+                Math.abs(page - currentPage) <= 1
             )
             .map((page, index, array) => (
               <React.Fragment key={page}>
@@ -485,9 +528,11 @@ export function EventList({
                 </button>
               </React.Fragment>
             ))}
-          
+
           <button
-            onClick={() => setCurrentPage(page => Math.min(totalPages, page + 1))}
+            onClick={() =>
+              setCurrentPage((page) => Math.min(totalPages, page + 1))
+            }
             disabled={currentPage === totalPages}
             className="px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed"
           >
@@ -509,10 +554,10 @@ export function useEvents() {
       try {
         // Import direct du JSON avec validation
         const { default: eventsData } = await import('@/data/events.json');
-        
+
         // Validation et conversion des données
         const validatedEvents: Event[] = eventsData.map(validateEventData);
-        
+
         setEvents(validatedEvents);
       } catch (error) {
         console.error('Erreur lors du chargement des événements:', error);

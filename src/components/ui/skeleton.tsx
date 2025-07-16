@@ -9,18 +9,22 @@ interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const Skeleton = React.forwardRef<HTMLDivElement, SkeletonProps>(
-  ({ className, variant = 'rectangular', width, height, lines = 1, ...props }, ref) => {
+  (
+    { className, variant = 'rectangular', width, height, lines = 1, ...props },
+    ref
+  ) => {
     const baseClasses = 'skeleton rounded';
-    
+
     const variantClasses = {
       text: 'h-4 w-full',
       circular: 'rounded-full',
-      rectangular: 'rounded'
+      rectangular: 'rounded',
     };
 
     const style: React.CSSProperties = {};
     if (width) style.width = typeof width === 'number' ? `${width}px` : width;
-    if (height) style.height = typeof height === 'number' ? `${height}px` : height;
+    if (height)
+      style.height = typeof height === 'number' ? `${height}px` : height;
 
     if (variant === 'text' && lines > 1) {
       return (
@@ -43,11 +47,7 @@ const Skeleton = React.forwardRef<HTMLDivElement, SkeletonProps>(
     return (
       <div
         ref={ref}
-        className={cn(
-          baseClasses,
-          variantClasses[variant],
-          className
-        )}
+        className={cn(baseClasses, variantClasses[variant], className)}
         style={style}
         {...props}
       />
@@ -58,14 +58,18 @@ const Skeleton = React.forwardRef<HTMLDivElement, SkeletonProps>(
 Skeleton.displayName = 'Skeleton';
 
 // Composants pré-configurés pour des cas d'usage communs
-const SkeletonAvatar = ({ size = 'md' }: { size?: 'sm' | 'md' | 'lg' | 'xl' }) => {
+const SkeletonAvatar = ({
+  size = 'md',
+}: {
+  size?: 'sm' | 'md' | 'lg' | 'xl';
+}) => {
   const sizeClasses = {
     sm: 'w-8 h-8',
     md: 'w-10 h-10',
     lg: 'w-12 h-12',
-    xl: 'w-16 h-16'
+    xl: 'w-16 h-16',
   };
-  
+
   return <Skeleton variant="circular" className={sizeClasses[size]} />;
 };
 

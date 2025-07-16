@@ -9,14 +9,14 @@ import { cn } from '@/lib/utils';
 import { NAVIGATION } from '@/lib/constants';
 
 // Composant Button simplifié en tant que Client Component
-function ClientButton({ 
-  children, 
-  className, 
-  variant = 'primary', 
+function ClientButton({
+  children,
+  className,
+  variant = 'primary',
   size = 'md',
   onClick,
   disabled,
-  ...props 
+  ...props
 }: {
   children: React.ReactNode;
   className?: string;
@@ -27,12 +27,16 @@ function ClientButton({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 }) {
-  const baseClasses = 'inline-flex items-center justify-center rounded-xl font-medium transition-all duration-200 focus-ring disabled:pointer-events-none disabled:opacity-50';
-  
+  const baseClasses =
+    'inline-flex items-center justify-center rounded-xl font-medium transition-all duration-200 focus-ring disabled:pointer-events-none disabled:opacity-50';
+
   const variants = {
-    primary: 'bg-primary-600 text-white hover:bg-primary-700 active:bg-primary-800 shadow-sm hover:shadow-md',
-    secondary: 'bg-slate-100 text-slate-900 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700',
-    ghost: 'hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300',
+    primary:
+      'bg-primary-600 text-white hover:bg-primary-700 active:bg-primary-800 shadow-sm hover:shadow-md',
+    secondary:
+      'bg-slate-100 text-slate-900 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700',
+    ghost:
+      'hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300',
   };
 
   const sizes = {
@@ -54,11 +58,11 @@ function ClientButton({
 }
 
 // Composant Badge simplifié
-function ClientBadge({ 
-  children, 
-  variant = 'primary', 
+function ClientBadge({
+  children,
+  variant = 'primary',
   size = 'md',
-  className 
+  className,
 }: {
   children: React.ReactNode;
   variant?: 'primary' | 'secondary';
@@ -67,7 +71,8 @@ function ClientBadge({
 }) {
   const variants = {
     primary: 'bg-primary-600 text-white',
-    secondary: 'bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-slate-100',
+    secondary:
+      'bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-slate-100',
   };
 
   const sizes = {
@@ -76,7 +81,14 @@ function ClientBadge({
   };
 
   return (
-    <span className={cn('inline-flex items-center rounded-full border-0 font-medium', variants[variant], sizes[size], className)}>
+    <span
+      className={cn(
+        'inline-flex items-center rounded-full border-0 font-medium',
+        variants[variant],
+        sizes[size],
+        className
+      )}
+    >
       {children}
     </span>
   );
@@ -151,8 +163,8 @@ export function Header({ className }: HeaderProps) {
       <div className="container-custom">
         <div className="flex items-center justify-between h-16">
           {/* Logo et nom */}
-          <Link 
-            href="/" 
+          <Link
+            href="/"
             className="flex items-center space-x-3 hover:opacity-80 transition-opacity"
           >
             <div className="w-8 h-8 bg-gradient-to-br from-primary-600 to-accent-500 rounded-lg flex items-center justify-center">
@@ -176,7 +188,8 @@ export function Header({ className }: HeaderProps) {
                 href={item.href}
                 className={cn(
                   'nav-link px-3 py-2 rounded-lg transition-all duration-200',
-                  isActivePage(item.href) && 'nav-link-active bg-primary-50 dark:bg-primary-900/50'
+                  isActivePage(item.href) &&
+                    'nav-link-active bg-primary-50 dark:bg-primary-900/50'
                 )}
               >
                 {item.name}
@@ -201,17 +214,17 @@ export function Header({ className }: HeaderProps) {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="relative"
             >
-              <Menu 
+              <Menu
                 className={cn(
                   'h-5 w-5 transition-transform duration-200',
                   isMenuOpen && 'rotate-90 opacity-0'
-                )} 
+                )}
               />
-              <X 
+              <X
                 className={cn(
                   'h-5 w-5 absolute transition-transform duration-200',
                   !isMenuOpen && '-rotate-90 opacity-0'
-                )} 
+                )}
               />
             </ClientButton>
           </div>
@@ -238,8 +251,8 @@ export function Header({ className }: HeaderProps) {
                     ? 'opacity-100 translate-x-0'
                     : 'opacity-0 translate-x-4'
                 )}
-                style={{ 
-                  transitionDelay: isMenuOpen ? `${index * 50}ms` : '0ms' 
+                style={{
+                  transitionDelay: isMenuOpen ? `${index * 50}ms` : '0ms',
                 }}
               >
                 <Link
@@ -247,7 +260,8 @@ export function Header({ className }: HeaderProps) {
                   className={cn(
                     'flex items-center justify-between px-4 py-3 rounded-xl transition-colors',
                     'hover:bg-slate-100 dark:hover:bg-slate-800',
-                    isActivePage(item.href) && 'bg-primary-50 dark:bg-primary-900/50 text-primary-600 dark:text-primary-400'
+                    isActivePage(item.href) &&
+                      'bg-primary-50 dark:bg-primary-900/50 text-primary-600 dark:text-primary-400'
                   )}
                 >
                   <div className="flex items-center space-x-3">
@@ -273,7 +287,10 @@ export function Header({ className }: HeaderProps) {
 
           {/* CTA mobile */}
           <div className="pt-4 mt-4 border-t border-slate-200 dark:border-slate-700">
-            <Link href="/join" className="btn btn-primary w-full text-center block">
+            <Link
+              href="/join"
+              className="btn btn-primary w-full text-center block"
+            >
               Rejoindre l&apos;association
             </Link>
           </div>

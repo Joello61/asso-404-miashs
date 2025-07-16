@@ -34,7 +34,8 @@ export default function GlobalError({ error, reset }: GlobalErrorProps) {
                   Erreur critique
                 </h1>
                 <p className="text-neutral-600 dark:text-neutral-400">
-                  Une erreur inattendue s&apos;est produite. L&apos;application doit être rechargée.
+                  Une erreur inattendue s&apos;est produite. L&apos;application
+                  doit être rechargée.
                 </p>
               </div>
 
@@ -47,7 +48,7 @@ export default function GlobalError({ error, reset }: GlobalErrorProps) {
                   <RefreshCw className="w-4 h-4 mr-2" />
                   Recharger l&apos;application
                 </button>
-                
+
                 <a
                   href="/"
                   className="w-full inline-flex items-center justify-center px-4 py-2 border border-neutral-300 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"

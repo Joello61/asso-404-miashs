@@ -39,7 +39,7 @@ export function ThemeProvider({
   const [theme, setTheme] = useState<Theme>(() => {
     // Vérification côté client uniquement
     if (typeof window === 'undefined') return defaultTheme;
-    
+
     try {
       const stored = localStorage.getItem(storageKey);
       return (stored as Theme) || defaultTheme;
@@ -54,7 +54,9 @@ export function ThemeProvider({
   // Fonction pour obtenir le thème système
   const getSystemTheme = (): 'dark' | 'light' => {
     if (typeof window === 'undefined') return 'light';
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    return window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark'
+      : 'light';
   };
 
   // Fonction pour résoudre le thème actuel
@@ -121,7 +123,7 @@ export function ThemeProvider({
     if (!enableSystem || typeof window === 'undefined') return;
 
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    
+
     const handleSystemThemeChange = () => {
       if (theme === 'system') {
         const newResolvedTheme = getSystemTheme();
@@ -131,7 +133,9 @@ export function ThemeProvider({
     };
 
     mediaQuery.addEventListener('change', handleSystemThemeChange);
-    return () => mediaQuery.removeEventListener('change', handleSystemThemeChange);
+    return () =>
+      mediaQuery.removeEventListener('change', handleSystemThemeChange);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [theme, enableSystem]);
 
   // Initialisation du thème au montage
@@ -140,6 +144,7 @@ export function ThemeProvider({
     setResolvedTheme(resolved);
     applyTheme(resolved);
     setMounted(true);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Éviter le flash de contenu non stylé
@@ -148,6 +153,7 @@ export function ThemeProvider({
 
     const resolved = resolveTheme(theme);
     applyTheme(resolved);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [theme, mounted]);
 
   const value = {

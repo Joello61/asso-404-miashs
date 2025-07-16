@@ -15,12 +15,13 @@ export default function ActualitesPage() {
             Actualités
           </h1>
           <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-            Découvrez les dernières nouvelles de l&apos;Asso 404 MIASHS : événements, projets, partenariats et bien plus encore !
+            Découvrez les dernières nouvelles de l&apos;Asso 404 MIASHS :
+            événements, projets, partenariats et bien plus encore !
           </p>
         </div>
 
         {/* Liste des actualités */}
-        <NewsList 
+        <NewsList
           news={news}
           loading={loading}
           variant="grid"
