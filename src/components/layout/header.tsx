@@ -7,6 +7,7 @@ import { Menu, X, ChevronDown } from 'lucide-react';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { cn } from '@/lib/utils';
 import { NAVIGATION } from '@/lib/constants';
+import Image from "next/image";
 
 // Composant Button simplifié en tant que Client Component
 function ClientButton({
@@ -167,8 +168,13 @@ export function Header({ className }: HeaderProps) {
             href="/"
             className="flex items-center space-x-3 hover:opacity-80 transition-opacity"
           >
-            <div className="w-8 h-8 bg-gradient-to-br from-primary-600 to-accent-500 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">404</span>
+            <div className="w-8 h-8 rounded-lg overflow-hidden relative">
+              <Image
+                src="/images/logo/LOGO_ASSO.png"
+                alt="Logo 404"
+                fill
+                className="object-cover"
+              />
             </div>
             <div className="hidden sm:block">
               <div className="font-bold text-lg text-slate-900 dark:text-slate-100">

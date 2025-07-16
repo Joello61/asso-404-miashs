@@ -176,15 +176,16 @@ export default function AboutPage() {
               </div>
 
               <div className="relative">
-                <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl">
+                <div className="relative aspect-square rounded-3xl overflow-hidden shadow-2xl">
                   <Image
-                    src="/images/about/mission.jpg"
+                    src="/images/membres/asso_1.jpg"
                     alt="Équipe de l'association en action"
                     fill
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
                 </div>
+
                 <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-primary-600 rounded-2xl flex items-center justify-center shadow-xl">
                   <Coffee className="w-8 h-8 text-white" />
                 </div>

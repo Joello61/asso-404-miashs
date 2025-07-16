@@ -36,7 +36,7 @@ export default function TrombinoscopePage() {
           showSearch={true}
           showStats={true}
           showViewToggle={true}
-          itemsPerPage={12}
+          itemsPerPage={24}
           onMemberClick={handleMemberClick}
         />
       </div>

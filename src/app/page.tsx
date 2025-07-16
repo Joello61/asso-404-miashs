@@ -1,19 +1,20 @@
 import React from 'react';
 import Link from 'next/link';
-import {
-  ArrowRight,
-  Users,
-  Calendar,
-  BookOpen,
+import { 
+  ArrowRight, 
+  Users, 
+  Calendar, 
+  BookOpen, 
   Code,
   Zap,
   MessageCircle,
   Mail,
+  Github,
+  Linkedin,
   ExternalLink,
   GraduationCap,
   Target,
 } from 'lucide-react';
-import { SiLinkedin, SiGithub } from 'react-icons/si';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { ACTIVITIES, SOCIAL_LINKS } from '@/lib/constants';
@@ -26,26 +27,24 @@ const getIcon = (iconName: string) => {
     Zap,
     BookOpen,
     Users,
-    Wrench: Target, // Utilise Target à la place de Wrench
+    Wrench: Target // Utilise Target à la place de Wrench
   };
   return icons[iconName as keyof typeof icons] || BookOpen;
 };
 
 const getSocialIcon = (iconName: string) => {
   const icons = {
-    SiLinkedin,
-    SiGithub,
+    Linkedin,
+    Github,
     MessageCircle,
-    Mail,
+    Mail
   };
   return icons[iconName as keyof typeof icons] || Mail;
 };
 
 export default function HomePage() {
   // Prendre les 4 premières activités pour l'aperçu
-  const featuredActivities = ACTIVITIES.filter(
-    (activity) => activity.isActive
-  ).slice(0, 4);
+  const featuredActivities = ACTIVITIES.filter(activity => activity.isActive).slice(0, 4);
 
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900">
@@ -53,7 +52,7 @@ export default function HomePage() {
       <section className="relative py-20 lg:py-32 overflow-hidden">
         {/* Arrière-plan subtil */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary-50/50 to-accent-50/30 dark:from-slate-900 dark:to-slate-800" />
-
+        
         {/* Motif géométrique subtil */}
         <div className="absolute inset-0 opacity-5 dark:opacity-10">
           <div className="absolute top-20 left-10 w-32 h-32 border border-primary-200 rounded-lg rotate-12" />
@@ -74,7 +73,8 @@ export default function HomePage() {
 
             {/* Titre principal */}
             <h1 className="text-4xl lg:text-6xl font-bold text-slate-900 dark:text-slate-100 mb-6 leading-tight">
-              Association <span className="text-gradient">404</span>
+              Association{' '}
+              <span className="text-gradient">404</span>
               <br />
               <span className="text-2xl lg:text-4xl font-medium text-slate-600 dark:text-slate-400">
                 MIASHS
@@ -85,38 +85,24 @@ export default function HomePage() {
             <p className="text-xl text-slate-600 dark:text-slate-400 mb-8 max-w-3xl mx-auto leading-relaxed">
               L&apos;association étudiante qui réunit{' '}
               <span className="font-semibold text-primary-600 dark:text-primary-400">
-                Mathématiques et Informatique Appliquées aux Sciences Humaines
-                et Sociales
+                Mathématiques et Informatique Appliquées aux Sciences Humaines et Sociales
               </span>
-              . Ensemble, nous explorons l&apos;intersection fascinante entre
-              technologie et humanités.
+              . Ensemble, nous explorons l&apos;intersection fascinante entre technologie et humanités.
             </p>
 
             {/* Statistiques */}
             <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 max-w-2xl mx-auto mb-12">
               <div className="text-center">
-                <div className="text-3xl font-bold text-primary-600 dark:text-primary-400 mb-1">
-                  150+
-                </div>
-                <div className="text-sm text-slate-600 dark:text-slate-400">
-                  Membres actifs
-                </div>
+                <div className="text-3xl font-bold text-primary-600 dark:text-primary-400 mb-1">150+</div>
+                <div className="text-sm text-slate-600 dark:text-slate-400">Membres actifs</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-accent-600 dark:text-accent-400 mb-1">
-                  {ACTIVITIES.length}
-                </div>
-                <div className="text-sm text-slate-600 dark:text-slate-400">
-                  Activités
-                </div>
+                <div className="text-3xl font-bold text-accent-600 dark:text-accent-400 mb-1">{ACTIVITIES.length}</div>
+                <div className="text-sm text-slate-600 dark:text-slate-400">Activités</div>
               </div>
               <div className="text-center col-span-2 lg:col-span-1">
-                <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-1">
-                  24/7
-                </div>
-                <div className="text-sm text-slate-600 dark:text-slate-400">
-                  Entraide communauté
-                </div>
+                <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-1">24/7</div>
+                <div className="text-sm text-slate-600 dark:text-slate-400">Entraide communauté</div>
               </div>
             </div>
 
@@ -128,19 +114,126 @@ export default function HomePage() {
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Link>
               </Button>
-
-              <Button
-                asChild
-                variant="outline"
-                size="lg"
-                className="w-full sm:w-auto"
-              >
+              
+              <Button asChild variant="outline" size="lg" className="w-full sm:w-auto">
                 <Link href="/about">
                   En savoir plus
                   <ExternalLink className="w-4 h-4 ml-2" />
                 </Link>
               </Button>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Événements à la une */}
+      <section className="section-padding">
+        <div className="container-custom">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-4">
+              Événements <span className="text-gradient">à la une</span>
+            </h2>
+            <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+              Ne manquez pas nos prochains événements marquants
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            {/* Événement principal */}
+            <Card hover className="md:col-span-2 lg:col-span-1 bg-gradient-to-br from-primary-50 to-accent-50 dark:from-primary-900/20 dark:to-accent-900/20 border-primary-200 dark:border-primary-800">
+              <CardContent className="p-8">
+                <div className="flex items-start justify-between mb-4">
+                  <div className="bg-primary-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                    À venir
+                  </div>
+                  <Calendar className="w-6 h-6 text-primary-600 dark:text-primary-400" />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-3">
+                  Hackathon MIASHS 2024
+                </h3>
+                <p className="text-slate-600 dark:text-slate-400 mb-4 leading-relaxed">
+                  24h de développement créatif autour des données sociologiques et de l&apos;IA éthique.
+                </p>
+                <div className="flex items-center text-sm text-slate-500 dark:text-slate-400 mb-4">
+                  <Calendar className="w-4 h-4 mr-2" />
+                  <span>15-16 Mars 2024</span>
+                </div>
+                <Link
+                  href="/events"
+                  className="text-primary-600 dark:text-primary-400 font-medium inline-flex items-center hover:text-primary-700 dark:hover:text-primary-300"
+                >
+                  S&apos;inscrire
+                  <ArrowRight className="w-4 h-4 ml-1" />
+                </Link>
+              </CardContent>
+            </Card>
+
+            {/* Événement secondaire 1 */}
+            <Card hover className="group">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between mb-3">
+                  <div className="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 px-2 py-1 rounded text-xs font-medium">
+                    Conférence
+                  </div>
+                  <Users className="w-5 h-5 text-green-600 dark:text-green-400" />
+                </div>
+                <h3 className="font-semibold text-slate-900 dark:text-slate-100 mb-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                  IA & Sciences Sociales
+                </h3>
+                <p className="text-sm text-slate-600 dark:text-slate-400 mb-3">
+                  Rencontre avec des chercheurs sur l&apos;impact de l&apos;IA en sociologie.
+                </p>
+                <div className="flex items-center text-xs text-slate-500 dark:text-slate-400 mb-3">
+                  <Calendar className="w-3 h-3 mr-1" />
+                  <span>8 Mars 2024</span>
+                </div>
+                <Link
+                  href="/events"
+                  className="text-primary-600 dark:text-primary-400 text-sm font-medium inline-flex items-center hover:text-primary-700 dark:hover:text-primary-300"
+                >
+                  En savoir plus
+                  <ArrowRight className="w-3 h-3 ml-1" />
+                </Link>
+              </CardContent>
+            </Card>
+
+            {/* Événement secondaire 2 */}
+            <Card hover className="group">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between mb-3">
+                  <div className="bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 px-2 py-1 rounded text-xs font-medium">
+                    Atelier
+                  </div>
+                  <Code className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+                </div>
+                <h3 className="font-semibold text-slate-900 dark:text-slate-100 mb-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                  Initiation Data Science
+                </h3>
+                <p className="text-sm text-slate-600 dark:text-slate-400 mb-3">
+                  Découvrez Python et les bases de l&apos;analyse de données.
+                </p>
+                <div className="flex items-center text-xs text-slate-500 dark:text-slate-400 mb-3">
+                  <Calendar className="w-3 h-3 mr-1" />
+                  <span>12 Mars 2024</span>
+                </div>
+                <Link
+                  href="/events"
+                  className="text-primary-600 dark:text-primary-400 text-sm font-medium inline-flex items-center hover:text-primary-700 dark:hover:text-primary-300"
+                >
+                  Participer
+                  <ArrowRight className="w-3 h-3 ml-1" />
+                </Link>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="text-center">
+            <Button asChild variant="outline">
+              <Link href="/events">
+                Voir tous les événements
+                <Calendar className="w-4 h-4 ml-2" />
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
@@ -153,8 +246,7 @@ export default function HomePage() {
               Nos <span className="text-gradient">Activités</span>
             </h2>
             <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-              De la programmation aux sciences humaines, découvrez nos domaines
-              d&apos;expertise
+              De la programmation aux sciences humaines, découvrez nos domaines d&apos;expertise
             </p>
           </div>
 
@@ -164,9 +256,7 @@ export default function HomePage() {
               return (
                 <Card key={activity.id} hover className="text-center">
                   <CardContent className="pt-6">
-                    <div
-                      className={`w-12 h-12 mx-auto mb-4 rounded-xl bg-gradient-to-br from-primary-100 to-accent-100 dark:from-primary-900/30 dark:to-accent-900/30 flex items-center justify-center`}
-                    >
+                    <div className={`w-12 h-12 mx-auto mb-4 rounded-xl bg-gradient-to-br from-primary-100 to-accent-100 dark:from-primary-900/30 dark:to-accent-900/30 flex items-center justify-center`}>
                       <Icon className={`w-6 h-6 ${activity.color}`} />
                     </div>
                     <h3 className="font-semibold text-slate-900 dark:text-slate-100 mb-2">
@@ -219,10 +309,7 @@ export default function HomePage() {
                     <p className="text-slate-600 dark:text-slate-400 text-sm mb-4">
                       Rencontrez nos membres et découvrez leurs parcours
                     </p>
-                    <Link
-                      href="/trombinoscope"
-                      className="text-primary-600 dark:text-primary-400 text-sm font-medium inline-flex items-center hover:text-primary-700 dark:hover:text-primary-300"
-                    >
+                    <Link href="/trombinoscope" className="text-primary-600 dark:text-primary-400 text-sm font-medium inline-flex items-center hover:text-primary-700 dark:hover:text-primary-300">
                       Voir les membres
                       <ArrowRight className="w-4 h-4 ml-1" />
                     </Link>
@@ -245,10 +332,7 @@ export default function HomePage() {
                     <p className="text-slate-600 dark:text-slate-400 text-sm mb-4">
                       Conférences, hackathons et ateliers à venir
                     </p>
-                    <Link
-                      href="/events"
-                      className="text-primary-600 dark:text-primary-400 text-sm font-medium inline-flex items-center hover:text-primary-700 dark:hover:text-primary-300"
-                    >
+                    <Link href="/events" className="text-primary-600 dark:text-primary-400 text-sm font-medium inline-flex items-center hover:text-primary-700 dark:hover:text-primary-300">
                       Voir l&apos;agenda
                       <ArrowRight className="w-4 h-4 ml-1" />
                     </Link>
@@ -271,10 +355,7 @@ export default function HomePage() {
                     <p className="text-slate-600 dark:text-slate-400 text-sm mb-4">
                       Suivez nos dernières nouvelles et réalisations
                     </p>
-                    <Link
-                      href="/actualites"
-                      className="text-primary-600 dark:text-primary-400 text-sm font-medium inline-flex items-center hover:text-primary-700 dark:hover:text-primary-300"
-                    >
+                    <Link href="/actualites" className="text-primary-600 dark:text-primary-400 text-sm font-medium inline-flex items-center hover:text-primary-700 dark:hover:text-primary-300">
                       Lire les actualités
                       <ArrowRight className="w-4 h-4 ml-1" />
                     </Link>
@@ -294,30 +375,19 @@ export default function HomePage() {
               Rejoignez une communauté d&apos;exception
             </h2>
             <p className="text-xl text-primary-100 mb-8 leading-relaxed">
-              Que vous soyez passionné de mathématiques, d&apos;informatique ou
-              de sciences humaines, notre association vous offre
-              l&apos;opportunité de grandir et d&apos;apprendre ensemble.
+              Que vous soyez passionné de mathématiques, d&apos;informatique ou de sciences humaines, 
+              notre association vous offre l&apos;opportunité de grandir et d&apos;apprendre ensemble.
             </p>
-
+            
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 mb-8">
-              <Button
-                asChild
-                size="lg"
-                variant="secondary"
-                className="w-full sm:w-auto"
-              >
+              <Button asChild size="lg" variant="secondary" className="w-full sm:w-auto">
                 <Link href="/join">
                   Adhérer maintenant
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Link>
               </Button>
-
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="w-full sm:w-auto border-white/30 text-white hover:bg-white/10"
-              >
+              
+              <Button asChild size="lg" variant="outline" className="w-full sm:w-auto border-white/30 text-white hover:bg-white/10">
                 <Link href="/contact">
                   Nous contacter
                   <Mail className="w-4 h-4 ml-2" />

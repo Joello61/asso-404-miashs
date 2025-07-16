@@ -9,6 +9,7 @@ import {
 } from '@/lib/constants';
 import { SiLinkedin, SiGithub } from 'react-icons/si';
 import { cn } from '@/lib/utils';
+import Image from "next/image";
 
 interface FooterProps {
   className?: string;
@@ -46,8 +47,15 @@ export function Footer({ className }: FooterProps) {
           {/* À propos */}
           <div className="lg:col-span-1">
             <div className="flex items-center space-x-3 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary-600 to-accent-500 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold">404</span>
+              <div className="w-10 h-10 bg-gradient-to-br to-accent-500 rounded-lg flex items-center justify-center">
+                <div className="w-8 h-8 rounded-lg overflow-hidden relative">
+                  <Image
+                    src="/images/logo/LOGO_ASSO.png"
+                    alt="Logo 404"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
               </div>
               <div>
                 <div className="font-bold text-lg text-foreground">

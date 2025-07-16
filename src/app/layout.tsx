@@ -119,38 +119,26 @@ export const metadata: Metadata = {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
       {
-        url: '/images/logo/favicon-16x16.png',
+        url: '/favicon-16x16.png',
         sizes: '16x16',
         type: 'image/png',
       },
       {
-        url: '/images/logo/favicon-32x32.png',
+        url: '/favicon-32x32.png',
         sizes: '32x32',
-        type: 'image/png',
-      },
-      {
-        url: '/images/logo/favicon-96x96.png',
-        sizes: '96x96',
         type: 'image/png',
       },
     ],
     shortcut: '/favicon.ico',
     apple: [
       {
-        url: '/images/logo/apple-touch-icon.png',
+        url: '/apple-touch-icon.png',
         sizes: '180x180',
         type: 'image/png',
       },
     ],
-    other: [
-      {
-        rel: 'mask-icon',
-        url: '/images/logo/safari-pinned-tab.svg',
-        color: '#3b82f6',
-      },
-    ],
   },
-  manifest: '/manifest.json',
+  manifest: '/site.webmanifest',
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION,
     yandex: process.env.NEXT_PUBLIC_YANDEX_VERIFICATION,
@@ -207,6 +195,21 @@ export default function RootLayout({ children }: RootLayoutProps) {
           as="image"
           type="image/svg+xml"
         />
+
+        <link rel="icon" href="/favicon.ico" />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
         {/* Scripts de performance (à configurer selon vos besoins) */}
         {process.env.NODE_ENV === 'production' && (

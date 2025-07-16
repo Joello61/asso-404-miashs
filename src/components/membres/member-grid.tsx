@@ -6,12 +6,9 @@ import {
   Grid,
   List,
   Users,
-  BarChart3,
-  TrendingUp,
   Award,
 } from 'lucide-react';
 import { MemberCard, MemberCardSkeleton } from './member-card';
-import { MemberFiltersComponent } from './member-filters';
 import { cn } from '@/lib/utils';
 import { useMemberFilters } from '@/hooks/use-filters';
 import { usePagination } from '@/hooks/use-pagination';
@@ -76,7 +73,7 @@ export function MemberGrid({
   showSearch = true,
   showStats = true,
   showViewToggle = true,
-  itemsPerPage = 12,
+  itemsPerPage = 24,
   onMemberClick,
   className,
 }: MemberGridProps) {
@@ -89,12 +86,9 @@ export function MemberGrid({
     filters,
     filteredMembers,
     updateSearch,
-    updatePromo,
-    updateSocialFilters,
     clearFilters,
     hasActiveFilters,
     resultCount,
-    totalCount,
   } = useMemberFilters(members);
 
   // Gestion de la pagination
@@ -118,19 +112,6 @@ export function MemberGrid({
     return groupMembersByPromo(paginatedMembers);
   }, [paginatedMembers, currentView]);
 
-  // Gestion des filtres via props
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleFiltersChange = (newFilters: any) => {
-    if (newFilters.search !== undefined) updateSearch(newFilters.search);
-    if (newFilters.promo !== undefined) updatePromo(newFilters.promo);
-    if (
-      newFilters.hasLinkedIn !== undefined ||
-      newFilters.hasGitHub !== undefined
-    ) {
-      updateSocialFilters(newFilters.hasLinkedIn, newFilters.hasGitHub);
-    }
-  };
-
   // Statistiques à afficher
   const displayStats = [
     {
@@ -139,22 +120,6 @@ export function MemberGrid({
       icon: Users,
       color: 'text-blue-600 dark:text-blue-400',
       bg: 'bg-blue-100 dark:bg-blue-900/30',
-    },
-    {
-      label: 'LinkedIn',
-      value: stats.socialLinks.linkedin.count,
-      percentage: stats.socialLinks.linkedin.percentage,
-      icon: TrendingUp,
-      color: 'text-green-600 dark:text-green-400',
-      bg: 'bg-green-100 dark:bg-green-900/30',
-    },
-    {
-      label: 'GitHub',
-      value: stats.socialLinks.github.count,
-      percentage: stats.socialLinks.github.percentage,
-      icon: BarChart3,
-      color: 'text-purple-600 dark:text-purple-400',
-      bg: 'bg-purple-100 dark:bg-purple-900/30',
     },
     {
       label: 'Actifs',
@@ -294,7 +259,7 @@ export function MemberGrid({
     <div className={cn('space-y-6', className)}>
       {/* Statistiques */}
       {showStats && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
           {displayStats.map((stat) => {
             const Icon = stat.icon;
             return (
@@ -317,9 +282,6 @@ export function MemberGrid({
                     </div>
                     <div className="text-sm text-slate-600 dark:text-slate-400 flex items-center">
                       {stat.label}
-                      {stat.percentage !== undefined && (
-                        <span className="ml-1">({stat.percentage}%)</span>
-                      )}
                     </div>
                   </div>
                 </div>
@@ -329,21 +291,8 @@ export function MemberGrid({
         </div>
       )}
 
-      {/* Layout avec filtres */}
+      {/* Layout */}
       <div className="flex flex-col lg:flex-row gap-6">
-        {/* Sidebar avec filtres */}
-        {showFilters && (
-          <div className="lg:w-80 flex-shrink-0">
-            <MemberFiltersComponent
-              members={members}
-              filters={filters}
-              onFiltersChange={handleFiltersChange}
-              resultCount={resultCount}
-              totalCount={totalCount}
-            />
-          </div>
-        )}
-
         {/* Contenu principal */}
         <div className="flex-1">
           {/* En-tête avec contrôles */}
