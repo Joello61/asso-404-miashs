@@ -1,25 +1,25 @@
 [
-  {
+    {
     "id": "event-001",
-    "title": "Hackathon Asso 404 : Innovation Durable",
-    "description": "48 heures pour développer des solutions technologiques durables ! Notre premier hackathon réunit étudiants et professionnels autour du thème de l'innovation responsable. Ateliers, mentoring et prix à la clé !",
-    "startDate": "2024-02-25T09:00:00Z",
-    "endDate": "2024-02-26T18:00:00Z",
+    "title": "Week-end en Espagne",
+    "description": "Un week-end convivial en Espagne pour renforcer les liens entre membres",
+    "startDate": "2025-05-29T09:00:00Z",
+    "endDate": "2025-06-01T18:00:00Z",
     "location": {
-      "name": "Université Paris Cité - Bâtiment Sophie Germain",
-      "address": "8 Place Aurélie Nemours, 75013 Paris",
-      "url": "https://maps.google.com/..."
+      "name": "Barcelone, Espagne",
+      "address": "Barcelone, Espagne",
+      "url": "https://maps.google.com/?q=Barcelona"
     },
-    "image": "/images/events/hackathon-innovation-durable.jpg",
-    "organizer": "Thomas Martin",
-    "maxParticipants": 50,
-    "currentParticipants": 38,
+    "image": "../Public/images/WKEspagne/WeekEndEspagne.png",
+    "organizer": "L'équipe Asso 404",
+    "maxParticipants": 40,
+    "currentParticipants": 0,
     "registrationRequired": true,
-    "registrationDeadline": "2024-02-20T23:59:59Z",
-    "price": 0,
-    "tags": ["Hackathon", "Innovation", "Développement durable", "Compétition"],
+    "registrationDeadline": "2024-04-30T23:59:59Z",
+    "price": 120,
+    "tags": ["Voyage", "Team building", "Culture", "Détente"],
     "status": "upcoming",
-    "slug": "hackathon-asso-404-innovation-durable"
+    "slug": "weekend-asso-404-espagne"
   },
   {
     "id": "event-002",
