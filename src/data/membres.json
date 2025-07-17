@@ -1,16 +1,16 @@
 [
   {
     "id": "membre-001",
-    "firstName": "Alice",
-    "lastName": "Dubois",
+    "firstName": "Mathis",
+    "lastName": "DUGUÉ",
     "promo": "M2",
     "photo": "/images/membres/alice-dubois.jpg",
-    "linkedin": "https://linkedin.com/in/alice-dubois",
-    "github": "https://github.com/alice-dubois",
-    "email": "alice.dubois@etu.univ-paris.fr",
+    "linkedin": "https://www.linkedin.com/in/mathis-dugue-0494a61b0/",
+    "github": "",
+    "email": "Mathisdugue4@gmail.com",
     "role": "Présidente",
-    "description": "Passionnée par l'IA et le machine learning, je travaille sur des projets de NLP pour ma thèse.",
-    "skills": ["Python", "Machine Learning", "NLP", "TensorFlow", "React"],
+    "description": "Passionné par l'IoT et les réseaux industriels, je m'intéresse au développement logiciel, aux systèmes SCADA et à la supervision. Curieux et toujours prêt à apprendre.",
+    "skills": ["LoRaWAN","SCADA","MQTT" ,"Réseaux & supervision"],
     "joinDate": "2023-09-01"
   },
   {
