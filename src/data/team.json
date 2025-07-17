@@ -1,34 +1,34 @@
 [
-    {
-      "name": "Alice Dubois",
-      "role": "Présidente",
-      "description":
-        "Passionnée par l'IA et le leadership, Alice guide notre association vers l'excellence.",
-      "image": "/images/membres/alice-dubois.jpg",
-      "promo": "M2"
-    },
-    {
-      "name": "Thomas Martin",
-      "role": "Vice-président",
-      "description":
-        "Expert DevOps et organisateur né, Thomas coordonne nos initiatives techniques.",
-      "image": "/images/membres/thomas-martin.jpg",
-      "promo": "M2"
-    },
-    {
-      "name": "Emma Bernard",
-      "role": "Trésorière",
-      "description":
-        "Spécialiste en data science, Emma assure la gestion financière avec rigueur.",
-      "image": "/images/membres/emma-bernard.jpg",
-      "promo": "M1"
-    },
-    {
-      "name": "Hugo Leroy",
-      "role": "Secrétaire",
-      "description":
-        "Designer UX/UI créatif, Hugo veille à la communication et à l'image de l'association.",
-      "image": "/images/membres/hugo-leroy.jpg",
-      "promo": "M1"
-    }
-  ]
+  {
+    "name": "Mathis Dugue",
+    "role": "Président",
+    "description": "Passionné par l’IoT et les réseaux industriels, je m’intéresse à la supervision, aux systèmes SCADA et au développement logiciel. Curieux et engagé, j’aime relever de nouveaux défis techniques et humains.",
+    "image": "/images/membres/mathis-dugue.jpg",
+    "promo": "M2",
+    "linkedin": "https://www.linkedin.com/in/mathis-dugue-0494a61b0/"   
+  },
+  {
+    "name": "Hugo Gonçalves",
+    "role": "Trésorier",
+    "description": "Spécialisé en data science, j’assure la gestion financière de l’association avec rigueur et méthode. J’apprécie les environnements où l’analyse de données et l’organisation se rejoignent.",
+    "image": "/images/membres/hugo-gonçalves.jpg",
+    "promo": "M2",
+    "linkedin": "https://www.linkedin.com/in/hugo-goncalves/"
+  },
+  {
+    "name": "Matthias Labbit",
+    "role": "Secrétaire",
+    "description": "Curieux et créatif, je suis passionné par le développement web, les jeux vidéo, la data et le sport. J’aime concevoir des projets ludiques et explorer de nouvelles technologies avec une forte sensibilité UX. Mon objectif : entreprendre en mettant mes idées en action.",
+    "image": "/images/membres/hugo-leroy.jpg",
+    "promo": "M2",
+    "linkedin": "https://www.linkedin.com/in/matthias-labit-016496224/"
+  },
+  {
+    "name": "Timothée Joël",
+    "role": "Responsable Tech & Web",
+    "description": "Développeur passionné par le web, l’IA et les technologies émergentes, je conçois des outils innovants au service de l’association. Toujours en quête d’amélioration, je mets la tech au service de l’expérience utilisateur.",
+    "image": "/images/membres/alice-dubois.jpg",
+    "promo": "M2",
+    "linkedin": "https://www.linkedin.com/in/joel-tchinda"
+  }
+]

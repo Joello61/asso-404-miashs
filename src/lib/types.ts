@@ -103,6 +103,7 @@ export interface TeamMember {
   description: string;
   image: string;
   promo: string;
+  linkedin: string;
 }
 
 export interface JoinForm {

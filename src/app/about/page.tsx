@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import Image from 'next/image';
 import {
@@ -22,6 +24,8 @@ import activitiesData from '@/data/activities.json';
 
 // Import des types
 import type { Member, Event, Activity, TeamMember } from '@/lib/types';
+import { getInitials } from '@/lib/utils';
+
 
 export default function AboutPage() {
   // Conversion des données JSON en format typé
@@ -29,6 +33,13 @@ export default function AboutPage() {
   const allMembers = membresData as Member[];
   const events = eventsData as Event[];
   const activities = activitiesData as Activity[];
+
+  // State pour gérer les erreurs d'images
+  const [imageErrors, setImageErrors] = React.useState<{[key: string]: boolean}>({});
+
+  const handleImageError = (memberName: string) => {
+    setImageErrors(prev => ({ ...prev, [memberName]: true }));
+  };
 
   // Calcul des statistiques dynamiques basées sur les données réelles
   const stats = [
@@ -274,7 +285,7 @@ export default function AboutPage() {
       {/* Team Section */}
       <section className="py-16 lg:py-24 bg-slate-50 dark:bg-slate-800/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-6xl mx-auto">
+          <div className="max-w-8xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-4">
                 Notre Bureau
@@ -286,44 +297,61 @@ export default function AboutPage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {team.map((member, index) => (
-                <div
-                  key={index}
-                  className="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-                >
-                  <div className="relative w-20 h-20 mx-auto mb-4">
-                    <Image
-                      src={member.image}
-                      alt={member.name}
-                      fill
-                      className="object-cover rounded-full border-4 border-white dark:border-slate-800 shadow-md"
-                      sizes="80px"
-                    />
-                  </div>
-                  <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100 mb-1">
-                    {member.name}
-                  </h3>
-                  <div className="flex items-center justify-center space-x-2 mb-3">
-                    <span className="text-sm font-medium text-primary-600 dark:text-primary-400">
-                      {member.role}
-                    </span>
-                    <span
-                      className={cn(
-                        'text-xs px-2 py-1 rounded-full font-medium',
-                        member.promo === 'M2' &&
-                          'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300',
-                        member.promo === 'M1' &&
-                          'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300'
+              {team.map((member, index) => {
+                const memberKey = `${member.name}-${index}`;
+                const hasImageError = imageErrors[memberKey];
+                const initials = getInitials(member.name.split(' ')[0] || '', member.name.split(' ')[1] || '');
+                
+                return (
+                  <div
+                    key={index}
+                    className="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                  >
+                    <div className="relative w-20 h-20 mx-auto mb-4">
+                      {!hasImageError ? (
+                        <Image
+                          src={member.image}
+                          alt={member.name}
+                          fill
+                          className="object-cover rounded-full border-4 border-white dark:border-slate-800 shadow-md"
+                          sizes="80px"
+                          onError={() => handleImageError(memberKey)}
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-primary-500 to-accent-500 rounded-full border-4 border-white dark:border-slate-800 shadow-md flex items-center justify-center">
+                          <span className="text-lg font-bold text-white">
+                            {initials}
+                          </span>
+                        </div>
                       )}
-                    >
-                      {member.promo}
-                    </span>
+                    </div>
+                    <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100 mb-1">
+                      {member.name}
+                    </h3>
+                    <div className="flex items-center justify-center space-x-2 mb-3">
+                      <span className="text-sm font-medium text-primary-600 dark:text-primary-400">
+                        {member.role}
+                      </span>
+                      <span
+                        className={cn(
+                          'text-xs px-2 py-1 rounded-full font-medium',
+                          member.promo === 'M2' &&
+                            'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300',
+                          member.promo === 'M1' &&
+                            'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300',
+                          member.promo === 'L3' &&
+                            'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300'
+                        )}
+                      >
+                        {member.promo}
+                      </span>
+                    </div>
+                    <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                      {member.description}
+                    </p>
                   </div>
-                  <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-                    {member.description}
-                  </p>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>

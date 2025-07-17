@@ -18,6 +18,7 @@ import { cn } from '@/lib/utils';
 import type { ContactForm, TeamMember } from '@/lib/types';
 import { SiInstagram, SiLinkedin, SiDiscord } from 'react-icons/si';
 import { CONTACT_INFO, SOCIAL_LINKS } from '@/lib/constants';
+import { getInitials } from '@/lib/utils';
 
 // Import des données JSON
 import teamData from '@/data/team.json';
@@ -25,6 +26,13 @@ import teamData from '@/data/team.json';
 export default function ContactPage() {
   // Conversion des données JSON en format typé
   const team = teamData as TeamMember[];
+
+  // State pour gérer les erreurs d'images
+  const [imageErrors, setImageErrors] = useState<{[key: string]: boolean}>({});
+
+  const handleImageError = (memberName: string) => {
+    setImageErrors(prev => ({ ...prev, [memberName]: true }));
+  };
 
   const [formData, setFormData] = useState<ContactForm>({
     name: '',
@@ -101,20 +109,21 @@ export default function ContactPage() {
   const teamContacts = team.map(member => ({
     name: member.name,
     role: member.role,
-    email: `${member.name.toLowerCase().replace(' ', '.')}@asso404miashs.fr`,
+    linkedin: member.linkedin,
     avatar: member.image,
     description: getDescriptionByRole(member.role),
   }));
 
-  function getDescriptionByRole(role: string): string {
-    const descriptions = {
-      'Présidente': 'Questions générales et partenariats',
-      'Vice-président': 'Projets techniques et événements',
-      'Trésorière': 'Questions financières et budget',
-      'Secrétaire': 'Communication et adhésions',
-    };
-    return descriptions[role as keyof typeof descriptions] || 'Contact général';
-  }
+function getDescriptionByRole(role: string): string {
+  const descriptions = {
+    'Présidente': 'Questions générales et partenariats',
+    'Trésorière': 'Questions financières et budget',
+    'Secrétaire': 'Communication et adhésions',
+    'Responsable Tech & Web': 'Site, outils numériques et support technique',
+  };
+  return descriptions[role as keyof typeof descriptions] || 'Contact général';
+}
+
 
   const handleInputChange = (
     e: React.ChangeEvent<
@@ -427,42 +436,57 @@ export default function ContactPage() {
                   Contactez directement l&apos;équipe
                 </h2>
                 <div className="space-y-4">
-                  {teamContacts.map((member, index) => (
-                    <div
-                      key={index}
-                      className="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all duration-300"
-                    >
-                      <div className="flex items-start space-x-4">
-                        <div className="relative w-12 h-12 flex-shrink-0">
-                          <Image
-                            src={member.avatar}
-                            alt={member.name}
-                            width={48}
-                            height={48}
-                            className="object-cover rounded-full border-2 border-white dark:border-slate-800 shadow-sm"
-                          />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <h3 className="text-lg font-medium text-slate-900 dark:text-slate-100">
-                            {member.name}
-                          </h3>
-                          <p className="text-sm text-primary-600 dark:text-primary-400 font-medium mb-1">
-                            {member.role}
-                          </p>
-                          <p className="text-sm text-slate-600 dark:text-slate-400 mb-3">
-                            {member.description}
-                          </p>
-                          <a
-                            href={`mailto:${member.email}`}
-                            className="inline-flex items-center text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-                          >
-                            <Mail className="w-4 h-4 mr-2" />
-                            {member.email}
-                          </a>
+                  {teamContacts.map((member, index) => {
+                    const memberKey = `${member.name}-${index}`;
+                    const hasImageError = imageErrors[memberKey];
+                    const initials = getInitials(member.name.split(' ')[0] || '', member.name.split(' ')[1] || '');
+                    
+                    return (
+                      <div
+                        key={index}
+                        className="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all duration-300"
+                      >
+                        <div className="flex items-start space-x-4">
+                          <div className="relative w-12 h-12 flex-shrink-0">
+                            {!hasImageError ? (
+                              <Image
+                                src={member.avatar}
+                                alt={member.name}
+                                width={48}
+                                height={48}
+                                className="object-cover rounded-full border-2 border-white dark:border-slate-800 shadow-sm"
+                                onError={() => handleImageError(memberKey)}
+                              />
+                            ) : (
+                              <div className="w-full h-full bg-gradient-to-br from-primary-500 to-accent-500 rounded-full border-2 border-white dark:border-slate-800 shadow-sm flex items-center justify-center">
+                                <span className="text-sm font-bold text-white">
+                                  {initials}
+                                </span>
+                              </div>
+                            )}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <h3 className="text-lg font-medium text-slate-900 dark:text-slate-100">
+                              {member.name}
+                            </h3>
+                            <p className="text-sm text-primary-600 dark:text-primary-400 font-medium mb-1">
+                              {member.role}
+                            </p>
+                            <p className="text-sm text-slate-600 dark:text-slate-400 mb-3">
+                              {member.description}
+                            </p>
+                            <a
+                              href={member.linkedin}
+                              className="inline-flex items-center text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                            >
+                              <SiLinkedin className="w-4 h-4 mr-2" />
+                              {member.linkedin}
+                            </a>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             </div>
