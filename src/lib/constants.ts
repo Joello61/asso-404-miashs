@@ -48,25 +48,25 @@ export const NAVIGATION: NavigationItem[] = [
 export const SOCIAL_LINKS: SocialLink[] = [
   {
     name: 'LinkedIn',
-    href: 'https://linkedin.com/company/asso-404-miashs',
+    href: 'https://www.linkedin.com/company/association-404/?viewAsMember=true',
     icon: 'Linkedin',
     color: 'hover:text-blue-600',
   },
   {
-    name: 'GitHub',
-    href: 'https://github.com/asso-404-miashs',
-    icon: 'Github',
-    color: 'hover:text-gray-900 dark:hover:text-gray-100',
-  },
-  {
     name: 'Discord',
-    href: 'https://discord.gg/asso404miashs',
+    href: 'https://discord.gg/7Rkfqqm8',
     icon: 'MessageCircle',
     color: 'hover:text-indigo-600',
   },
   {
+    name: 'Instagram',
+    href: 'https://www.instagram.com/asso_404_miashs/?hl=am-et',
+    icon: 'Instagram',
+    color: 'hover:text-pink-600',
+  },
+  {
     name: 'Email',
-    href: 'mailto:contact@asso404miashs.fr',
+    href: 'mailto:assomiashs@gmail.com',
     icon: 'Mail',
     color: 'hover:text-red-600',
   },
@@ -132,8 +132,8 @@ export const ACTIVITIES: Activity[] = [
 
 // Informations de contact
 export const CONTACT_INFO = {
-  email: 'contact@asso404miashs.fr',
-  phone: '+33 1 23 45 67 89',
+  email: 'assomiashs@gmail.com',
+  phone: '+33 6 03 38 61 14',
   address: {
     street: 'Université de Toulouse Jean Jaurès',
     city: 'Toulouse',

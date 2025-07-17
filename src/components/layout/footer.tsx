@@ -7,7 +7,7 @@ import {
   NAVIGATION,
   ACTIVITIES,
 } from '@/lib/constants';
-import { SiLinkedin, SiGithub } from 'react-icons/si';
+import { SiLinkedin, SiGithub, SiDiscord, SiInstagram } from 'react-icons/si';
 import { cn } from '@/lib/utils';
 import Image from "next/image";
 
@@ -76,7 +76,8 @@ export function Footer({ className }: FooterProps) {
                 const IconComponent =
                   {
                     Linkedin: SiLinkedin,
-                    Github: SiGithub,
+                    Discord: SiDiscord,
+                    Instagram: SiInstagram,
                     MessageCircle: MessageCircle,
                     Mail: Mail,
                   }[social.icon] || ExternalLink;
