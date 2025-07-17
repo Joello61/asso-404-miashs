@@ -58,43 +58,6 @@ function ClientButton({
   );
 }
 
-// Composant Badge simplifié
-function ClientBadge({
-  children,
-  variant = 'primary',
-  size = 'md',
-  className,
-}: {
-  children: React.ReactNode;
-  variant?: 'primary' | 'secondary';
-  size?: 'sm' | 'md';
-  className?: string;
-}) {
-  const variants = {
-    primary: 'bg-primary-600 text-white',
-    secondary:
-      'bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-slate-100',
-  };
-
-  const sizes = {
-    sm: 'px-2 py-0.5 text-xs',
-    md: 'px-2.5 py-1 text-sm',
-  };
-
-  return (
-    <span
-      className={cn(
-        'inline-flex items-center rounded-full border-0 font-medium',
-        variants[variant],
-        sizes[size],
-        className
-      )}
-    >
-      {children}
-    </span>
-  );
-}
-
 interface HeaderProps {
   className?: string;
 }
@@ -272,11 +235,6 @@ export function Header({ className }: HeaderProps) {
                 >
                   <div className="flex items-center space-x-3">
                     <span className="font-medium">{item.name}</span>
-                    {item.name === 'Trombinoscope' && (
-                      <ClientBadge variant="primary" size="sm">
-                        Nouveau
-                      </ClientBadge>
-                    )}
                   </div>
                   {item.description && (
                     <ChevronDown className="h-4 w-4 text-slate-600 dark:text-slate-400" />
