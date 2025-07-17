@@ -8,7 +8,6 @@ import {
   Clock,
   Send,
   MessageCircle,
-  Users,
   ExternalLink,
   CheckCircle,
   AlertCircle,
