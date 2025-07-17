@@ -10,7 +10,7 @@
       "address": "Barcelone, Espagne",
       "url": "https://maps.google.com/?q=Barcelona"
     },
-    "image": "/public/images/WKEspagne/WeekEndEspagne.png",
+    "image": "/images/events/WKEspagne/WeekEndEspagne.png",
     "organizer": "L'équipe Asso 404",
     "maxParticipants": 15,
     "currentParticipants": 13,
@@ -28,7 +28,7 @@
   "location": {
     "name": "Salle Gs039"
   },
-  "image": "/images/events/vente-pulls-asso-404.jpg",
+  "image": "/images/events/Pull.png",
   "organizer": "L'Association 404",
   "maxParticipants": 100,
   "currentParticipants": 0,
