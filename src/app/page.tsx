@@ -14,7 +14,7 @@ import {
   Presentation,
   Wrench,
 } from 'lucide-react';
-import {SiLinkedin, SiGithub } from 'react-icons/si';
+import {SiLinkedin, SiInstagram, SiDiscord } from 'react-icons/si';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { SOCIAL_LINKS } from '@/lib/constants';
@@ -42,10 +42,11 @@ const getIcon = (iconName: string) => {
 
 const getSocialIcon = (iconName: string) => {
   const icons = {
-    SiLinkedin,
-    SiGithub,
-    MessageCircle,
-    Mail
+    'Linkedin': SiLinkedin,
+    'MessageCircle': MessageCircle,
+    'Mail': Mail,
+    'Instagram': SiInstagram,
+    'Discord': SiDiscord,
   };
   return icons[iconName as keyof typeof icons] || Mail;
 };

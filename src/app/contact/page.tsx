@@ -15,21 +15,12 @@ import {
 } from 'lucide-react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import type { ContactForm } from '@/lib/types';
+import type { ContactForm, TeamMember } from '@/lib/types';
 import { SiInstagram, SiLinkedin, SiDiscord } from 'react-icons/si';
 import { CONTACT_INFO, SOCIAL_LINKS } from '@/lib/constants';
 
 // Import des données JSON
 import teamData from '@/data/team.json';
-
-// Interface pour le team (bureau)
-interface TeamMember {
-  name: string;
-  role: string;
-  description: string;
-  image: string;
-  promo: string;
-}
 
 export default function ContactPage() {
   // Conversion des données JSON en format typé
@@ -78,15 +69,18 @@ export default function ContactPage() {
     },
   ];
 
-  const socialLinks = SOCIAL_LINKS.map(social => {
-    const iconMap = {
-      'Instagram': SiInstagram,
+  const getSocialIcon = (iconName: string) => {
+    const icons = {
       'Linkedin': SiLinkedin,
-      'Discord': SiDiscord,
       'MessageCircle': MessageCircle,
       'Mail': Mail,
+      'Instagram': SiInstagram,
+      'Discord': SiDiscord,
     };
+    return icons[iconName as keyof typeof icons] || Mail;
+  };
 
+  const socialLinks = SOCIAL_LINKS.map(social => {
     const colorMap = {
       'Instagram': 'text-pink-600 dark:text-pink-400',
       'Linkedin': 'text-blue-600 dark:text-blue-400',
@@ -97,7 +91,7 @@ export default function ContactPage() {
 
     return {
       name: social.name,
-      icon: iconMap[social.name as keyof typeof iconMap] || MessageCircle,
+      icon: getSocialIcon(social.icon), // Utilise l'icône définie dans constants.ts
       url: social.href,
       color: colorMap[social.name as keyof typeof colorMap] || 'text-slate-900 dark:text-slate-100',
     };
