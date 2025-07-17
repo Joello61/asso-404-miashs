@@ -2,13 +2,13 @@
   {
     "id": "membre-001",
     "firstName": "Mathis",
-    "lastName": "DUGUÉ",
+    "lastName": "Dugué",
     "promo": "M2",
     "photo": "/images/membres/alice-dubois.jpg",
     "linkedin": "https://www.linkedin.com/in/mathis-dugue-0494a61b0/",
     "github": "",
     "email": "Mathisdugue4@gmail.com",
-    "role": "Présidente",
+    "role": "Président",
     "description": "Passionné par l'IoT et les réseaux industriels, je m'intéresse au développement logiciel, aux systèmes SCADA et à la supervision. Curieux et toujours prêt à apprendre.",
     "skills": ["LoRaWAN","SCADA","MQTT" ,"Réseaux & supervision"],
     "joinDate": "2023-09-01"
