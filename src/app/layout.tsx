@@ -46,13 +46,17 @@ export const metadata: Metadata = {
     'informatique',
     'sciences humaines',
     'université',
-    'Paris',
+    'Toulouse',
+    'Jean Jaurès',
     'programmation',
     'développement web',
     'data science',
     'événements tech',
     'formation',
     'networking',
+    'hackathon',
+    'conférences',
+    'ateliers',
   ],
   authors: [{ name: 'Asso 404 MIASHS', url: 'https://asso404miashs.fr' }],
   creator: 'Asso 404 MIASHS',
@@ -128,6 +132,11 @@ export const metadata: Metadata = {
         sizes: '32x32',
         type: 'image/png',
       },
+      {
+        url: '/favicon-96x96.png',
+        sizes: '96x96',
+        type: 'image/png',
+      },
     ],
     shortcut: '/favicon.ico',
     apple: [
@@ -135,6 +144,16 @@ export const metadata: Metadata = {
         url: '/apple-touch-icon.png',
         sizes: '180x180',
         type: 'image/png',
+      },
+    ],
+    other: [
+      {
+        rel: 'android-chrome-192x192',
+        url: '/android-chrome-192x192.png',
+      },
+      {
+        rel: 'android-chrome-512x512',
+        url: '/android-chrome-512x512.png',
       },
     ],
   },
@@ -163,6 +182,7 @@ export const metadata: Metadata = {
     'apple-mobile-web-app-title': 'Asso 404',
     'application-name': 'Asso 404 MIASHS',
     'msapplication-TileColor': '#3b82f6',
+    'msapplication-TileImage': '/android-chrome-192x192.png',
     'msapplication-config': '/browserconfig.xml',
     'theme-color': '#ffffff',
   },
@@ -187,16 +207,24 @@ export default function RootLayout({ children }: RootLayoutProps) {
         {/* DNS Prefetch pour les domaines externes */}
         <link rel="dns-prefetch" href="//www.google-analytics.com" />
         <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
 
         {/* Preload des ressources critiques */}
         <link
           rel="preload"
-          href="/images/logo/logo.svg"
+          href="/images/logo/LOGO_ASSO.png"
           as="image"
-          type="image/svg+xml"
+          type="image/png"
         />
 
-        <link rel="icon" href="/favicon.ico" />
+        {/* Icônes explicites pour une meilleure compatibilité */}
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        />
         <link
           rel="icon"
           type="image/png"
@@ -206,12 +234,28 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <link
           rel="icon"
           type="image/png"
-          sizes="16x16"
-          href="/favicon-16x16.png"
+          sizes="96x96"
+          href="/favicon-96x96.png"
         />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
 
-        {/* Scripts de performance (à configurer selon vos besoins) */}
+        {/* Métadonnées supplémentaires pour PWA */}
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="Asso 404" />
+        <meta name="application-name" content="Asso 404 MIASHS" />
+        <meta name="msapplication-TileColor" content="#3b82f6" />
+        <meta
+          name="msapplication-TileImage"
+          content="/android-chrome-192x192.png"
+        />
+
+        {/* Scripts de performance */}
         {process.env.NODE_ENV === 'production' && (
           <>
             {/* Google Analytics */}
@@ -230,14 +274,73 @@ export default function RootLayout({ children }: RootLayoutProps) {
                       gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', {
                         page_title: document.title,
                         page_location: window.location.href,
+                        cookie_flags: 'SameSite=None;Secure',
                       });
                     `,
                   }}
                 />
               </>
             )}
+
+            {/* Hotjar (optionnel) */}
+            {process.env.NEXT_PUBLIC_HOTJAR_ID && (
+              <script
+                dangerouslySetInnerHTML={{
+                  __html: `
+                    (function(h,o,t,j,a,r){
+                      h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+                      h._hjSettings={hjid:${process.env.NEXT_PUBLIC_HOTJAR_ID},hjsv:6};
+                      a=o.getElementsByTagName('head')[0];
+                      r=o.createElement('script');r.async=1;
+                      r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+                      a.appendChild(r);
+                    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+                  `,
+                }}
+              />
+            )}
           </>
         )}
+
+        {/* Schema.org pour le SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: 'Association 404 MIASHS',
+              alternateName: 'Asso 404',
+              url: 'https://asso404miashs.fr',
+              logo: 'https://asso404miashs.fr/LOGO_ASSO.png',
+              description:
+                'Association étudiante de Mathématiques et Informatique Appliquées aux Sciences Humaines et Sociales',
+              foundingDate: '2020',
+              address: {
+                '@type': 'PostalAddress',
+                streetAddress: 'Université de Toulouse Jean Jaurès',
+                addressLocality: 'Toulouse',
+                postalCode: '31000',
+                addressCountry: 'FR',
+              },
+              contactPoint: {
+                '@type': 'ContactPoint',
+                email: 'contact@asso404miashs.fr',
+                contactType: 'customer service',
+                availableLanguage: 'French',
+              },
+              sameAs: [
+                'https://linkedin.com/company/asso-404-miashs',
+                'https://github.com/asso-404-miashs',
+                'https://discord.gg/asso404miashs',
+              ],
+              memberOf: {
+                '@type': 'EducationalOrganization',
+                name: 'Université de Toulouse Jean Jaurès',
+              },
+            }),
+          }}
+        />
       </head>
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}
@@ -255,12 +358,14 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <Header />
 
             {/* Contenu principal avec padding pour le header fixe */}
-            <main className="flex-1 pt-16">{children}</main>
+            <main className="flex-1 pt-16" id="main-content">
+              {children}
+            </main>
 
             <Footer />
           </div>
 
-          {/* Scripts additionnels */}
+          {/* Indicateur de breakpoint en développement */}
           {process.env.NODE_ENV === 'development' && (
             <div className="fixed bottom-4 right-4 z-50 no-print">
               <div className="rounded-lg bg-card border border-border px-2 py-1 text-xs font-mono shadow-lg">
@@ -274,6 +379,14 @@ export default function RootLayout({ children }: RootLayoutProps) {
               </div>
             </div>
           )}
+
+          {/* Skip to main content pour l'accessibilité */}
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary-600 focus:text-white focus:rounded-md focus:shadow-lg"
+          >
+            Aller au contenu principal
+          </a>
         </ThemeProvider>
       </body>
     </html>
