@@ -18,10 +18,12 @@ import { cn } from '@/lib/utils';
 import type { ContactForm, TeamMember } from '@/lib/types';
 import { SiInstagram, SiLinkedin, SiDiscord } from 'react-icons/si';
 import { CONTACT_INFO, SOCIAL_LINKS } from '@/lib/constants';
+import emailjs from '@emailjs/browser';
 import { getInitials } from '@/lib/utils';
 
 // Import des données JSON
 import teamData from '@/data/team.json';
+
 
 export default function ContactPage() {
   // Conversion des données JSON en format typé
@@ -114,10 +116,10 @@ export default function ContactPage() {
     description: getDescriptionByRole(member.role),
   }));
 
-function getDescriptionByRole(role: string): string {
+  function getDescriptionByRole(role: string): string {
   const descriptions = {
-    'Présidente': 'Questions générales et partenariats',
-    'Trésorière': 'Questions financières et budget',
+    'Président': 'Questions générales et partenariats',
+    'Trésorier': 'Questions financières et budget',
     'Secrétaire': 'Communication et adhésions',
     'Responsable Tech & Web': 'Site, outils numériques et support technique',
   };
@@ -142,13 +144,39 @@ function getDescriptionByRole(role: string): string {
     setIsSubmitting(true);
 
     try {
-      // Simulation d'envoi de formulaire
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      // Configuration EmailJS - remplacez par vos propres clés
+      const SERVICE_ID = 'service_z88e85k';
+      const TEMPLATE_ID = 'template_1n21hg7';
+      const PUBLIC_KEY = 'eiSkrS6jQlSi8c8GO';
 
-      // Ici vous intégreriez votre API d'envoi d'email
-      console.log('Formulaire envoyé:', formData);
+      // Paramètres pour le template EmailJS
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+        promo: formData.promo || 'Non spécifiée',
+        date: new Date().toLocaleDateString('fr-FR', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        }),
+      };
 
+      // Envoi via EmailJS vers votre adresse email
+      await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        templateParams,
+        PUBLIC_KEY
+      );
+
+      console.log('Message envoyé avec succès à l\'association');
       setSubmitStatus('success');
+      
+      // Réinitialiser le formulaire
       setFormData({
         name: '',
         email: '',
@@ -156,8 +184,8 @@ function getDescriptionByRole(role: string): string {
         message: '',
         promo: undefined,
       });
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
+      console.error('Erreur lors de l\'envoi du message:', error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
