@@ -16,9 +16,25 @@ import {
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import type { ContactForm } from '@/lib/types';
-import { SiInstagram, SiLinkedin, SiGithub } from 'react-icons/si';
+import { SiInstagram, SiLinkedin, SiDiscord } from 'react-icons/si';
+import { CONTACT_INFO, SOCIAL_LINKS } from '@/lib/constants';
+
+// Import des données JSON
+import teamData from '@/data/team.json';
+
+// Interface pour le team (bureau)
+interface TeamMember {
+  name: string;
+  role: string;
+  description: string;
+  image: string;
+  promo: string;
+}
 
 export default function ContactPage() {
+  // Conversion des données JSON en format typé
+  const team = teamData as TeamMember[];
+
   const [formData, setFormData] = useState<ContactForm>({
     name: '',
     email: '',
@@ -36,22 +52,22 @@ export default function ContactPage() {
     {
       icon: Mail,
       title: 'Email',
-      content: 'contact@asso404miashs.fr',
-      link: 'mailto:contact@asso404miashs.fr',
+      content: CONTACT_INFO.email,
+      link: `mailto:${CONTACT_INFO.email}`,
       description: 'Pour toute question générale',
     },
     {
       icon: Phone,
       title: 'Téléphone',
-      content: '+33 1 23 45 67 89',
-      link: 'tel:+33123456789',
+      content: CONTACT_INFO.phone,
+      link: `tel:${CONTACT_INFO.phone}`,
       description: 'Du lundi au vendredi, 10h-18h',
     },
     {
       icon: MapPin,
       title: 'Adresse',
-      content: 'Université Paris Cité\n45 Rue des Saints-Pères\n75006 Paris',
-      link: 'https://maps.google.com/?q=45+Rue+des+Saints-Pères+75006+Paris',
+      content: `${CONTACT_INFO.address.street}\n${CONTACT_INFO.address.zipCode} ${CONTACT_INFO.address.city}\n${CONTACT_INFO.address.country}`,
+      link: `https://maps.google.com/?q=${encodeURIComponent(CONTACT_INFO.address.street + ' ' + CONTACT_INFO.address.zipCode + ' ' + CONTACT_INFO.address.city)}`,
       description: "Bureau de l'association",
     },
     {
@@ -62,57 +78,49 @@ export default function ContactPage() {
     },
   ];
 
-  const socialLinks = [
-    {
-      name: 'Instagram',
-      icon: SiInstagram,
-      url: 'https://instagram.com/asso404miashs',
-      color: 'text-pink-600 dark:text-pink-400',
-    },
-    {
-      name: 'LinkedIn',
-      icon: SiLinkedin,
-      url: 'https://linkedin.com/company/asso-404-miashs',
-      color: 'text-blue-600 dark:text-blue-400',
-    },
-    {
-      name: 'GitHub',
-      icon: SiGithub,
-      url: 'https://github.com/asso-404-miashs',
-      color: 'text-slate-900 dark:text-slate-100',
-    },
-  ];
+  const socialLinks = SOCIAL_LINKS.map(social => {
+    const iconMap = {
+      'Instagram': SiInstagram,
+      'Linkedin': SiLinkedin,
+      'Discord': SiDiscord,
+      'MessageCircle': MessageCircle,
+      'Mail': Mail,
+    };
 
-  const teamContacts = [
-    {
-      name: 'Alice Dubois',
-      role: 'Présidente',
-      email: 'president@asso404miashs.fr',
-      avatar: '/images/membres/alice-dubois.jpg',
-      description: 'Questions générales et partenariats',
-    },
-    {
-      name: 'Thomas Martin',
-      role: 'Vice-président',
-      email: 'vicepresident@asso404miashs.fr',
-      avatar: '/images/membres/thomas-martin.jpg',
-      description: 'Projets techniques et événements',
-    },
-    {
-      name: 'Emma Bernard',
-      role: 'Trésorière',
-      email: 'tresorier@asso404miashs.fr',
-      avatar: '/images/membres/emma-bernard.jpg',
-      description: 'Questions financières',
-    },
-    {
-      name: 'Hugo Leroy',
-      role: 'Secrétaire',
-      email: 'secretaire@asso404miashs.fr',
-      avatar: '/images/membres/hugo-leroy.jpg',
-      description: 'Communication et adhésions',
-    },
-  ];
+    const colorMap = {
+      'Instagram': 'text-pink-600 dark:text-pink-400',
+      'Linkedin': 'text-blue-600 dark:text-blue-400',
+      'Discord': 'text-indigo-600 dark:text-indigo-400',
+      'MessageCircle': 'text-purple-600 dark:text-purple-400',
+      'Mail': 'text-red-600 dark:text-red-400',
+    };
+
+    return {
+      name: social.name,
+      icon: iconMap[social.name as keyof typeof iconMap] || MessageCircle,
+      url: social.href,
+      color: colorMap[social.name as keyof typeof colorMap] || 'text-slate-900 dark:text-slate-100',
+    };
+  });
+
+  // Générer les contacts de l'équipe avec emails génériques
+  const teamContacts = team.map(member => ({
+    name: member.name,
+    role: member.role,
+    email: `${member.name.toLowerCase().replace(' ', '.')}@asso404miashs.fr`,
+    avatar: member.image,
+    description: getDescriptionByRole(member.role),
+  }));
+
+  function getDescriptionByRole(role: string): string {
+    const descriptions = {
+      'Présidente': 'Questions générales et partenariats',
+      'Vice-président': 'Projets techniques et événements',
+      'Trésorière': 'Questions financières et budget',
+      'Secrétaire': 'Communication et adhésions',
+    };
+    return descriptions[role as keyof typeof descriptions] || 'Contact général';
+  }
 
   const handleInputChange = (
     e: React.ChangeEvent<
@@ -176,7 +184,7 @@ export default function ContactPage() {
 
             <p className="text-xl text-slate-600 dark:text-slate-400 mb-8 max-w-3xl mx-auto leading-relaxed">
               Une question, une suggestion, ou simplement envie d&apos;échanger
-              ? Notre équipe est là pour vous accompagner. N&apos;hésitez pas à
+              ? Notre équipe de {team.length} membres est là pour vous accompagner. N&apos;hésitez pas à
               nous contacter !
             </p>
           </div>
@@ -435,8 +443,8 @@ export default function ContactPage() {
                           <Image
                             src={member.avatar}
                             alt={member.name}
-                            width={100} // tu dois définir width et height, ou utiliser fill
-                            height={100}
+                            width={48}
+                            height={48}
                             className="object-cover rounded-full border-2 border-white dark:border-slate-800 shadow-sm"
                           />
                         </div>
@@ -565,7 +573,7 @@ export default function ContactPage() {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
               <a
-                href="mailto:contact@asso404miashs.fr"
+                href={`mailto:${CONTACT_INFO.email}`}
                 className="inline-flex items-center px-8 py-3 bg-primary-600 text-white font-medium rounded-xl hover:bg-primary-700 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
               >
                 <Mail className="w-5 h-5 mr-2" />

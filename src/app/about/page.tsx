@@ -14,7 +14,46 @@ import {
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
+// Import des données JSON
+import teamData from '@/data/team.json';
+import membresData from '@/data/membres.json';
+import eventsData from '@/data/events.json';
+import activitiesData from '@/data/activities.json';
+
+// Import des types
+import type { Member, Event, Activity, TeamMember } from '@/lib/types';
+
 export default function AboutPage() {
+  // Conversion des données JSON en format typé
+  const team = teamData as TeamMember[];
+  const allMembers = membresData as Member[];
+  const events = eventsData as Event[];
+  const activities = activitiesData as Activity[];
+
+  // Calcul des statistiques dynamiques basées sur les données réelles
+  const stats = [
+    { 
+      label: 'Membres actifs', 
+      value: `${allMembers.length}`, 
+      icon: Users 
+    },
+    { 
+      label: 'Événements organisés', 
+      value: `${events.length}`, 
+      icon: Calendar 
+    },
+    { 
+      label: 'Activités proposées', 
+      value: `${activities.filter(activity => activity.isActive).length}`, 
+      icon: Code 
+    },
+    { 
+      label: 'Membres du bureau', 
+      value: `${team.length}`, 
+      icon: Award 
+    },
+  ];
+
   const values = [
     {
       icon: Users,
@@ -47,48 +86,6 @@ export default function AboutPage() {
         "Cultiver l'esprit d'entraide et de soutien mutuel entre tous les membres.",
       color: 'text-red-600 dark:text-red-400',
       bg: 'bg-red-100 dark:bg-red-900/30',
-    },
-  ];
-
-  const stats = [
-    { label: 'Membres actifs', value: '150+', icon: Users },
-    { label: 'Événements organisés', value: '25+', icon: Calendar },
-    { label: 'Projets réalisés', value: '12', icon: Code },
-    { label: 'Partenaires', value: '8', icon: Award },
-  ];
-
-  const team = [
-    {
-      name: 'Alice Dubois',
-      role: 'Présidente',
-      description:
-        "Passionnée par l'IA et le leadership, Alice guide notre association vers l'excellence.",
-      image: '/images/membres/alice-dubois.jpg',
-      promo: 'M2',
-    },
-    {
-      name: 'Thomas Martin',
-      role: 'Vice-président',
-      description:
-        'Expert DevOps et organisateur né, Thomas coordonne nos initiatives techniques.',
-      image: '/images/membres/thomas-martin.jpg',
-      promo: 'M2',
-    },
-    {
-      name: 'Emma Bernard',
-      role: 'Trésorière',
-      description:
-        'Spécialiste en data science, Emma assure la gestion financière avec rigueur.',
-      image: '/images/membres/emma-bernard.jpg',
-      promo: 'M1',
-    },
-    {
-      name: 'Hugo Leroy',
-      role: 'Secrétaire',
-      description:
-        "Designer UX/UI créatif, Hugo veille à la communication et à l'image de l'association.",
-      image: '/images/membres/hugo-leroy.jpg',
-      promo: 'M1',
     },
   ];
 
@@ -127,7 +124,7 @@ export default function AboutPage() {
               </div>
               <div className="flex items-center space-x-2 text-slate-600 dark:text-slate-400">
                 <Users className="w-5 h-5" />
-                <span>150+ membres</span>
+                <span>{allMembers.length} membres</span>
               </div>
               <div className="flex items-center space-x-2 text-slate-600 dark:text-slate-400">
                 <BookOpen className="w-5 h-5" />

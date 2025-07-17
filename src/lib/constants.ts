@@ -1,4 +1,4 @@
-import type { NavigationItem, SocialLink, Activity } from './types';
+import type { NavigationItem, SocialLink } from './types';
 
 // Navigation principale
 export const NAVIGATION: NavigationItem[] = [
@@ -69,64 +69,6 @@ export const SOCIAL_LINKS: SocialLink[] = [
     href: 'mailto:assomiashs@gmail.com',
     icon: 'Mail',
     color: 'hover:text-red-600',
-  },
-];
-
-// Activités de l'association
-export const ACTIVITIES: Activity[] = [
-  {
-    id: 'coding-sessions',
-    name: 'Sessions de Code',
-    description: 'Ateliers de programmation et de développement web',
-    icon: 'Code',
-    color: 'text-blue-600',
-    category: 'technical',
-    isActive: true,
-  },
-  {
-    id: 'conferences',
-    name: 'Conférences Tech',
-    description: 'Rencontres avec des professionnels du secteur',
-    icon: 'Presentation',
-    color: 'text-purple-600',
-    category: 'professional',
-    isActive: true,
-  },
-  {
-    id: 'hackathons',
-    name: 'Hackathons',
-    description: 'Compétitions de développement créatif',
-    icon: 'Zap',
-    color: 'text-yellow-600',
-    category: 'technical',
-    isActive: true,
-  },
-  {
-    id: 'study-groups',
-    name: "Groupes d'Étude",
-    description: 'Entraide et révisions collectives',
-    icon: 'BookOpen',
-    color: 'text-green-600',
-    category: 'academic',
-    isActive: true,
-  },
-  {
-    id: 'social-events',
-    name: 'Événements Sociaux',
-    description: 'Sorties et activités pour créer du lien',
-    icon: 'Users',
-    color: 'text-pink-600',
-    category: 'social',
-    isActive: true,
-  },
-  {
-    id: 'workshops',
-    name: 'Ateliers',
-    description: 'Formation sur des outils et technologies',
-    icon: 'Wrench',
-    color: 'text-orange-600',
-    category: 'technical',
-    isActive: true,
   },
 ];
 

@@ -5,11 +5,14 @@ import {
   SOCIAL_LINKS,
   CONTACT_INFO,
   NAVIGATION,
-  ACTIVITIES,
 } from '@/lib/constants';
-import { SiLinkedin, SiGithub, SiDiscord, SiInstagram } from 'react-icons/si';
+import { SiLinkedin, SiDiscord, SiInstagram } from 'react-icons/si';
 import { cn } from '@/lib/utils';
 import Image from "next/image";
+
+// Import des données JSON
+import activitiesData from '@/data/activities.json';
+import { Activity } from '@/lib/types';
 
 interface FooterProps {
   className?: string;
@@ -17,6 +20,9 @@ interface FooterProps {
 
 export function Footer({ className }: FooterProps) {
   const currentYear = new Date().getFullYear();
+
+  // Conversion des données JSON en format Activity (typage)
+  const activities = activitiesData as Activity[];
 
   // Grouper la navigation en sections
   const navigationSections = [
@@ -30,7 +36,8 @@ export function Footer({ className }: FooterProps) {
     },
   ];
 
-  const quickActivities = ACTIVITIES.filter(
+  // Filtrer les activités actives et prendre les 3 premières
+  const quickActivities = activities.filter(
     (activity) => activity.isActive
   ).slice(0, 3);
 

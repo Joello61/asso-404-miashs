@@ -21,7 +21,51 @@ import {
 import { cn } from '@/lib/utils';
 import type { JoinForm } from '@/lib/types';
 
+// Import des données JSON
+import membresData from '@/data/membres.json';
+import activitiesData from '@/data/activities.json';
+import eventsData from '@/data/events.json';
+
+// Import des types
+import type { Member, Event } from '@/lib/types';
+
+// Interface Activity
+interface Activity {
+  id: string;
+  name: string;
+  description: string;
+  longDescription: string;
+  icon: string;
+  color: string;
+  category: 'academic' | 'social' | 'professional' | 'technical';
+  isActive: boolean;
+  schedule: string;
+  location: string;
+  participants: number;
+  difficulty: string;
+  technologies?: string[];
+  nextSession?: string;
+  speakers?: string[];
+  duration?: string;
+  prizes?: string[];
+  nextEvent?: string;
+  subjects?: string[];
+  tutors?: string[];
+  upcomingEvents?: string[];
+  upcomingWorkshops?: Array<{
+    title: string;
+    date: string;
+    instructor: string;
+  }>;
+  certification?: boolean;
+}
+
 export default function JoinPage() {
+  // Conversion des données JSON en format typé
+  const members = membresData as Member[];
+  const activities = activitiesData as Activity[];
+  const events = eventsData as Event[];
+
   const [formData, setFormData] = useState<JoinForm>({
     firstName: '',
     lastName: '',
@@ -91,7 +135,7 @@ export default function JoinPage() {
   ];
 
   const requirements = [
-    "Être étudiant en MIASHS à l'Université Paris Cité",
+    "Être étudiant en MIASHS à l'Université Toulouse Jean Jaurès",
     "Adhérer aux valeurs de bienveillance et d'entraide de l'association",
     'Participer activement à la vie associative',
     'Respecter le règlement intérieur',
@@ -118,30 +162,23 @@ export default function JoinPage() {
     },
   ];
 
-  const suggestedSkills = [
-    'Python',
-    'JavaScript',
-    'Java',
-    'C++',
-    'React',
-    'Vue.js',
-    'Node.js',
-    'Django',
-    'Flask',
-    'Spring',
-    'SQL',
-    'MongoDB',
-    'Git',
-    'Docker',
-    'Machine Learning',
-    'Data Science',
-    'UX/UI Design',
-    'Cybersécurité',
-    'DevOps',
-    'Cloud Computing',
-    'Mobile Development',
-    'Game Development',
-  ];
+  // Générer les compétences suggérées à partir des données réelles
+  const suggestedSkills = Array.from(new Set(
+    members.flatMap(member => member.skills || [])
+  )).sort();
+
+  // Obtenir les prochains événements
+  const upcomingEvents = events
+    .filter(event => event.status === 'upcoming')
+    .sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime())
+    .slice(0, 4);
+
+  // Statistiques dynamiques
+  const stats = {
+    members: members.length,
+    activities: activities.filter(activity => activity.isActive).length,
+    upcomingEvents: upcomingEvents.length,
+  };
 
   // Fonction utilitaire pour s'assurer que skills est toujours un tableau
   const getSkills = () => {
@@ -255,7 +292,7 @@ export default function JoinPage() {
             </h1>
 
             <p className="text-xl text-slate-600 dark:text-slate-400 mb-8 max-w-3xl mx-auto leading-relaxed">
-              Rejoignez une communauté de 150+ étudiants passionnés par la tech,
+              Rejoignez une communauté de {stats.members} étudiants passionnés par la tech,
               les mathématiques et les sciences humaines. Ensemble, apprenons,
               créons et grandissons !
             </p>
@@ -267,7 +304,7 @@ export default function JoinPage() {
               </div>
               <div className="flex items-center space-x-2">
                 <CheckCircle className="w-5 h-5 text-green-500" />
-                <span>Accès à tous les événements</span>
+                <span>{stats.activities} activités disponibles</span>
               </div>
               <div className="flex items-center space-x-2">
                 <CheckCircle className="w-5 h-5 text-green-500" />
@@ -469,7 +506,7 @@ export default function JoinPage() {
                         value={formData.email}
                         onChange={handleInputChange}
                         className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
-                        placeholder="prenom.nom@etu.univ-paris.fr"
+                        placeholder="prenom.nom@etu.univ-tlse2.fr"
                       />
                     </div>
                     <div>
@@ -526,13 +563,13 @@ export default function JoinPage() {
                     </div>
                   </div>
 
-                  {/* Suggestions de compétences */}
+                  {/* Suggestions de compétences basées sur les données des membres */}
                   <div className="mb-4">
                     <p className="text-sm text-slate-600 dark:text-slate-400 mb-3">
-                      Ou choisissez parmi ces suggestions :
+                      Ou choisissez parmi les compétences de nos membres :
                     </p>
                     <div className="flex flex-wrap gap-2">
-                      {suggestedSkills.map((skill) => (
+                      {suggestedSkills.slice(0, 20).map((skill) => (
                         <button
                           key={skill}
                           type="button"
@@ -738,10 +775,23 @@ export default function JoinPage() {
                   </h3>
                 </div>
                 <ul className="space-y-2 text-slate-600 dark:text-slate-400">
-                  <li>• Assemblée Générale : 15 mai 2024</li>
-                  <li>• Hackathon de rentrée : septembre 2024</li>
-                  <li>• Conférence TechCorp : 15 mars 2024</li>
-                  <li>• Soirée networking : chaque dernier vendredi du mois</li>
+                  {upcomingEvents.length > 0 ? (
+                    upcomingEvents.map((event) => (
+                      <li key={event.id}>
+                        • {event.title} - {new Date(event.startDate).toLocaleDateString('fr-FR', { 
+                          day: 'numeric', 
+                          month: 'long' 
+                        })}
+                      </li>
+                    ))
+                  ) : (
+                    <>
+                      <li>• Assemblée Générale - 15 mai 2024</li>
+                      <li>• Nouveaux événements bientôt annoncés</li>
+                      <li>• Activités régulières selon planning</li>
+                    </>
+                  )}
+                  <li>• Activités permanentes : {stats.activities} disponibles</li>
                 </ul>
               </div>
 
@@ -771,6 +821,14 @@ export default function JoinPage() {
                     <p className="text-slate-600 dark:text-slate-400">
                       Absolument ! Les adhésions sont ouvertes toute
                       l&apos;année.
+                    </p>
+                  </div>
+                  <div>
+                    <p className="font-medium text-slate-900 dark:text-slate-100">
+                      Combien de membres êtes-vous ?
+                    </p>
+                    <p className="text-slate-600 dark:text-slate-400">
+                      Nous sommes actuellement {stats.members} membres actifs avec {stats.activities} activités disponibles.
                     </p>
                   </div>
                 </div>

@@ -1,12 +1,9 @@
 import React from 'react';
-import Image from 'next/image';
 import {
   Code,
   Users,
-  Lightbulb,
   Trophy,
   BookOpen,
-  Coffee,
   Presentation,
   Building,
   Calendar,
@@ -15,10 +12,44 @@ import {
   Target,
   Zap,
   Globe,
+  Wrench,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
+// Import des données JSON
+import activitiesData from '@/data/activities.json';
+import membresData from '@/data/membres.json';
+
+// Import des types
+import type { Activity, Member } from '@/lib/types';
+
+// Fonction utilitaire pour obtenir l'icône depuis le nom
+const getIcon = (iconName: string) => {
+  const icons = {
+    Code,
+    Presentation,
+    Zap,
+    BookOpen,
+    Users,
+    Wrench,
+  };
+  return icons[iconName as keyof typeof icons] || BookOpen;
+};
+
 export default function ActivitiesPage() {
+  // Conversion des données JSON en format typé
+  const activities = activitiesData as Activity[];
+  const members = membresData as Member[];
+
+  // Filtrer les activités actives
+  const activeActivities = activities.filter(activity => activity.isActive);
+
+  // Calculer les statistiques par catégorie
+  const categoryCounts = activeActivities.reduce((acc, activity) => {
+    acc[activity.category] = (acc[activity.category] || 0) + 1;
+    return acc;
+  }, {} as Record<string, number>);
+
   const categories = [
     {
       id: 'academic',
@@ -27,7 +58,7 @@ export default function ActivitiesPage() {
       icon: BookOpen,
       color: 'text-blue-600 dark:text-blue-400',
       bg: 'bg-blue-100 dark:bg-blue-900/30',
-      count: 8,
+      count: categoryCounts.academic || 0,
     },
     {
       id: 'technical',
@@ -36,7 +67,7 @@ export default function ActivitiesPage() {
       icon: Code,
       color: 'text-green-600 dark:text-green-400',
       bg: 'bg-green-100 dark:bg-green-900/30',
-      count: 12,
+      count: categoryCounts.technical || 0,
     },
     {
       id: 'social',
@@ -45,7 +76,7 @@ export default function ActivitiesPage() {
       icon: Users,
       color: 'text-purple-600 dark:text-purple-400',
       bg: 'bg-purple-100 dark:bg-purple-900/30',
-      count: 6,
+      count: categoryCounts.social || 0,
     },
     {
       id: 'professional',
@@ -54,86 +85,7 @@ export default function ActivitiesPage() {
       icon: Building,
       color: 'text-orange-600 dark:text-orange-400',
       bg: 'bg-orange-100 dark:bg-orange-900/30',
-      count: 5,
-    },
-  ];
-
-  const activities = [
-    {
-      category: 'technical',
-      title: 'Ateliers de Programmation',
-      description:
-        'Sessions pratiques pour maîtriser les langages et frameworks modernes : Python, JavaScript, React, et bien plus.',
-      icon: Code,
-      image: '/images/activities/workshop-programming.jpg',
-      frequency: 'Bi-mensuel',
-      duration: '3h',
-      level: 'Tous niveaux',
-      highlights: ['Projets pratiques', 'Mentoring', 'Certificats'],
-    },
-    {
-      category: 'academic',
-      title: 'Hackathons Thématiques',
-      description:
-        'Compétitions de 24-48h pour développer des solutions innovantes sur des thèmes variés : IA, développement durable, santé.',
-      icon: Trophy,
-      image: '/images/activities/hackathon.jpg',
-      frequency: 'Trimestriel',
-      duration: '24-48h',
-      level: 'Intermédiaire+',
-      highlights: ['Prix et récompenses', 'Networking', 'Projets portfolio'],
-    },
-    {
-      category: 'professional',
-      title: 'Conférences & Tech Talks',
-      description:
-        'Interventions de professionnels du secteur tech pour découvrir les métiers, tendances et opportunités.',
-      icon: Presentation,
-      image: '/images/activities/conference.jpg',
-      frequency: 'Mensuel',
-      duration: '2h',
-      level: 'Tous niveaux',
-      highlights: ['Experts reconnus', 'Q&A interactives', 'Networking'],
-    },
-    {
-      category: 'social',
-      title: 'Soirées Networking',
-      description:
-        'Moments conviviaux pour créer du lien entre les membres, partager ses expériences et développer son réseau.',
-      icon: Coffee,
-      image: '/images/activities/networking.jpg',
-      frequency: 'Mensuel',
-      duration: '3h',
-      level: 'Tous niveaux',
-      highlights: [
-        'Ambiance détendue',
-        'Jeux et activités',
-        'Nouveaux contacts',
-      ],
-    },
-    {
-      category: 'academic',
-      title: 'Projets Collaboratifs',
-      description:
-        'Développement de projets open source en équipe pour acquérir une expérience professionnelle réelle.',
-      icon: Lightbulb,
-      image: '/images/activities/collaborative-projects.jpg',
-      frequency: 'Continu',
-      duration: 'Variable',
-      level: 'Intermédiaire+',
-      highlights: ['Expérience équipe', 'Portfolio', 'Méthodologies agiles'],
-    },
-    {
-      category: 'professional',
-      title: "Visites d'Entreprises",
-      description:
-        "Découverte des coulisses d'entreprises tech partenaires pour comprendre les enjeux et opportunités du secteur.",
-      icon: Building,
-      image: '/images/activities/company-visit.jpg',
-      frequency: 'Trimestriel',
-      duration: '1 jour',
-      level: 'Tous niveaux',
-      highlights: ['Rencontres pros', 'Opportunités stage', 'Vision métiers'],
+      count: categoryCounts.professional || 0,
     },
   ];
 
@@ -176,24 +128,25 @@ export default function ActivitiesPage() {
     },
   ];
 
+  // Témoignages basés sur les vrais membres
   const testimonials = [
     {
       name: 'Marie Laurent',
       promo: 'L3',
       text: "Les ateliers de programmation m'ont permis de découvrir Python et de réaliser mon premier projet data science !",
-      activity: 'Ateliers de Programmation',
+      activity: 'Sessions de Code',
     },
     {
       name: 'Lucas Blanc',
       promo: 'M1',
-      text: "Le hackathon game dev était incroyable ! J'ai appris Unity en 48h et rencontré des développeurs passionnés.",
+      text: "Le hackathon était incroyable ! J'ai appris Unity en 48h et rencontré des développeurs passionnés.",
       activity: 'Hackathons',
     },
     {
       name: 'Clara Simon',
       promo: 'M1',
-      text: "Grâce aux conférences UX, j'ai découvert ma passion pour le design et trouvé mon stage de fin d'études.",
-      activity: 'Conférences',
+      text: "Grâce aux conférences tech, j'ai découvert ma passion pour l'UX et trouvé mon stage de fin d'études.",
+      activity: 'Conférences Tech',
     },
   ];
 
@@ -219,7 +172,7 @@ export default function ActivitiesPage() {
             </h1>
 
             <p className="text-xl text-slate-600 dark:text-slate-400 mb-8 max-w-3xl mx-auto leading-relaxed">
-              Découvrez toutes nos activités conçues pour enrichir votre
+              Découvrez nos {activeActivities.length} activités conçues pour enrichir votre
               parcours étudiant et vous préparer aux défis de demain. De la
               technique au networking, il y en a pour tous les goûts !
             </p>
@@ -314,25 +267,19 @@ export default function ActivitiesPage() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {activities.map((activity, index) => {
-                const Icon = activity.icon;
+              {activeActivities.map((activity) => {
+                const Icon = getIcon(activity.icon);
                 const category = categories.find(
                   (c) => c.id === activity.category
                 );
 
                 return (
                   <div
-                    key={index}
+                    key={activity.id}
                     className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden hover:shadow-lg transition-all duration-300"
                   >
                     <div className="relative h-48">
-                      <Image
-                        src={activity.image}
-                        alt={activity.title}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                      />
+                      <div className="absolute inset-0 bg-gradient-to-br from-primary-100 to-accent-100 dark:from-primary-900/30 dark:to-accent-900/30" />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                       <div className="absolute top-4 left-4">
                         <span
@@ -348,8 +295,11 @@ export default function ActivitiesPage() {
                       <div className="absolute bottom-4 left-4">
                         <div className="flex items-center space-x-2 text-white">
                           <Icon className="w-5 h-5" />
-                          <span className="font-medium">{activity.title}</span>
+                          <span className="font-medium">{activity.name}</span>
                         </div>
+                      </div>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <Icon className={cn('w-16 h-16 opacity-20', activity.color)} />
                       </div>
                     </div>
 
@@ -361,23 +311,23 @@ export default function ActivitiesPage() {
                       <div className="grid grid-cols-3 gap-4 mb-4">
                         <div className="text-center">
                           <div className="text-sm font-medium text-slate-900 dark:text-slate-100">
-                            {activity.frequency}
+                            {activity.schedule}
                           </div>
                           <div className="text-xs text-slate-500 dark:text-slate-400">
-                            Fréquence
+                            Horaires
                           </div>
                         </div>
                         <div className="text-center">
                           <div className="text-sm font-medium text-slate-900 dark:text-slate-100">
-                            {activity.duration}
+                            {activity.participants}
                           </div>
                           <div className="text-xs text-slate-500 dark:text-slate-400">
-                            Durée
+                            Participants
                           </div>
                         </div>
                         <div className="text-center">
                           <div className="text-sm font-medium text-slate-900 dark:text-slate-100">
-                            {activity.level}
+                            {activity.difficulty}
                           </div>
                           <div className="text-xs text-slate-500 dark:text-slate-400">
                             Niveau
@@ -385,19 +335,29 @@ export default function ActivitiesPage() {
                         </div>
                       </div>
 
-                      <div className="flex flex-wrap gap-2">
-                        {activity.highlights.map(
-                          (highlight, highlightIndex) => (
+                      <div className="mb-4">
+                        <div className="text-sm font-medium text-slate-900 dark:text-slate-100 mb-2">
+                          📍 {activity.location}
+                        </div>
+                      </div>
+
+                      {activity.technologies && (
+                        <div className="flex flex-wrap gap-2">
+                          {activity.technologies.slice(0, 4).map((tech, techIndex) => (
                             <span
-                              key={highlightIndex}
+                              key={techIndex}
                               className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200"
                             >
-                              <Star className="w-3 h-3 mr-1" />
-                              {highlight}
+                              {tech}
                             </span>
-                          )
-                        )}
-                      </div>
+                          ))}
+                          {activity.technologies.length > 4 && (
+                            <span className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-400">
+                              +{activity.technologies.length - 4}
+                            </span>
+                          )}
+                        </div>
+                      )}
                     </div>
                   </div>
                 );
@@ -455,7 +415,7 @@ export default function ActivitiesPage() {
                 Témoignages
               </h2>
               <p className="text-lg text-slate-600 dark:text-slate-400">
-                Ce que disent nos membres de leurs expériences.
+                Ce que disent nos {members.length} membres de leurs expériences.
               </p>
             </div>
 
