@@ -3,16 +3,11 @@ import Link from 'next/link';
 import { 
   ArrowRight, 
   Users, 
-  Calendar, 
-  BookOpen, 
-  Code,
-  Zap,
+  Calendar,
   MessageCircle,
   Mail,
   ExternalLink,
   GraduationCap,
-  Presentation,
-  Wrench,
 } from 'lucide-react';
 import {SiLinkedin, SiInstagram, SiDiscord } from 'react-icons/si';
 import { Button } from '@/components/ui/button';
@@ -20,25 +15,11 @@ import { Card, CardContent } from '@/components/ui/card';
 import { SOCIAL_LINKS } from '@/lib/constants';
 
 // Import des données JSON
-import activitiesData from '@/data/activities.json';
 import eventsData from '@/data/events.json';
 import membresData from '@/data/membres.json';
 
 // Import des types
-import type { Member, Event, Activity } from '@/lib/types';
-
-// Fonction utilitaire pour obtenir l'icône depuis le nom
-const getIcon = (iconName: string) => {
-  const icons = {
-    Code,
-    Presentation,
-    Zap,
-    BookOpen,
-    Users,
-    Wrench,
-  };
-  return icons[iconName as keyof typeof icons] || BookOpen;
-};
+import type { Member, Event } from '@/lib/types';
 
 const getSocialIcon = (iconName: string) => {
   const icons = {
@@ -53,12 +34,8 @@ const getSocialIcon = (iconName: string) => {
 
 export default function HomePage() {
   // Conversion des données JSON en format typé
-  const activities = activitiesData as Activity[];
   const events = eventsData as Event[];
   const members = membresData as Member[];
-
-  // Filtrer les activités actives et prendre les 4 premières
-  const featuredActivities = activities.filter(activity => activity.isActive).slice(0, 4);
 
   // Obtenir les événements à venir (3 premiers)
   const upcomingEvents = events
@@ -69,7 +46,6 @@ export default function HomePage() {
   // Statistiques dynamiques
   const stats = {
     members: members.length,
-    activities: activities.filter(activity => activity.isActive).length,
     events: events.filter(event => event.status === 'upcoming').length,
   };
 
@@ -118,14 +94,10 @@ export default function HomePage() {
             </p>
 
             {/* Statistiques dynamiques */}
-            <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 max-w-2xl mx-auto mb-12">
+            <div className="grid grid-cols-2 lg:grid-cols-2 gap-6 max-w-2xl mx-auto mb-12">
               <div className="text-center">
                 <div className="text-3xl font-bold text-primary-600 dark:text-primary-400 mb-1">{stats.members}</div>
                 <div className="text-sm text-slate-600 dark:text-slate-400">Membres actifs</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-accent-600 dark:text-accent-400 mb-1">{stats.activities}</div>
-                <div className="text-sm text-slate-600 dark:text-slate-400">Activités</div>
               </div>
               <div className="text-center col-span-2 lg:col-span-1">
                 <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-1">{stats.events}</div>
@@ -135,13 +107,6 @@ export default function HomePage() {
 
             {/* Boutons d'action */}
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
-              <Button asChild size="lg" className="w-full sm:w-auto">
-                <Link href="/join">
-                  Rejoindre l&apos;association
-                  <ArrowRight className="w-5 h-5 ml-2" />
-                </Link>
-              </Button>
-              
               <Button asChild variant="outline" size="lg" className="w-full sm:w-auto">
                 <Link href="/about">
                   En savoir plus
@@ -194,10 +159,10 @@ export default function HomePage() {
                       })}</span>
                     </div>
                     <Link
-                      href={`/events#${event.slug}`}
+                      href='/contact'
                       className={`text-primary-600 dark:text-primary-400 font-medium inline-flex items-center hover:text-primary-700 dark:hover:text-primary-300 ${index === 0 ? 'text-base' : 'text-sm'}`}
                     >
-                      {event.registrationRequired ? "S'inscrire" : "En savoir plus"}
+                      {event.registrationRequired ? "Nous contacter" : "En savoir plus"}
                       <ArrowRight className={`${index === 0 ? 'w-4 h-4' : 'w-3 h-3'} ml-1`} />
                     </Link>
                   </CardContent>
@@ -244,50 +209,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Aperçu des activités */}
-      <section className="section-padding bg-slate-50 dark:bg-slate-800/50">
-        <div className="container-custom">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-4">
-              Nos <span className="text-gradient">Activités</span>
-            </h2>
-            <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-              De la programmation aux sciences humaines, découvrez nos domaines d&apos;expertise
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            {featuredActivities.map((activity) => {
-              const Icon = getIcon(activity.icon);
-              return (
-                <Card key={activity.id} hover className="text-center">
-                  <CardContent className="pt-6">
-                    <div className={`w-12 h-12 mx-auto mb-4 rounded-xl bg-gradient-to-br from-primary-100 to-accent-100 dark:from-primary-900/30 dark:to-accent-900/30 flex items-center justify-center`}>
-                      <Icon className={`w-6 h-6 ${activity.color}`} />
-                    </div>
-                    <h3 className="font-semibold text-slate-900 dark:text-slate-100 mb-2">
-                      {activity.name}
-                    </h3>
-                    <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-                      {activity.description}
-                    </p>
-                  </CardContent>
-                </Card>
-              );
-            })}
-          </div>
-
-          <div className="text-center">
-            <Button asChild variant="secondary">
-              <Link href="/activities">
-                Découvrir toutes nos activités
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
-
       {/* Navigation rapide */}
       <section className="section-padding">
         <div className="container-custom">
@@ -300,7 +221,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
             {/* Trombinoscope */}
             <Card hover className="group">
               <CardContent className="p-8">
@@ -346,29 +267,6 @@ export default function HomePage() {
                 </div>
               </CardContent>
             </Card>
-
-            {/* Actualités */}
-            <Card hover className="group">
-              <CardContent className="p-8">
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <BookOpen className="w-6 h-6 text-green-600 dark:text-green-400" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-slate-900 dark:text-slate-100 mb-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
-                      Actualités
-                    </h3>
-                    <p className="text-slate-600 dark:text-slate-400 text-sm mb-4">
-                      Suivez nos dernières nouvelles et réalisations
-                    </p>
-                    <Link href="/actualites" className="text-primary-600 dark:text-primary-400 text-sm font-medium inline-flex items-center hover:text-primary-700 dark:hover:text-primary-300">
-                      Lire les actualités
-                      <ArrowRight className="w-4 h-4 ml-1" />
-                    </Link>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
           </div>
         </div>
       </section>
@@ -386,13 +284,6 @@ export default function HomePage() {
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 mb-8">
-              <Button asChild size="lg" variant="secondary" className="w-full sm:w-auto">
-                <Link href="/join">
-                  Adhérer maintenant
-                  <ArrowRight className="w-5 h-5 ml-2" />
-                </Link>
-              </Button>
-              
               <Button asChild size="lg" variant="outline" className="w-full sm:w-auto border-white/30 text-white hover:bg-white/10">
                 <Link href="/contact">
                   Nous contacter

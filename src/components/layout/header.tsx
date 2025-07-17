@@ -169,8 +169,8 @@ export function Header({ className }: HeaderProps) {
           {/* Actions desktop */}
           <div className="hidden lg:flex items-center space-x-2">
             <ThemeToggle variant="simple" />
-            <Link href="/join" className="btn btn-primary text-sm px-4 py-2">
-              Rejoindre
+            <Link href="/contact" className="btn btn-primary text-sm px-4 py-2">
+              Contact
             </Link>
           </div>
 
@@ -252,10 +252,10 @@ export function Header({ className }: HeaderProps) {
           {/* CTA mobile */}
           <div className="pt-4 mt-4 border-t border-slate-200 dark:border-slate-700">
             <Link
-              href="/join"
+              href="/contact"
               className="btn btn-primary w-full text-center block"
             >
-              Rejoindre l&apos;association
+              Contacter l&apos;association
             </Link>
           </div>
         </nav>

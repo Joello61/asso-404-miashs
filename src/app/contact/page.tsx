@@ -542,16 +542,14 @@ export default function ContactPage() {
                   Comment devenir membre de l&apos;association ?
                 </h3>
                 <p className="text-slate-600 dark:text-slate-400">
-                  Vous pouvez adhérer en remplissant le formulaire
-                  d&apos;inscription en ligne sur notre page
+                  Tout le monde peut etre membre. Contacter nous juste pour plus d&apos;information
                   <a
-                    href="/join"
+                    href="/contact"
                     className="text-primary-600 dark:text-primary-400 hover:underline ml-1"
                   >
-                    &quot;Nous rejoindre&quot;
+                    &quot;Nous Contacter&quot;
                   </a>
-                  . L&apos;adhésion est gratuite pour tous les étudiants de
-                  MIASHS.
+                  . L&apos;adhésion est gratuite pour tous les étudiants.
                 </p>
               </div>
 
@@ -581,24 +579,13 @@ export default function ContactPage() {
 
               <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
                 <h3 className="text-lg font-medium text-slate-900 dark:text-slate-100 mb-2">
-                  Y a-t-il des frais de participation aux activités ?
+                  Y a-t-il des frais de participation aux évènements ?
                 </h3>
                 <p className="text-slate-600 dark:text-slate-400">
-                  La plupart de nos activités sont gratuites pour les membres.
+                  La plupart de nos évènements sont gratuites pour les membres.
                   Seuls certains événements spéciaux (avec matériel fourni,
                   restauration, etc.) peuvent occasionner une participation
                   symbolique.
-                </p>
-              </div>
-
-              <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
-                <h3 className="text-lg font-medium text-slate-900 dark:text-slate-100 mb-2">
-                  Comment rester informé des actualités de l&apos;association ?
-                </h3>
-                <p className="text-slate-600 dark:text-slate-400">
-                  Suivez-nous sur nos réseaux sociaux, consultez régulièrement
-                  notre site web, et rejoignez notre Discord pour recevoir
-                  toutes les notifications en temps réel !
                 </p>
               </div>
             </div>
@@ -624,13 +611,6 @@ export default function ContactPage() {
               >
                 <Mail className="w-5 h-5 mr-2" />
                 Envoyer un email
-              </a>
-              <a
-                href="/join"
-                className="inline-flex items-center px-8 py-3 bg-slate-100 text-slate-900 font-medium rounded-xl hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2"
-              >
-                <Users className="w-5 h-5 mr-2" />
-                Rejoindre l&apos;association
               </a>
             </div>
           </div>

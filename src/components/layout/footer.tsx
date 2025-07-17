@@ -10,19 +10,12 @@ import { SiLinkedin, SiDiscord, SiInstagram } from 'react-icons/si';
 import { cn } from '@/lib/utils';
 import Image from "next/image";
 
-// Import des données JSON
-import activitiesData from '@/data/activities.json';
-import { Activity } from '@/lib/types';
-
 interface FooterProps {
   className?: string;
 }
 
 export function Footer({ className }: FooterProps) {
   const currentYear = new Date().getFullYear();
-
-  // Conversion des données JSON en format Activity (typage)
-  const activities = activitiesData as Activity[];
 
   // Grouper la navigation en sections
   const navigationSections = [
@@ -35,11 +28,6 @@ export function Footer({ className }: FooterProps) {
       links: NAVIGATION.slice(4), // Deuxième moitié
     },
   ];
-
-  // Filtrer les activités actives et prendre les 3 premières
-  const quickActivities = activities.filter(
-    (activity) => activity.isActive
-  ).slice(0, 3);
 
   return (
     <footer
@@ -174,24 +162,13 @@ export function Footer({ className }: FooterProps) {
             {/* Activités populaires */}
             <div className="mt-6">
               <h4 className="font-medium text-foreground mb-3 text-sm">
-                Nos activités
+                Nos évènements
               </h4>
-              <div className="space-y-2">
-                {quickActivities.map((activity) => (
-                  <div
-                    key={activity.id}
-                    className="flex items-center space-x-2 text-sm text-muted-foreground"
-                  >
-                    <div className="w-1.5 h-1.5 bg-primary-500 rounded-full flex-shrink-0" />
-                    <span>{activity.name}</span>
-                  </div>
-                ))}
-              </div>
               <Link
-                href="/activities"
+                href="/events"
                 className="inline-flex items-center space-x-1 text-sm text-primary-600 dark:text-primary-400 hover:underline mt-2"
               >
-                <span>Voir toutes les activités</span>
+                <span>Voir tous les évènements</span>
                 <ExternalLink className="h-3 w-3" />
               </Link>
             </div>

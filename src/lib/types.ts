@@ -57,37 +57,6 @@ export interface Event {
   slug: string;
 }
 
-// Types pour les activités de l'association
-export interface Activity {
-  id: string;
-  name: string;
-  description: string;
-  longDescription: string;
-  icon: string;
-  color: string;
-  category: 'academic' | 'social' | 'professional' | 'technical';
-  isActive: boolean;
-  schedule: string;
-  location: string;
-  participants: number;
-  difficulty: string;
-  technologies?: string[];
-  nextSession?: string;
-  speakers?: string[];
-  duration?: string;
-  prizes?: string[];
-  nextEvent?: string;
-  subjects?: string[];
-  tutors?: string[];
-  upcomingEvents?: string[];
-  upcomingWorkshops?: Array<{
-    title: string;
-    date: string;
-    instructor: string;
-  }>;
-  certification?: boolean;
-}
-
 // Types pour les formulaires
 export interface ContactForm {
   name: string;

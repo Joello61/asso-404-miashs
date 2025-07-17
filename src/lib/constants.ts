@@ -18,24 +18,9 @@ export const NAVIGATION: NavigationItem[] = [
     description: 'Rencontrez nos membres',
   },
   {
-    name: 'Activités',
-    href: '/activities',
-    description: 'Nos différentes activités',
-  },
-  {
     name: 'Événements',
     href: '/events',
     description: 'Nos événements à venir',
-  },
-  {
-    name: 'Actualités',
-    href: '/actualites',
-    description: 'Dernières nouvelles',
-  },
-  {
-    name: 'Nous rejoindre',
-    href: '/join',
-    description: 'Rejoignez notre communauté',
   },
   {
     name: 'Contact',

@@ -18,10 +18,7 @@ Allow: /
 Allow: /about
 Allow: /trombinoscope
 Allow: /events
-Allow: /actualites
-Allow: /activities
 Allow: /contact
-Allow: /join
 
 # Pour les bots spécifiques
 User-agent: Googlebot

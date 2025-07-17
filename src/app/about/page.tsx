@@ -7,7 +7,6 @@ import {
   Target,
   Heart,
   Award,
-  Code,
   Lightbulb,
   Calendar,
   BookOpen,
@@ -20,10 +19,9 @@ import { cn } from '@/lib/utils';
 import teamData from '@/data/team.json';
 import membresData from '@/data/membres.json';
 import eventsData from '@/data/events.json';
-import activitiesData from '@/data/activities.json';
 
 // Import des types
-import type { Member, Event, Activity, TeamMember } from '@/lib/types';
+import type { Member, Event, TeamMember } from '@/lib/types';
 import { getInitials } from '@/lib/utils';
 
 
@@ -32,7 +30,6 @@ export default function AboutPage() {
   const team = teamData as TeamMember[];
   const allMembers = membresData as Member[];
   const events = eventsData as Event[];
-  const activities = activitiesData as Activity[];
 
   // State pour gérer les erreurs d'images
   const [imageErrors, setImageErrors] = React.useState<{[key: string]: boolean}>({});
@@ -52,11 +49,6 @@ export default function AboutPage() {
       label: 'Événements organisés', 
       value: `${events.length}`, 
       icon: Calendar 
-    },
-    { 
-      label: 'Activités proposées', 
-      value: `${activities.filter(activity => activity.isActive).length}`, 
-      icon: Code 
     },
     { 
       label: 'Membres du bureau', 
@@ -370,13 +362,6 @@ export default function AboutPage() {
               rejoignez-nous !
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-              <a
-                href="/join"
-                className="inline-flex items-center px-8 py-3 bg-primary-600 text-white font-medium rounded-xl hover:bg-primary-700 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
-              >
-                <Users className="w-5 h-5 mr-2" />
-                Devenir membre
-              </a>
               <a
                 href="/contact"
                 className="inline-flex items-center px-8 py-3 bg-slate-100 text-slate-900 font-medium rounded-xl hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2"
