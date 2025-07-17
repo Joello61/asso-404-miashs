@@ -1,4 +1,4 @@
-export type PromoType = 'L3' | 'M1' | 'M2';
+export type PromoType = 'L3' | 'M1' | 'M2' | 'Alumni' | 'Autre';
 
 export interface Member {
   id: string;
@@ -9,7 +9,7 @@ export interface Member {
   linkedin?: string;
   github?: string;
   email?: string;
-  role?: string; // Président, Trésorier, Secrétaire, etc.
+  role?: string;
   description?: string;
   skills?: string[];
   joinDate?: string; // ISO date string

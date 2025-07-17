@@ -1,13 +1,7 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import {
-  Search,
-  Grid,
-  List,
-  Users,
-  Award,
-} from 'lucide-react';
+import { Search, Grid, List, Users, Award } from 'lucide-react';
 import { MemberCard, MemberCardSkeleton } from './member-card';
 import { cn } from '@/lib/utils';
 import { useMemberFilters } from '@/hooks/use-filters';
@@ -30,7 +24,13 @@ interface MemberGridProps {
 
 // Type garde pour valider une promo
 function isValidPromo(promo: string): promo is PromoType {
-  return promo === 'L3' || promo === 'M1' || promo === 'M2';
+  return (
+    promo === 'L3' ||
+    promo === 'M1' ||
+    promo === 'M2' ||
+    promo === 'Alumni' ||
+    promo === 'Autre'
+  );
 }
 
 // Fonction pour valider les données JSON
@@ -209,7 +209,11 @@ export function MemberGrid({
                         promo === 'M1' &&
                           'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300',
                         promo === 'M2' &&
-                          'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300'
+                          'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300',
+                        promo === 'Alumni' &&
+                          'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300',
+                        promo === 'Autre' &&
+                          'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300'
                       )}
                     >
                       {promo}

@@ -108,6 +108,10 @@ export function getPromoColor(promo: PromoType): string {
       return 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300';
     case 'M2':
       return 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300';
+    case 'Alumni':
+      return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300';
+    case 'Autre':
+      return 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300';
     default:
       return 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300';
   }
@@ -170,6 +174,8 @@ export function groupMembersByPromo(
     L3: [],
     M1: [],
     M2: [],
+    Alumni: [],
+    Autre: [],
   };
 
   members.forEach((member) => {

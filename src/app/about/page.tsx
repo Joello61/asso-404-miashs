@@ -24,7 +24,6 @@ import eventsData from '@/data/events.json';
 import type { Member, Event, TeamMember } from '@/lib/types';
 import { getInitials } from '@/lib/utils';
 
-
 export default function AboutPage() {
   // Conversion des données JSON en format typé
   const team = teamData as TeamMember[];
@@ -32,28 +31,30 @@ export default function AboutPage() {
   const events = eventsData as Event[];
 
   // State pour gérer les erreurs d'images
-  const [imageErrors, setImageErrors] = React.useState<{[key: string]: boolean}>({});
+  const [imageErrors, setImageErrors] = React.useState<{
+    [key: string]: boolean;
+  }>({});
 
   const handleImageError = (memberName: string) => {
-    setImageErrors(prev => ({ ...prev, [memberName]: true }));
+    setImageErrors((prev) => ({ ...prev, [memberName]: true }));
   };
 
   // Calcul des statistiques dynamiques basées sur les données réelles
   const stats = [
-    { 
-      label: 'Membres actifs', 
-      value: `${allMembers.length}`, 
-      icon: Users 
+    {
+      label: 'Membres actifs',
+      value: `${allMembers.length}`,
+      icon: Users,
     },
-    { 
-      label: 'Événements organisés', 
-      value: `${events.length}`, 
-      icon: Calendar 
+    {
+      label: 'Événements organisés',
+      value: `${events.length}`,
+      icon: Calendar,
     },
-    { 
-      label: 'Membres du bureau', 
-      value: `${team.length}`, 
-      icon: Award 
+    {
+      label: 'Membres du bureau',
+      value: `${team.length}`,
+      icon: Award,
     },
   ];
 
@@ -292,8 +293,11 @@ export default function AboutPage() {
               {team.map((member, index) => {
                 const memberKey = `${member.name}-${index}`;
                 const hasImageError = imageErrors[memberKey];
-                const initials = getInitials(member.name.split(' ')[0] || '', member.name.split(' ')[1] || '');
-                
+                const initials = getInitials(
+                  member.name.split(' ')[0] || '',
+                  member.name.split(' ')[1] || ''
+                );
+
                 return (
                   <div
                     key={index}
@@ -332,7 +336,11 @@ export default function AboutPage() {
                           member.promo === 'M1' &&
                             'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300',
                           member.promo === 'L3' &&
-                            'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300'
+                            'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
+                          member.promo === 'Alumni' &&
+                            'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300',
+                          member.promo === 'Autre' &&
+                            'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300'
                         )}
                       >
                         {member.promo}
