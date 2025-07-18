@@ -1,5 +1,5 @@
 [
-    {
+  {
     "id": "event-001",
     "title": "Week-end en Espagne",
     "description": "Un week-end convivial en Espagne pour renforcer les liens entre membres",
@@ -11,6 +11,11 @@
       "url": "https://maps.google.com/?q=Barcelona"
     },
     "image": "/images/events/WKEspagne/WeekEndEspagne.png",
+    "gallery": [
+      "/images/events/WKEspagne/WeekEndEspagne.png",
+      "/images/events/WKEspagne/WeekEndEspagne.png",
+      "/images/events/WKEspagne/WeekEndEspagne.png"
+    ],
     "organizer": "L'équipe Asso 404",
     "maxParticipants": 15,
     "currentParticipants": 13,
@@ -21,42 +26,51 @@
     "slug": "weekend-asso-404-espagne"
   },
   {
-  "id": "event-002",
-  "title": "Vente de Pulls Asso 404",
-  "description": "Les pulls officiels de l'Asso 404 sont enfin là ! Disponible en plusieurs tailles et couleurs, avec notre logo brodé. Commande ton sweat et représente fièrement l’asso sur le campus ou ailleurs.",
-  "startDate": "2025-09-01T09:00:00Z",
-  "location": {
-    "name": "Salle Gs039"
+    "id": "event-002",
+    "title": "Vente de Pulls Asso 404",
+    "description": "Les pulls officiels de l'Asso 404 sont enfin là ! Disponible en plusieurs tailles et couleurs, avec notre logo brodé. Commande ton sweat et représente fièrement l’asso sur le campus ou ailleurs.",
+    "startDate": "2025-09-01T09:00:00Z",
+    "location": {
+      "name": "Salle Gs039"
+    },
+    "image": "/images/events/sweater-sale/Pull.png",
+    "gallery": [
+      "/images/events/sweater-sale/Pull.png",
+      "/images/events/sweater-sale/Pull.png",
+      "/images/events/sweater-sale/Pull.png"
+    ],
+    "organizer": "L'Association 404",
+    "maxParticipants": 100,
+    "currentParticipants": 0,
+    "registrationRequired": true,
+    "registrationDeadline": "2025-09-25T23:59:59Z",
+    "price": 30,
+    "tags": ["Vente", "Merch", "Pull", "Asso 404", "Textile"],
+    "status": "upcoming",
+    "slug": "vente-pulls-asso-404"
   },
-  "image": "/images/events/Pull.png",
-  "organizer": "L'Association 404",
-  "maxParticipants": 100,
-  "currentParticipants": 0,
-  "registrationRequired": true,
-  "registrationDeadline": "2025-09-25T23:59:59Z",
-  "price": 30,
-  "tags": ["Vente", "Merch", "Pull", "Asso 404", "Textile"],
-  "status": "upcoming",
-  "slug": "vente-pulls-asso-404"
-}
-,
   {
-  "id": "event-003",
-  "title": "Rencontre avec l'Asso 404 devant Olympe de Gouges",
-  "description": "Viens rencontrer les membres de l’Asso 404 du 4 au 9 septembre à l’entrée de la fac ! On sera présents pour te parler de nos projets, nos événements à venir, et comment tu peux rejoindre ou t’impliquer dans l’association. Que tu sois curieux·se, motivé·e ou juste de passage, viens échanger avec nous !",
-  "startDate": "2025-09-04T08:00:00Z",
-  "endDate": "2025-09-09T16:00:00Z",
-  "location": {
-    "name": "Entrée de l’université – Bâtiment Olympe de Gouges"
-  },
-  "image": "/images/events/stand-asso-404.jpg",
-  "organizer": "Asso 404",
-  "maxParticipants": 200,
-  "currentParticipants": 0,
-  "registrationRequired": false,
-  "price": 0,
-  "tags": ["Rencontre", "Présentation", "Asso 404", "Rentrée", "Université"],
-  "status": "upcoming",
-  "slug": "stand-asso-404-rentree-2025"
-}
+    "id": "event-003",
+    "title": "Rencontre avec l'Asso 404 devant Olympe de Gouges",
+    "description": "Viens rencontrer les membres de l’Asso 404 du 4 au 9 septembre à l’entrée de la fac ! On sera présents pour te parler de nos projets, nos événements à venir, et comment tu peux rejoindre ou t’impliquer dans l’association. Que tu sois curieux·se, motivé·e ou juste de passage, viens échanger avec nous !",
+    "startDate": "2025-09-04T08:00:00Z",
+    "endDate": "2025-09-09T16:00:00Z",
+    "location": {
+      "name": "Entrée de l’université – Bâtiment Olympe de Gouges"
+    },
+    "image": "/images/events/meeting-asso/stand-asso-404.jpg",
+    "gallery": [
+      "/images/events/meeting-asso/stand-asso-404.jpg",
+      "/images/events/meeting-asso/stand-asso-404.jpg",
+      "/images/events/meeting-asso/stand-asso-404.jpg"
+    ],
+    "organizer": "Asso 404",
+    "maxParticipants": 200,
+    "currentParticipants": 0,
+    "registrationRequired": false,
+    "price": 0,
+    "tags": ["Rencontre", "Présentation", "Asso 404", "Rentrée", "Université"],
+    "status": "upcoming",
+    "slug": "stand-asso-404-rentree-2025"
+  }
 ]

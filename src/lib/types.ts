@@ -46,6 +46,7 @@ export interface Event {
     url?: string;
   };
   image?: string;
+  gallery?: string[]; 
   organizer: string;
   maxParticipants?: number;
   currentParticipants?: number;
